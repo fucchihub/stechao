@@ -35,17 +35,14 @@ class Public::SessionsController < Devise::SessionsController
     root_path
   end
 
- private
-
-  # ログイン時、ユーザーが有効か退会済みかで処理を分けている
-  def user_state
+# 退会済みユーザーがログインしようとしたときの処理
+  def reject_inactive_customer
     user = User.find_by(email: params[:user][:email])
-    return if user.nil?
-    if user.is_active
-      return unless user.valid_password?(params[:user][:password])
-    else
-      flash[:danger] = 'このアカウントは退会済みです。別のアカウントでログインまたは新規登録をお願いします。'
-      redirect_to new_user_session_path
+    if user
+      if user.valid_password?(params[:user][:password]) && !user.is_active
+        flash[:danger] = 'このアカウントは退会済みです。別のアカウントでログインまたは新規登録をお願いします。'
+        redirect_to new_user_session_path
+      end
     end
   end
 end
