@@ -8,16 +8,18 @@
       <h3 class="title">投稿詳細</h3>
       <div class="row d-flex">
         <div>
-          <%= image_tag @posts.get_image(250,250) %>
+          <%= image_tag @post.get_image(250,250) %>
         </div>
         <div>
-          <%= @posts.name %>
-          <p>断捨離した数「<%= @posts.quantity %>」</p>
-          <%= @posts.intoduction %>
+          <%= @post.name %>
+          <p>断捨離した数「<%= @post.quantity %>」</p>
+          <%= @post.intoduction %>
         </div>
       </div>
+      <% if @post.user == current_user %>
+        <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-sm btn-danger" %>
+      <% end %>
     </div>
-    
+
   </div>
 </div>
- 
