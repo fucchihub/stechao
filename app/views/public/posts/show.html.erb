@@ -13,11 +13,11 @@
         <div>
           <%= @post.name %>
           <p>断捨離した数「<%= @post.quantity %>」</p>
-          <%= @post.intoduction %>
+          <%= @post.caption %>
         </div>
       </div>
       <% if @post.user == current_user %>
-        <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-sm btn-danger" %>
+        <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: "「#{@post.name.truncate(10)}」を削除しますか？"}, class: "btn btn-sm btn-danger" %>
       <% end %>
     </div>
 

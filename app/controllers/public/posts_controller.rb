@@ -8,7 +8,7 @@ class Public::PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
-      flash[:success] = "#{params[:name].truncate(10)}を投稿しました！"
+      flash[:success] = "「#{@post.name.truncate(10)}」を投稿しました！"
       redirect_to post_path(@post)
     else
       flash[:error] = "投稿できませんでした..."
