@@ -9,7 +9,7 @@
 <!--パスワード変更のルーティング削除時のエラー回避のため、以下コメントアウト-->
 <%
 =begin
-
+%>
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
   <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
 <% end %>
@@ -27,6 +27,6 @@
     <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %><br />
   <% end %>
 <% end %>
-
+<%
 =end
 %>

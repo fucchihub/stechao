@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
-  before_action :reject_inactive_customer, only: [:create]
+  before_action :configure_sign_in_params, only: [:create]
+  before_action :user_state, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -19,13 +19,6 @@ class Public::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
-
   def after_sign_in_path_for(resource)
     root_path
     # user_path(current_user.id)
@@ -35,14 +28,24 @@ class Public::SessionsController < Devise::SessionsController
     root_path
   end
 
-# 退会済みユーザーがログインしようとしたときの処理
-  def reject_inactive_customer
+   private
+
+  # 退会済みユーザーがログインしようとしたときの処理
+  def user_state
     user = User.find_by(email: params[:user][:email])
-    if user
-      if user.valid_password?(params[:user][:password]) && !user.is_active
-        flash[:danger] = 'このアカウントは退会済みです。別のアカウントでログインまたは新規登録をお願いします。'
-        redirect_to new_user_session_path
-      end
+    return if user.nil?
+    if user.is_active
+      return unless user.valid_password?(params[:user][:password])
+    else
+      flash[:danger] = 'このアカウントは退会済みです。別のアカウントでログインまたは新規登録をお願いします。'
+      redirect_to new_user_session_path
     end
   end
+
+  protected
+
+  def configure_sign_in_params
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:name, :email])
+  end
+
 end
