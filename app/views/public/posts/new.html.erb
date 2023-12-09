@@ -1,0 +1,35 @@
+<!--ユーザ側／新規投稿画面-->
+<div class='container py-5'>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h3>新しい投稿を作る</h3>
+      <%= form_with model: @post, url: posts_path, method: :post do |f| %>
+        <div class="form-group">
+          <%= f.label :image, "投稿画像" %><br>
+          <%= f.file_field :image, accept: "image/*" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :name, "投稿名" %><br>
+          <%= f.text_field :name, placeholder: "あなたが手放したもの、思い切ってやめたことなど", class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :caption, "投稿文" %><br>
+          <%= f.text_area :caption, placeholder: "どうして手放したのか、なぜやめたのか、ふり返りながら自由に書き残しましょう！", rows: "10", class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :quantity, "数量" %><br>
+          <div class="input-group">
+            <%= f.number_field :quantity, placeholder: "手放した・やめた数を記録するとグラフで見れます", class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group text-center">
+          <%= f.submit "投稿する", class: 'btn btn-success' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -4,7 +4,7 @@
 // $danger: #d7003a;くれない
 // $warning: #fcc500;あざやかな黄系の色
 // $info: #2cd4ab;強い緑系の色
-// $light: #ffffff;
+// $light: #f8f9fa;やや灰色い青紫系の色
 // $dark: #4e454a;チャコールグレイ
 
 // #f7f6f5 パールホワイト
@@ -46,8 +46,14 @@ a:hover {
   align-items: center;
 }
 
+// .card {
+  // width: auto;
+  // background-color: #f8f9fa;}
 
-
+.title {
+  margin-bottom: 30px;
+  font-size: 40px;
+}
 
 
 footer {
