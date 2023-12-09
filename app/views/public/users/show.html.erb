@@ -1,0 +1,43 @@
+<!--ユーザ側／ユーザ詳細画面-->
+<div class='container py-5'>
+  <div class='row'>
+    <div class="col-md-4 d-flex bg-light rounded-lg">
+      <div>
+        <%= image_tag @user.get_profile_image(100,100), class: "rounded_image" %>
+        <%= @user.name %>
+        <%= @user.introduction %>
+      </div>
+      <div class="co">
+        <%= link_to "投稿する", new_post_path, class: "btn btn-primary"%>
+        <%= link_to "編集する", edit_post_path, class: "btn btn-success"%>
+        <%= link_to new_post_path, class: "btn btn-outline-success" do %>
+          <i class="fas fa-heart"></i>お気に入り
+        <% end %>
+        <%= link_to new_post_path, class: "btn btn-outline-success" do %>
+          <i class="fas fa-message"></i>コメント
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <h3 class="title"><%= @user.name %>さんの投稿詳細</h3>
+      <div class="row">
+        <% @posts.each do |posts| %>
+          <div class="col-3">
+            <%= link_to post_path(posts), class:"text-decoration-none text-dark" do %>
+              <div class="card m-3">
+                <%= image_tag posts.get_image(150,150) %>
+                <div class="card-body">
+                  <p class="card-text">
+                    <%= posts.name %><br>
+                  </p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
