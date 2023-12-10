@@ -1,32 +1,46 @@
 <!--ユーザ側／ユーザ詳細画面-->
 <div class='container py-5'>
   <div class='row'>
-    <div class="col-md-4 d-flex bg-light rounded-lg">
-      <div>
-        <%= image_tag @user.get_profile_image(100,100), class: "rounded_image" %>
-        <%= @user.name %>
-        <%= @user.introduction %>
+    <div class="col-md-4 bg-light rounded-lg">
+      
+      <div class="profile-content row align-items-center">
+        <div class="col-sm text-center">
+          <%= image_tag @user.get_profile_image(150,150), class: "rounded-circle shadow" %>
+        </div>
+        <div class="col-sm">
+          <%= @user.name %><br>
+          <%= @user.introduction %>
+        </div>
       </div>
-      <div class="co">
-        <%= link_to "投稿する", new_post_path, class: "btn btn-primary"%>
-        <%= link_to "編集する", edit_post_path, class: "btn btn-success"%>
-        <%= link_to new_post_path, class: "btn btn-outline-success" do %>
+      <div class="row">
+        <%= link_to new_post_path, class: "btn btn-outline-primary col-sm m-2" do %>
+          <i class="fas fa-paper-plane"></i>投稿する
+        <% end %>
+        <%= link_to edit_user_path(current_user), class: "btn btn-outline-success col-sm m-2" do %>
+          <i class="fas fa-user-gear"></i>編集する
+        <% end %>
+      </div>
+      <div class="row">
+        <%= link_to new_post_path, class: "btn btn-outline-danger col-sm m-2" do %>
           <i class="fas fa-heart"></i>お気に入り
         <% end %>
-        <%= link_to new_post_path, class: "btn btn-outline-success" do %>
+        <%= link_to new_post_path, class: "btn btn-outline-dark col-sm m-2" do %>
           <i class="fas fa-message"></i>コメント
         <% end %>
       </div>
     </div>
 
     <div class="col-md-8">
-      <h3 class="title"><%= @user.name %>さんの投稿詳細</h3>
+      <h2 class="title">
+        <i class="fas fa-flag"></i>
+        <%= @user.name %>さんの投稿詳細
+      </h2>
       <div class="row">
         <% @posts.each do |posts| %>
           <div class="col-3">
-            <%= link_to post_path(posts), class:"text-decoration-none text-dark" do %>
-              <div class="card m-3">
-                <%= image_tag posts.get_image(150,150) %>
+            <%= link_to post_path(posts), class: "text-decoration-none text-dark" do %>
+              <div class="card shadow p-1 mx-1 mb-4">
+                <%= image_tag posts.get_image(250,250), class: "card-img-top" %>
                 <div class="card-body">
                   <p class="card-text">
                     <%= posts.name %><br>
