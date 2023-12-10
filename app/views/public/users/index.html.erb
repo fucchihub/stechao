@@ -1,2 +1,27 @@
-<h1>Public::Users#index</h1>
-<p>Find me in app/views/public/users/index.html.erb</p>
+<!--ユーザ側／ユーザ一覧画面-->
+<div class='container py-5'>
+  <div class='row'>
+    <div class="col-md-4">
+    </div>
+
+    <div class="col-md-8">
+      <h3 class="title">
+        <i class="fas fa-user-group"></i>ユーザ一覧
+      </h3>
+      <div class="table-container">
+        <% @users.each do |user| %>
+          <%= link_to user_path(user), class: "text-decoration-none" do %>
+            <div class="table-row">
+              <div class="table-cell">
+                <%= image_tag user.get_profile_image(100,100), class: "rounded-circle shadow" %>
+              </div>
+              <div class="table-cell">
+                <%= user.name %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

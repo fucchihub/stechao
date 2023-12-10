@@ -59,6 +59,26 @@ a:hover {
   height: 200px;
 }
 
+.table-container {
+  display: table;
+  margin: 0 auto;
+}
+
+.table-row {
+  display: table-row;
+  padding: 8px;
+  border-bottom: 1px solid #cccccc;
+}
+
+.table-row:hover {
+  background-color:#abced8;
+}
+
+.table-cell {
+  display: table-cell;
+  padding: 8px
+  }
+  
 footer {
   position: sticky;
   top: 100vh;
