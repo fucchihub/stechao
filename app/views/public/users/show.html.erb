@@ -7,13 +7,17 @@
         <%= @user.name %>
         <%= @user.introduction %>
       </div>
-      <div class="co">
-        <%= link_to "投稿する", new_post_path, class: "btn btn-primary"%>
-        <%= link_to "編集する", edit_post_path, class: "btn btn-success"%>
-        <%= link_to new_post_path, class: "btn btn-outline-success" do %>
+      <div class="">
+        <%= link_to new_post_path, class: "btn btn-outline-primary" do %>
+          <i class="fas fa-paper-plane"></i>投稿する
+        <% end %>
+        <%= link_to edit_post_path, class: "btn btn-outline-success" do %>
+          <i class="fas fa-user-gear"></i>編集する
+        <% end %>
+        <%= link_to new_post_path, class: "btn btn-outline-danger" do %>
           <i class="fas fa-heart"></i>お気に入り
         <% end %>
-        <%= link_to new_post_path, class: "btn btn-outline-success" do %>
+        <%= link_to new_post_path, class: "btn btn-outline-dark" do %>
           <i class="fas fa-message"></i>コメント
         <% end %>
       </div>

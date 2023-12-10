@@ -15,7 +15,7 @@
           <li class="nav-item"><%= link_to "ログアウト", admin_top_path, class: 'nav-link text-light' %></li>
         <% elsif user_signed_in? %>
           <li class="nav-item mr-3">
-            <%= link_to root_path, class: 'nav-link' do %>
+            <%= link_to user_path(current_user), class: 'nav-link' do %>
               <div class="vertical_center">
                 <i class="fas fa-flag fa-2x"></i> マイページ
               </div>
