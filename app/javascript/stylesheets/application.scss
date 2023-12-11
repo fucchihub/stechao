@@ -31,8 +31,10 @@ a {
 
 a:hover {
   color: #043c78; //インディゴ
+  text-decoration: none;
 }
 
+// ヘッダー用
 .navbar {
   background-color: #f7f6f5; //パールホワイト
 }
@@ -50,15 +52,18 @@ a:hover {
   // width: auto;
   // background-color: #f8f9fa;}
 
+// 各画面のタイトル用
 .title {
   margin-bottom: 30px;
   border-bottom: 2px solid #043c78;
 }
 
+// プロフィール
 .profile-content {
   height: 200px;
 }
 
+// ユーザ一覧画面のテーブル用
 .table-container {
   display: table;
   margin: 0 auto;
@@ -78,7 +83,21 @@ a:hover {
   display: table-cell;
   padding: 8px
   }
-  
+
+// 投稿詳細画面用
+.postdetail-name {
+  margin-bottom: 30px;
+  border-bottom: 2px solid #043c78;
+  display: flex;
+  justify-content: space-between;
+}
+.fontawesome-button i {
+  font-size: 25px;
+  margin: 0 5px;
+  height: 20px;
+  width: 20px;
+}
+
 footer {
   position: sticky;
   top: 100vh;
