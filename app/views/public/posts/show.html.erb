@@ -5,28 +5,43 @@
     </div>
 
     <div class="col-md-8 bg-light rounded-lg">
-      <h2 class="title">投稿詳細</h2>
-      
+      <h2 class="title">
+        <i class="fas fa-image"></i>投稿詳細
+      </h2>
+
       <div class="row">
-        <div class="col-5">
+        <div class="col-md-5">
           <%= image_tag @post.get_image(250,250) %>
           <% unless @post.quantity == 0 %>
             <p>断捨離した数は <strong><%= @post.quantity %></strong> です</p>
           <% end %>
         </div>
-        
-        <div class="col-7">
-          <h4 class="title"><%= @post.name %></h4>
-          <div class="caption-area">
+
+        <div class="col-md-7">
+          <div class="postdetail-name">
+            <h4 class="">
+              <%= @post.name %>
+            </h4>
+          
+            <% if @post.user == current_user %>
+            <span class="fontawesome-button">
+              <%= link_to edit_post_path(@post), class: "text-success" do %>
+                <i class="fas fa-pen"></i>
+              <% end %>
+              <%= link_to post_path(@post), method: :delete, data: { confirm: "「#{@post.name.truncate(10)}」を削除しますか？" }, class: "text-danger" do  %>
+                <i class="fas fa-trash-can"></i>
+              <% end %>
+            </span>
+            <% end %>
+          </div>
+          <div class="caption-area bg-primary rounded-lg py-5 px-2">
             <%= @post.caption %>
           </div>
         </div>
 
-        
-      <% if @post.user == current_user %>
-        <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: "「#{@post.name.truncate(10)}」を削除しますか？"}, class: "btn btn-sm btn-danger" %>
-      <% end %>
-    </div>
 
+
+      </div>
+    </div>
   </div>
 </div>
