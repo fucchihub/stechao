@@ -33,6 +33,7 @@ a:hover {
   color: #043c78; //インディゴ
 }
 
+// ヘッダー用
 .navbar {
   background-color: #f7f6f5; //パールホワイト
 }
@@ -50,15 +51,18 @@ a:hover {
   // width: auto;
   // background-color: #f8f9fa;}
 
+// 各画面のタイトル用
 .title {
   margin-bottom: 30px;
   border-bottom: 2px solid #043c78;
 }
 
+// プロフィール
 .profile-content {
   height: 200px;
 }
 
+// ユーザ一覧画面のテーブル用
 .table-container {
   display: table;
   margin: 0 auto;
@@ -78,6 +82,11 @@ a:hover {
   display: table-cell;
   padding: 8px
   }
+
+// 投稿詳細画面用
+.caption-area {
+  
+}
   
 footer {
   position: sticky;

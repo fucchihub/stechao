@@ -6,16 +6,23 @@
 
     <div class="col-md-8 bg-light rounded-lg">
       <h2 class="title">投稿詳細</h2>
-      <div class="row d-flex">
-        <div>
+      
+      <div class="row">
+        <div class="col-5">
           <%= image_tag @post.get_image(250,250) %>
+          <% unless @post.quantity == 0 %>
+            <p>断捨離した数は <strong><%= @post.quantity %></strong> です</p>
+          <% end %>
         </div>
-        <div>
-          <%= @post.name %>
-          <p>断捨離した数「<%= @post.quantity %>」</p>
-          <%= @post.caption %>
+        
+        <div class="col-7">
+          <h4 class="title"><%= @post.name %></h4>
+          <div class="caption-area">
+            <%= @post.caption %>
+          </div>
         </div>
-      </div>
+
+        
       <% if @post.user == current_user %>
         <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: "「#{@post.name.truncate(10)}」を削除しますか？"}, class: "btn btn-sm btn-danger" %>
       <% end %>
