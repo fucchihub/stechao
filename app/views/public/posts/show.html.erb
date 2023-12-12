@@ -19,9 +19,7 @@
 
         <div class="col-md-7">
           <div class="postdetail-name">
-            <h4 class="">
-              <%= @post.name %>
-            </h4>
+            <h4><%= @post.name %></h4>
           
             <% if @post.user == current_user %>
             <span class="fontawesome-button">
@@ -38,8 +36,6 @@
             <%= @post.caption %>
           </div>
         </div>
-
-
 
       </div>
     </div>
