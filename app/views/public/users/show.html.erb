@@ -1,8 +1,9 @@
-<!--ユーザ側／ユーザ詳細画面-->
+<!--ユーザ側／ユーザ詳細画面（マイページ）-->
 <div class='container py-5'>
   <div class='row'>
+    
+    <!--プロフィール-->
     <div class="col-md-4 bg-light rounded-lg">
-      <!--プロフィール-->
       <div class="profile-content row justify-content-center align-items-center">
         <div class="col-sm text-center">
           <%= image_tag @user.get_profile_image(150,150), class: "rounded-circle shadow" %>

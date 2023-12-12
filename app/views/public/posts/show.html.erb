@@ -1,14 +1,16 @@
 <!--ユーザ側／投稿詳細画面-->
 <div class='container py-5'>
   <div class='row'>
+
+    <!--プロフィール-->
     <div class="col-md-4">
     </div>
 
+    <!--投稿詳細-->
     <div class="col-md-8 bg-light rounded-lg">
       <h2 class="title">
         <i class="fas fa-image"></i>投稿詳細
       </h2>
-
       <div class="row">
         <div class="col-md-5">
           <%= image_tag @post.get_image(250,250) %>
@@ -16,11 +18,9 @@
             <p>断捨離した数は <strong><%= @post.quantity %></strong> です</p>
           <% end %>
         </div>
-
         <div class="col-md-7">
           <div class="postdetail-name">
             <h4><%= @post.name %></h4>
-          
             <% if @post.user == current_user %>
             <span class="fontawesome-button">
               <%= link_to edit_post_path(@post), class: "text-success" do %>
@@ -36,8 +36,26 @@
             <%= @post.caption %>
           </div>
         </div>
-        
-        <div>
+      </div>
+
+      <!--お気に入り機能-->
+      <div class="row">
+        <div class="col">
+          <% if @post.favorited_by?(current_user) %>
+            <%= link_to post_favorites_path(@post), method: :delete, class: "text-danger" do %>
+              <i class="fas fa-heart"></i><%= @post.favorites.count %>
+            <% end %>
+          <% else %>
+            <%= link_to post_favorites_path(@post), method: :post, class: "text-danger" do %>
+              <i class="far fa-heart"></i><%= @post.favorites.count %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <!--コメント機能-->
+      <div class="row">
+        <div class="col">
           <p>コメント件数：<%= @post.post_comments.count %></p>
           <% @post.post_comments.each do |post_comment| %>
             <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
@@ -48,13 +66,12 @@
             <% end %>
           <% end %>
         </div>
-        <div>
-          <%= form_with model: [@post, @post_comment] do |f| %>
-            <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-            <%= f.submit "送信する" %>
-          <% end %>
+        <div class="col">
+        <%= form_with model: [@post, @post_comment] do |f| %>
+          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+          <%= f.submit "送信する" %>
+        <% end %>
         </div>
-
       </div>
     </div>
   </div>
