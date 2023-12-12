@@ -11,7 +11,6 @@
       <h2 class="title">
         <i class="fas fa-image"></i>投稿詳細
       </h2>
-
       <div class="row">
         <div class="col-md-5">
           <%= image_tag @post.get_image(250,250) %>
@@ -36,45 +35,43 @@
           <div class="text-break rounded-lg py-1 px-2">
             <%= @post.caption %>
           </div>
-
-          <!--コメント機能-->
-          <div class="row">
-          <div class="col">
-            <p>コメント件数：<%= @post.post_comments.count %></p>
-            <% @post.post_comments.each do |post_comment| %>
-              <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-              <%= post_comment.user.name %>
-              <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
-              <% if post_comment.user == current_user %>
-                <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
-              <% end %>
+        </div>
+      </div>
+      
+      <!--お気に入り機能-->
+      <div class="row">
+        <div class="col">
+          <% if @post.favorited_by?(current_user) %>
+            <%= link_to post_favorites_path(@post), method: :delete do %>
+              <i class="fas fa-heart"></i><%= @post.favorites.count %>
             <% end %>
-          </div>
-          <div class="col">
-          <%= form_with model: [@post, @post_comment] do |f| %>
-            <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-            <%= f.submit "送信する" %>
+          <% else %>
+            <%= link_to post_favorites_path(@post), method: :post do %>
+              <i class="far fa-heart"></i><%= @post.favorites.count %>
+            <% end %>
           <% end %>
-          </div>
         </div>
-        </div>
-
-        <!--お気に入り機能-->
-        <div class="row">
-          <div class="col">
-            <% if @post.favorited_by?(current_user) %>
-              <%= link_to post_favorites_path(@post), method: :delete do %>
-                <i class="fas fa-heart"></i><%= @post.favorites.count %>
-              <% end %>
-            <% else %>
-              <%= link_to post_favorites_path(@post), method: :post do %>
-                <i class="far fa-heart"></i><%= @post.favorites.count %>
-              <% end %>
+      </div>
+      
+      <!--コメント機能-->
+      <div class="row">
+        <div class="col">
+          <p>コメント件数：<%= @post.post_comments.count %></p>
+          <% @post.post_comments.each do |post_comment| %>
+            <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
+            <%= post_comment.user.name %>
+            <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+            <% if post_comment.user == current_user %>
+              <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
             <% end %>
-          </div>
+          <% end %>
         </div>
-
-
+        <div class="col">
+        <%= form_with model: [@post, @post_comment] do |f| %>
+          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+          <%= f.submit "送信する" %>
+        <% end %>
+        </div>
       </div>
     </div>
   </div>
