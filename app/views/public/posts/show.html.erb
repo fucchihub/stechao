@@ -21,16 +21,19 @@
         <div class="col-md-7">
           <div class="postdetail-name">
             <h4><%= @post.name %></h4>
-            <% if @post.user == current_user %>
-            <span class="fontawesome-button">
-              <%= link_to edit_post_path(@post), class: "text-success" do %>
-                <i class="fas fa-pen"></i>
+            <div>
+              <span class="fontawesome-button" id="favorite_btn_<%= @post.id %>">
+                <%= render "public/favorites/btn", posts: @post %>
+              </span>
+              <% if @post.user == current_user %>
+                <%= link_to edit_post_path(@post), class: "text-success fontawesome-button" do %>
+                  <i class="fas fa-pen"></i>
+                <% end %>
+                <%= link_to post_path(@post), method: :delete, data: { confirm: "「#{@post.name.truncate(10)}」を本当に削除しますか？" }, class: "text-danger fontawesome-button" do  %>
+                  <i class="fas fa-trash-can"></i>
+                <% end %>
               <% end %>
-              <%= link_to post_path(@post), method: :delete, data: { confirm: "「#{@post.name.truncate(10)}」を本当に削除しますか？" }, class: "text-danger" do  %>
-                <i class="fas fa-trash-can"></i>
-              <% end %>
-            </span>
-            <% end %>
+            </div>
           </div>
           <div class="text-break rounded-lg py-1 px-2">
             <%= @post.caption %>
@@ -40,17 +43,7 @@
 
       <!--お気に入り機能-->
       <div class="row">
-        <div class="col">
-          <% if @post.favorited_by?(current_user) %>
-            <%= link_to post_favorites_path(@post), method: :delete, class: "text-danger" do %>
-              <i class="fas fa-heart"></i><%= @post.favorites.count %>
-            <% end %>
-          <% else %>
-            <%= link_to post_favorites_path(@post), method: :post, class: "text-danger" do %>
-              <i class="far fa-heart"></i><%= @post.favorites.count %>
-            <% end %>
-          <% end %>
-        </div>
+        
       </div>
 
       <!--コメント機能-->

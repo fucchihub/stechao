@@ -1,7 +1,7 @@
 <!--ユーザ側／ユーザ詳細画面（マイページ）-->
 <div class='container py-5'>
   <div class='row'>
-    
+
     <!--プロフィール-->
     <div class="col-md-4 bg-light rounded-lg">
       <div class="profile-content row justify-content-center align-items-center">
@@ -22,7 +22,7 @@
         <% end %>
       </div>
       <div class="row">
-        <%= link_to new_post_path, class: "btn btn-outline-danger col-sm m-2" do %>
+        <%= link_to favorites_user_path(@user), class: "btn btn-outline-danger col-sm m-2" do %>
           <i class="fas fa-heart"></i>お気に入り
         <% end %>
         <%= link_to new_post_path, class: "btn btn-outline-dark col-sm m-2" do %>
@@ -48,6 +48,9 @@
                       <i class="fas fa-comment"></i>
                       <%= posts.post_comments.count %>
                     <% end %>
+                    <span id="favorite_btn_<%= posts.id %>">
+                      <%= render "public/favorites/btn", posts: posts %>
+                    </span>
                   </p>
                 </div>
                 <%= image_tag posts.get_image(250,250), class: "card-img-top" %>
