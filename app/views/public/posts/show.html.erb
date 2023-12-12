@@ -37,22 +37,22 @@
           </div>
         </div>
       </div>
-      
+
       <!--お気に入り機能-->
       <div class="row">
         <div class="col">
           <% if @post.favorited_by?(current_user) %>
-            <%= link_to post_favorites_path(@post), method: :delete do %>
+            <%= link_to post_favorites_path(@post), method: :delete, class: "text-danger" do %>
               <i class="fas fa-heart"></i><%= @post.favorites.count %>
             <% end %>
           <% else %>
-            <%= link_to post_favorites_path(@post), method: :post do %>
+            <%= link_to post_favorites_path(@post), method: :post, class: "text-danger" do %>
               <i class="far fa-heart"></i><%= @post.favorites.count %>
             <% end %>
           <% end %>
         </div>
       </div>
-      
+
       <!--コメント機能-->
       <div class="row">
         <div class="col">
