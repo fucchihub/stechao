@@ -37,12 +37,16 @@
       </h2>
       <div class="row">
         <% @posts.each do |posts| %>
-          <div class="col-3">
+          <div class="col-4">
             <%= link_to post_path(posts), class: "text-decoration-none text-dark" do %>
               <div class="card shadow p-1 mx-1 mb-4">
-                <div class="p-1">
+                <div class="card-body p-1">
                   <p class="card-text">
-                    <%= posts.name.truncate(7) %><br>
+                    <%= posts.name.truncate(7) %>
+                    <%= link_to post_path(posts) do %>
+                      <i class="fas fa-comment"></i>
+                      <%= posts.post_comments.count %>
+                    <% end %>
                   </p>
                 </div>
                 <%= image_tag posts.get_image(250,250), class: "card-img-top" %>

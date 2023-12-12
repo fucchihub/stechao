@@ -16,7 +16,10 @@
                 <div class="p-1">
                   <p class="card-text">
                     <%= image_tag posts.user.get_profile_image(30,30), class: "rounded-circle" %>
-                    <%= posts.user.name %>
+                    <%= link_to post_path(posts) do %>
+                      <i class="fas fa-comment"></i>
+                      <%= posts.post_comments.count %>
+                    <% end %>
                   </p>
                 </div>
                 <%= image_tag posts.get_image(250,250), class: "card-img-top" %>
