@@ -11,14 +11,15 @@
       <div class="row">
         <% @posts.each do |posts| %>
           <div class="col-3">
-            <%= link_to post_path(posts), class:"text-decoration-none text-dark" do %>
-              <div class="card m-3">
-                <%= image_tag posts.get_image(150,150) %>
-                <div class="card-body">
+            <%= link_to post_path(posts), class: "text-decoration-none text-dark" do %>
+              <div class="card shadow p-1 mx-1 mb-4">
+                <div class="p-1">
                   <p class="card-text">
-                    <%= posts.name %><br>
+                    <%= image_tag posts.user.get_profile_image(30,30), class: "rounded-circle" %>
+                    <%= posts.user.name %>
                   </p>
                 </div>
+                <%= image_tag posts.get_image(250,250), class: "card-img-top" %>
               </div>
             <% end %>
           </div>

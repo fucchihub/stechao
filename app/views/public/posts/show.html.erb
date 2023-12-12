@@ -28,13 +28,13 @@
               <%= link_to edit_post_path(@post), class: "text-success" do %>
                 <i class="fas fa-pen"></i>
               <% end %>
-              <%= link_to post_path(@post), method: :delete, data: { confirm: "「#{@post.name.truncate(10)}」を削除しますか？" }, class: "text-danger" do  %>
+              <%= link_to post_path(@post), method: :delete, data: { confirm: "「#{@post.name.truncate(10)}」を本当に削除しますか？" }, class: "text-danger" do  %>
                 <i class="fas fa-trash-can"></i>
               <% end %>
             </span>
             <% end %>
           </div>
-          <div class="caption-area bg-primary rounded-lg py-5 px-2">
+          <div class="text-break rounded-lg py-1 px-2">
             <%= @post.caption %>
           </div>
         </div>
