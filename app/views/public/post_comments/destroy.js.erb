@@ -1,0 +1,2 @@
+$('#comment_counter').html("<%= j(render "public/post_comments/counter", posts: @comment.post) %>");
+$('#comment_index').html("<%= j(render 'public/post_comments/index', posts: @comment.post) %>");

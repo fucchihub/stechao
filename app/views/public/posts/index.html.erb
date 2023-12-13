@@ -11,15 +11,14 @@
       <div class="row">
         <% @posts.each do |posts| %>
           <div class="col-3">
-            <%= link_to post_path(posts), class: "text-decoration-none text-dark" do %>
+            <%= link_to post_path(posts), class: "text-decoration-none" do %>
               <div class="card shadow p-1 mx-1 mb-4">
                 <div class="p-1">
                   <p class="card-text">
                     <%= image_tag posts.user.get_profile_image(30,30), class: "rounded-circle" %>
-                    <%= link_to post_path(posts) do %>
-                      <i class="fas fa-comment"></i>
-                      <%= posts.post_comments.count %>
-                    <% end %>
+                    <span id="comment_counter">
+                       <%= render "public/post_comments/counter", posts: posts %>
+                    </span>
                     <span id="favorite_btn_<%= posts.id %>">
                       <%= render "public/favorites/btn", posts: posts %>
                     </span>
