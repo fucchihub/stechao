@@ -39,13 +39,11 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # end
 
   def after_sign_up_path_for(resource)
-    root_path
-    # user_path(current_user.id)
+    user_path(current_user.id)
   end
 
   def after_update_path_for(resource)
-    root_path
-    # user_path(current_user.id)
+    user_path(current_user.id)
   end
 
   # The path used after sign up for inactive accounts.
