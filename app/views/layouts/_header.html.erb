@@ -7,72 +7,79 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
-        <% if admin_signed_in? %>
-          <li class="nav-item"><%= link_to "ユーザー一覧", admin_top_path, class: 'nav-link text-light' %></li>
-          <li class="nav-item"><%= link_to "投稿一覧", admin_top_path, class: 'nav-link text-light' %></li>
-          <li class="nav-item"><%= link_to "コメント一覧", admin_top_path, class: 'nav-link text-light' %></li>
-          <li class="nav-item"><%= link_to "ログアウト", admin_top_path, class: 'nav-link text-light' %></li>
-        <% elsif user_signed_in? %>
-          <li class="nav-item mr-3">
-            <%= link_to user_path(current_user), class: 'nav-link' do %>
-              <div class="vertical_center">
-                <i class="fas fa-flag fa-2x"></i> マイページ
-              </div>
-            <% end %>
-          </li>
-          <li class="nav-item mr-3">
-            <%= link_to posts_path, class: 'nav-link' do %>
-              <div class="vertical_center">
-                <i class="fas fa-images fa-2x"></i> 投稿一覧
-              </div>
-            <% end %>
-          </li>
-          <li class="nav-item mr-3">
-            <%= link_to users_path, class: 'nav-link' do %>
-              <div class="vertical_center">
-                <i class="fas fa-user-group fa-2x"></i> ユーザー一覧
-              </div>
-            <% end %>
-          </li>
-          <li class="nav-item mr-3">
-            <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
-              <div class="vertical_center">
-                <i class="fas fa-right-from-bracket fa-2x"></i> ログアウト
-              </div>
-            <% end %>
-          </li>
-        <% else %>
-          <li class="nav-item mr-3">
-            <%= link_to root_path, class: 'nav-link' do %>
-              <div class="vertical_center">
-                <i class="fas fa-circle-question fa-2x"></i> Stechaoとは
-              </div>
-            <% end %>
-          </li>
-          <li class="nav-item mr-3">
-            <%= link_to posts_path,class: 'nav-link' do %>
-              <div class="vertical_center">
-                <i class="fas fa-image fa-2x"></i> 投稿一覧
-              </div>
-            <% end %>
-          </li>
-          <li class="nav-item mr-3">
-            <%= link_to new_user_registration_path, class: 'nav-link' do %>
-              <div class="vertical_center">
-                <i class="fas fa-user-plus fa-2x"></i> 新規登録
-              </div>
-            <% end %>
-          </li>
-          <li class="nav-item mr-3">
-            <%= link_to new_user_session_path, class: 'nav-link' do %>
-              <div class="vertical_center">
-                <i class="fas fa-right-to-bracket fa-2x"></i> ログイン
-              </div>
-            <% end %>
-          </li>
-        <% end %>
-        </ul>
+        <div>
+          <div class="row">
+            <ul class="navbar-nav ml-auto">
+              <% if admin_signed_in? %>
+                <li class="nav-item"><%= link_to "ユーザー一覧", admin_top_path, class: 'nav-link text-light' %></li>
+                <li class="nav-item"><%= link_to "投稿一覧", admin_top_path, class: 'nav-link text-light' %></li>
+                <li class="nav-item"><%= link_to "コメント一覧", admin_top_path, class: 'nav-link text-light' %></li>
+                <li class="nav-item"><%= link_to "ログアウト", admin_top_path, class: 'nav-link text-light' %></li>
+              <% elsif user_signed_in? %>
+                <li class="nav-item mr-3">
+                  <%= link_to user_path(current_user), class: 'nav-link' do %>
+                    <div class="vertical_center">
+                      <i class="fas fa-flag fa-2x"></i> マイページ
+                    </div>
+                  <% end %>
+                </li>
+                <li class="nav-item mr-3">
+                  <%= link_to posts_path, class: 'nav-link' do %>
+                    <div class="vertical_center">
+                      <i class="fas fa-images fa-2x"></i> 投稿一覧
+                    </div>
+                  <% end %>
+                </li>
+                <li class="nav-item mr-3">
+                  <%= link_to users_path, class: 'nav-link' do %>
+                    <div class="vertical_center">
+                      <i class="fas fa-user-group fa-2x"></i> ユーザー一覧
+                    </div>
+                  <% end %>
+                </li>
+                <li class="nav-item mr-3">
+                  <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
+                    <div class="vertical_center">
+                      <i class="fas fa-right-from-bracket fa-2x"></i> ログアウト
+                    </div>
+                  <% end %>
+                </li>
+              <% else %>
+                <li class="nav-item mr-3">
+                  <%= link_to root_path, class: 'nav-link' do %>
+                    <div class="vertical_center">
+                      <i class="fas fa-circle-question fa-2x"></i> Stechaoとは
+                    </div>
+                  <% end %>
+                </li>
+                <li class="nav-item mr-3">
+                  <%= link_to posts_path,class: 'nav-link' do %>
+                    <div class="vertical_center">
+                      <i class="fas fa-image fa-2x"></i> 投稿一覧
+                    </div>
+                  <% end %>
+                </li>
+                <li class="nav-item mr-3">
+                  <%= link_to new_user_registration_path, class: 'nav-link' do %>
+                    <div class="vertical_center">
+                      <i class="fas fa-user-plus fa-2x"></i> 新規登録
+                    </div>
+                  <% end %>
+                </li>
+                <li class="nav-item mr-3">
+                  <%= link_to new_user_session_path, class: 'nav-link' do %>
+                    <div class="vertical_center">
+                      <i class="fas fa-right-to-bracket fa-2x"></i> ログイン
+                    </div>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="row">
+            <%= render "public/posts/search" %>
+          </div>
+        </div>
       </div>
     </div>
   </nav>

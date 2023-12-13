@@ -1,4 +1,6 @@
 class Public::PostCommentsController < ApplicationController
+  
+  # 非同期通信化
   def create
     @post = Post.find(params[:post_id])
     comment = current_user.post_comments.new(post_comment_params)
@@ -6,6 +8,7 @@ class Public::PostCommentsController < ApplicationController
     comment.save
   end
 
+  # 非同期通信化
   def destroy
     @comment = PostComment.find(params[:id])
     PostComment.find(params[:id]).destroy
