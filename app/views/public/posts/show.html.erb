@@ -41,29 +41,18 @@
         </div>
       </div>
 
-      <!--お気に入り機能-->
-      <div class="row">
-        
-      </div>
-
       <!--コメント機能-->
       <div class="row">
         <div class="col">
-          <p>コメント件数：<%= @post.post_comments.count %></p>
-          <% @post.post_comments.each do |post_comment| %>
-            <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-            <%= post_comment.user.name %>
-            <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
-            <% if post_comment.user == current_user %>
-              <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
-            <% end %>
-          <% end %>
+          <p id="comment_counter">
+            <%= render "public/post_comments/counter", posts: @post %>
+          </p>
+          <div id="comment_index">
+            <%= render "public/post_comments/index", posts: @post %>
+          </div>
         </div>
         <div class="col">
-        <%= form_with model: [@post, @post_comment] do |f| %>
-          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-          <%= f.submit "送信する" %>
-        <% end %>
+          <%= render "public/post_comments/form", posts: @post, post_comment: @post_comment %>
         </div>
       </div>
     </div>
