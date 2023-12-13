@@ -4,7 +4,8 @@ class Public::PostsController < ApplicationController
   def new
     @post = Post.new
   end
-
+  
+  # postモデル内にafter_createコールバックあり(ハッシュタグを作成)
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
@@ -28,7 +29,8 @@ class Public::PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
   end
-
+  
+  # モデル内にbefore_updateコールバックあり(ハッシュタグを更新)
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
@@ -47,10 +49,31 @@ class Public::PostsController < ApplicationController
     redirect_to user_path(current_user)
   end
 
+  # ハッシュタグ検索機能(ハッシュタグのリンク押すと一覧表示)
   def hashtag
     @user = current_user
+    # URLの:nameからハッシュタグの名前を取得
     @hashtag = Hashtag.find_by(name: params[:name])
     @posts = @hashtag.posts
+  end
+
+  # 複数のキーワードで検索できる機能
+  def search
+    redirect_to root_path if params[:keyword] == ""
+    # 検索フォームから送られてくるキーワードを空白で分割
+    split_keyword = params[:keyword].split(/[[:blank:]]+/)
+    # 変数の中身を初期化
+    @posts = []
+    # 分割したキーワードごとに検索
+    split_keyword.each do |keyword|
+      # キーワードが空白の場合は検索しないでスキップ(空白で検索すると全レコードを取得してしまう)
+      next if keyword == ""
+      # キーワードごとに部分一致検索をし、検索結果のpostを累積して格納
+      @posts += Post.where('name LIKE(?)', "%#{keyword}%")
+    end
+    # 重複したpostを削除する
+    @posts.uniq!
+    
   end
 
   private

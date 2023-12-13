@@ -23,9 +23,12 @@ class Public::UsersController < ApplicationController
     end
   end
 
+  # お気に入りを一覧表示する機能
   def favorites
     @user = User.find(params[:id])
+    # favoritesテーブルから@user.idが一致するレコードを取得し、その中からpost_idカラムだけ取得
     favorites= Favorite.where(user_id: @user.id).pluck(:post_id)
+    # 取得したpost_idを使ってuserがお気に入りした投稿を見つける
     @favorite_posts = Post.find(favorites)
   end
 

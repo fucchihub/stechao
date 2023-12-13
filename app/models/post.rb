@@ -21,25 +21,36 @@ class Post < ApplicationRecord
     image.variant(resize_to_fill: [width, height]).processed
   end
 
+  # 新しいpostが作成された後、キャプションからハッシュタグを抽出してHashtagモデルに関連付ける
   after_create do
-  posts = Post.find_by(id: self.id)
-  hashtags = self.caption.scan(/[#][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
-  posts.hashtags = []
-  hashtags.uniq.map do |hashtag|
-    # ハッシュタグは先頭の'#'を外した上で保存
-    tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
-    posts.hashtags << tag
+    #   新しく作成されたpostを取得
+    posts = Post.find_by(id: self.id)
+    # キャプションからハッシュタグ(#で始まり、その後に英数字や日本語が続く)を抽出して格納
+    hashtags = self.caption.scan(/[#][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+    # postに関連付けられてるハッシュタグを初期化
+    posts.hashtags = []
+    # 抽出したハッシュタグから重複を除いて、残ったハッシュタグに対して繰り返し処理を行う。
+    hashtags.uniq.map do |hashtag|
+      # hashtagsテーブルにハッシュタグが既に存在する場合はそれを取得し、存在しない場合は新しく作成。
+      # その際、ハッシュタグの文字列は小文字に変換し、先頭の#を外す。
+      tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
+      # postとハッシュタグを関連付ける
+      posts.hashtags << tag
+    end
   end
-end
 
-before_update do
-  # @type [Post]
-  posts = Post.find_by(id: self.id)
-  posts.hashtags.clear
-  hashtags = self.caption.scan(/[#][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
-  hashtags.uniq.map do |hashtag|
-    tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
-    posts.hashtags << tag
+  # postが更新される前に、そのpostのハッシュタグを一旦削除し、新しいキャプションから再度抽出してHashtagモデルに関連付ける。
+  # これにより、キャプションが更新された時にハッシュタグも更新される。
+  before_update do
+    # 更新するpostを取得
+    posts = Post.find_by(id: self.id)
+    # postに関連付けられてるハッシュタグをクリア（削除）
+    posts.hashtags.clear
+    # 更新するキャプションからハッシュタグ(#で始まり、その後に英数字や日本語が続く)を抽出して格納
+    hashtags = self.caption.scan(/[#][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+    hashtags.uniq.map do |hashtag|
+      tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
+      posts.hashtags << tag
+    end
   end
-end
 end
