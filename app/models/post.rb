@@ -4,8 +4,8 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :taggings
-  has_many :hashtags, through: :taggings
+  has_many :taggings, dependent: :destroy
+  has_many :hashtags, through: :taggings, dependent: :destroy
 
   #validates :name, presence: true, length: { maximum: 20 }
 
@@ -22,23 +22,24 @@ class Post < ApplicationRecord
   end
 
   after_create do
-    posts = Post.find_by(id: self.id)
-    hashtags  = self.caption.scan(/[#][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
-    posts.hashtags = []
-    hashtags.uniq.map do |hashtag|
-      #ハッシュタグは先頭の'#'を外した上で保存
-      tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
-      posts.hashtags << tag
-    end
+  posts = Post.find_by(id: self.id)
+  hashtags = self.caption.scan(/[#][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+  posts.hashtags = []
+  hashtags.uniq.map do |hashtag|
+    # ハッシュタグは先頭の'#'を外した上で保存
+    tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
+    posts.hashtags << tag
   end
+end
 
-  before_update do
-    posts = Post.find_by(id: self.id)
-    posts.hashtags.clear
-    hashtags = self.caption.scan(/[#][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
-    hashtags.uniq.map do |hashtag|
-      tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
-      posts.hashtags << tag
-    end
+before_update do
+  # @type [Post]
+  posts = Post.find_by(id: self.id)
+  posts.hashtags.clear
+  hashtags = self.caption.scan(/[#][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+  hashtags.uniq.map do |hashtag|
+    tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
+    posts.hashtags << tag
   end
+end
 end

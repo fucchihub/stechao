@@ -1,0 +1,6 @@
+<h2>ハッシュタグ #<%= @hashtag.name %></h2>
+    <% @posts.each do |posts| %>
+        <%= link_to post_path(posts) do %>
+          <%= posts.name %>
+        <% end %>
+    <% end %>

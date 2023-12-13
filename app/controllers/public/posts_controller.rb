@@ -44,13 +44,13 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     flash[:notice] = "投稿を削除しました！"
-    redirect_to posts_path
+    redirect_to request.referer
   end
-  
+
   def hashtag
     @user = current_user
-    @tag = Hashtag.find_by(hashname: params[:name])
-    @posts = @tag.posts
+    @hashtag = Hashtag.find_by(name: params[:name])
+    @posts = @hashtag.posts
   end
 
   private

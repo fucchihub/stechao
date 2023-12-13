@@ -6,17 +6,17 @@ Rails.application.routes.draw do
 
   devise_for :users, skip: [:passwords], controllers: {
   registrations: "public/registrations",
-  sessions: 'public/sessions'
+  sessions: "public/sessions"
 }
 
   namespace :admin do
-    get 'top' => 'homes#top', as: "top"
+    get "top" => "homes#top", as: "top"
   end
 
   scope module: :public do
-    root to: 'homes#top'
+    root to: "homes#top"
+    get "/posts/hashtag/:name" => "posts#hashtag"
     resources :posts do
-      get '/hashtag/:id' => "posts#hashtag"
       resource :favorites, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end
