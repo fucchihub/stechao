@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!
 
   def new
     @post = Post.new
@@ -45,6 +45,12 @@ class Public::PostsController < ApplicationController
     @post.destroy
     flash[:notice] = "投稿を削除しました！"
     redirect_to posts_path
+  end
+  
+  def hashtag
+    @user = current_user
+    @tag = Hashtag.find_by(hashname: params[:name])
+    @posts = @tag.posts
   end
 
   private
