@@ -44,18 +44,11 @@
                     </div>
                   <% end %>
                 </li>
-              <% else %>
+              <% else %> <!--ログインしてない時-->
                 <li class="nav-item mr-3">
                   <%= link_to root_path, class: 'nav-link' do %>
                     <div class="vertical_center">
                       <i class="fas fa-circle-question fa-2x"></i> Stechaoとは
-                    </div>
-                  <% end %>
-                </li>
-                <li class="nav-item mr-3">
-                  <%= link_to posts_path,class: 'nav-link' do %>
-                    <div class="vertical_center">
-                      <i class="fas fa-image fa-2x"></i> 投稿一覧
                     </div>
                   <% end %>
                 </li>
