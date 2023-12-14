@@ -68,8 +68,11 @@ class Public::PostsController < ApplicationController
     split_keyword.each do |keyword|
       # キーワードが空白の場合は検索しないでスキップ(空白で検索すると全レコードを取得してしまう)
       next if keyword == ""
+      # キーワードが#で始まる場合は#を取り除く(文字列の2文字目から最後までを取り出す)
+      keyword = keyword.starts_with?('#') ? keyword[1..-1] : keyword
       # キーワードごとに部分一致検索をし、検索結果のpostを累積して格納
-      @posts += Post.where('name LIKE(?)', "%#{keyword}%")
+      @posts += Post.where('name LIKE ?', "%#{keyword}%")
+      
     end
     # 重複したpostを削除する
     @posts.uniq!
