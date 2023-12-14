@@ -22,6 +22,7 @@ body {
   margin: 0;
   padding: 0;
   color: #4e454a; //チャコールグレイ
+  font-family: 'Zen Kaku Gothic New', sans-serif;
 }
 
 a {
@@ -38,18 +39,41 @@ a:hover {
 //   background-color: #f7f6f5; //パールホワイト
 // }
 
-.nav-item i {
-  margin-right: 10px;
-}
+// .nav-item i {
+//   margin-right: 10px;
+// }
 
-.vertical_center {
-  display: flex;
-  align-items: center;
-}
+// .vertical_center {
+//   display: flex;
+//   align-items: center;
+// }
 
 // .card {
   // width: auto;
   // background-color: #f8f9fa;}
+  
+  
+// サイドバー
+#sticky-sidebar {
+  position: fixed;
+  height: 100%;
+  width: 300px;
+  left: 0;
+  transition: left 2s;
+  z-index: 100;
+}
+
+.sidebar-closed #sticky-sidebar {
+  left: -300px;
+}
+
+#sidebar-menu li {
+  list-style: none;
+  margin: 50px 0;
+  font-size: 20px;
+}
+ 
+
 
 // 各画面のタイトル用
 .title {
@@ -101,7 +125,6 @@ footer {
   position: sticky;
   top: 100vh;
   width: 100%;
-  border-top: 1px solid #f8f9fa;
 }
 
 // margin-top: auto;とどっちがいいか
