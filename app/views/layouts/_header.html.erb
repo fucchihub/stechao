@@ -69,9 +69,11 @@
               <% end %>
             </ul>
           </div>
+          <% if user_signed_in? %>
           <div class="row">
             <%= render "public/posts/search" %>
           </div>
+          <% end %>
         </div>
       </div>
     </div>

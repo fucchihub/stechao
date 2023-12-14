@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def devise_mapping
+   @devise_mapping ||= Devise.mappings[:user]
+  end
+
   def bootstrap_class_for_flash(flash_type)
     case flash_type.to_sym
     when :success
