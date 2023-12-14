@@ -1,2 +1,39 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<!--ユーザ側／トップページ-->
+<div class='container py-5'>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h2>ログイン</h2>
+
+      <%= form_with model: @user, url: user_session_path, method: :post do |f| %>
+        <%= render "public/shared/error_messages", resource: @user %>
+
+        <div class="form-group">
+          <%= f.label :name, "ユーザー名" %><br>
+          <%= f.text_field :name, autofocus: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password, "パスワード(6字以上)" %><br>
+          <%= f.password_field :password, autocomplete: "current-password" %>
+        </div>
+
+         <% if devise_mapping.rememberable? %>
+            <div class="form-group">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end %>
+
+        <div class="form-group">
+          <%= f.submit "ログイン", class: "btn btn-success" %>
+        </div>
+      <% end %>
+
+      <div>
+        新規ユーザー登録は<%= link_to "こちら", new_user_registration_path %>
+      </div>
+
+    </div>
+  </div>
+</div>
+<%#= render "public/shared/links" %>
