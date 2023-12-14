@@ -26,7 +26,7 @@ body {
 }
 
 a {
-  color: #00608d; //マドンナブルー
+  color: #4e454a; //チャコールグレイ
 }
 
 a:hover {
@@ -67,9 +67,13 @@ a:hover {
   left: -300px;
 }
 
+.sidebar-closed .sidebar-trigger {
+  display: block; /* サイドバーが非表示のときにトリガーを表示 */
+}
+
 #sidebar-menu li {
   list-style: none;
-  margin: 50px 0;
+  margin: 30px 0;
   font-size: 20px;
 }
  
