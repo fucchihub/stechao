@@ -1,7 +1,7 @@
 <!--ユーザ側／投稿詳細画面-->
 <div class='container py-5'>
   <div class='row'>
-    <div class="col-sm-12 col-md-8 col-lg-8 px-5 px-sm-0 mx-auto">
+    <div class="col-sm-12 col-md-9 col-lg-9 px-5 px-sm-0 mx-auto">
 
       <h2 class="mb-4">
         <i class="fas fa-image"></i>投稿詳細
@@ -38,18 +38,22 @@
 
       <!--コメント機能-->
       <div class="row">
-        <div class="col">
-          <p id="comment_counter">
-            <%= render "public/post_comments/counter", posts: @post %>
-          </p>
+        
           <div id="comment_index">
             <%= render "public/post_comments/index", posts: @post %>
           </div>
-        </div>
-        <div class="col">
-          <%= render "public/post_comments/form", posts: @post, post_comment: @post_comment %>
-        </div>
+          
+          <p id="comment_counter">
+            <%= render "public/post_comments/counter", posts: @post %>
+          </p>
+          <div>
+            <%= render "public/post_comments/form", posts: @post, post_comment: @post_comment %>
+          </div>
+        
+        <div class="col-md-7"></div>
       </div>
     </div>
+    
+  
   </div>
 </div>
