@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 20 }
+  validates :introduction, length: { maximum: 30 }
+
 
   has_one_attached :profile_image
 
@@ -18,9 +20,9 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_fill: [width, height]).processed
   end
-  
+
   def remember_me
     true
   end
-    
+
 end

@@ -71,7 +71,7 @@ class Public::PostsController < ApplicationController
       # キーワードが#で始まる場合は#を取り除く(文字列の2文字目から最後までを取り出す)
       keyword = keyword.starts_with?('#') ? keyword[1..-1] : keyword
       # キーワードごとに部分一致検索をし、検索結果のpostを累積して格納
-      @posts += Post.where('name LIKE ?', "%#{keyword}%")
+      @posts += Post.where('name LIKE ? OR caption LIKE ?', "%#{keyword}%", "%#{keyword}%")
       
     end
     # 重複したpostを削除する

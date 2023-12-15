@@ -14,7 +14,7 @@
         <li>
           <%= link_to user_path(current_user) do %>
             <%= image_tag current_user.get_profile_image(50,50), class: "rounded-circle shadow" %>
-            <%= current_user.name %>
+            投稿を見る
           <% end %>
         </li>
         <li>
@@ -28,18 +28,18 @@
           <% end %>
         </li>
         <li>
-          <%= link_to edit_user_path(current_user) do %>
-            <i class="fas fa-user-gear"></i>プロフィールを変更する
-          <% end %>
-        </li>
-        <li>
           <%= link_to posts_path do %>
-            <i class="fas fa-images"></i> 投稿を見る
+            <i class="fas fa-images"></i> みんなの投稿を見る
           <% end %>
         </li>
         <li>
           <%= link_to users_path do %>
             <i class="fas fa-user-group"></i> ユーザーを見る
+          <% end %>
+        </li>
+        <li>
+          <%= link_to edit_user_path(current_user) do %>
+            <i class="fas fa-user-gear"></i> プロフィール編集
           <% end %>
         </li>
         <li>
@@ -67,3 +67,14 @@
     </ul>
   </div>
 </div>
+
+<% if user_signed_in? %>
+  <div class="row justify-content-center mt-4">
+    <%= form_with url: search_posts_path, method: :get do |f| %>
+      <div class="input-group">
+        <%= f.text_field :keyword, placeholder: "投稿を検索", class: "form-control" %>
+        <%= f.submit "検索", class: "btn btn-sm btn-success ml-2" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

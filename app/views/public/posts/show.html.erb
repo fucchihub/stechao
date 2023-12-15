@@ -1,14 +1,9 @@
 <!--ユーザ側／投稿詳細画面-->
 <div class='container py-5'>
   <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-8 px-5 px-sm-0 mx-auto">
 
-    <!--プロフィール-->
-    <div class="col-md-4">
-    </div>
-
-    <!--投稿詳細-->
-    <div class="col-md-8 bg-light rounded-lg">
-      <h2 class="title">
+      <h2 class="mb-4">
         <i class="fas fa-image"></i>投稿詳細
       </h2>
       <div class="row">
@@ -29,14 +24,14 @@
                 <%= link_to edit_post_path(@post), class: "text-success fontawesome-button" do %>
                   <i class="fas fa-pen"></i>
                 <% end %>
-                <%= link_to post_path(@post), method: :delete, data: { confirm: "「#{@post.name.truncate(10)}」を本当に削除しますか？" }, class: "text-danger fontawesome-button" do  %>
+                <%= link_to post_path(@post), method: :delete, data: { confirm: "「#{@post.name.truncate(10)}」を本当に削除しますか？" }, class: "text-dark fontawesome-button" do  %>
                   <i class="fas fa-trash-can"></i>
                 <% end %>
               <% end %>
             </div>
           </div>
           <div class="text-break rounded-lg py-1 px-2">
-            <%= render_with_hashtags(@post.caption) %>
+            <%= simple_format(render_with_hashtags(@post.caption)) %>
           </div>
         </div>
       </div>
