@@ -3,9 +3,7 @@
   <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
 
-      <h3 class="mb-4">
-        <i class="fas fa-user-group"></i>ユーザーを見る
-      </h3>
+      <h2 class="mb-4">ユーザーリスト</h2>
         <% @users.each do |user| %>
           <%= link_to user_path(user) do %>
             <div class="users-index-table row justify-content-center align-items-center">

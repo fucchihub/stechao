@@ -14,27 +14,27 @@
         <li>
           <%= link_to user_path(current_user) do %>
             <%= image_tag current_user.get_profile_image(50,50), class: "rounded-circle shadow" %>
-            投稿を見る
+            マイページ
           <% end %>
         </li>
         <li>
           <%= link_to new_post_path do %>
-            <i class="fas fa-paper-plane"></i> 新しく投稿する
-          <% end %>
-        </li>
-        <li>
-          <%= link_to favorites_user_path(current_user) do %>
-            <i class="fas fa-heart"></i> お気に入りを見る
+            <i class="fas fa-paper-plane"></i> 新しい投稿
           <% end %>
         </li>
         <li>
           <%= link_to posts_path do %>
-            <i class="fas fa-images"></i> みんなの投稿を見る
+            <i class="fas fa-images"></i> みんなの投稿
+          <% end %>
+        </li>
+        <li>
+          <%= link_to favorites_user_path(current_user) do %>
+            <i class="fas fa-heart"></i> お気に入りリスト
           <% end %>
         </li>
         <li>
           <%= link_to users_path do %>
-            <i class="fas fa-user-group"></i> ユーザーを見る
+            <i class="fas fa-user-group"></i> ユーザーリスト
           <% end %>
         </li>
         <li>

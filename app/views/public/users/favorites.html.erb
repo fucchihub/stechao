@@ -3,9 +3,7 @@
   <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-9 px-5 px-sm-0 mx-auto">
 
-      <h2 class="mb-4">
-        <i class="fas fa-image"></i>お気に入り一覧
-      </h2>
+      <h2 class="mb-4"><%= current_user.name %>のお気に入り</h2>
       <div class="row">
         <% @favorite_posts.each do |posts| %>
           <div class="col-4">

@@ -2,8 +2,9 @@
 <div class='container py-5'>
   <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-7 px-5 px-sm-0 mx-auto">
+
       <div class="rounded-lg border p-5">
-        <h2 class="mb-4">新しい投稿を作る</h2>
+        <h2 class="mb-4">新しい投稿</h2>
         <%= form_with model: @post, url: posts_path, method: :post do |f| %>
           <div class="form-group">
             <%= f.label :image, "投稿画像" %><br>
@@ -12,12 +13,12 @@
 
           <div class="form-group">
             <%= f.label :name, "投稿名" %><br>
-            <%= f.text_field :name, placeholder: "あなたが手放したもの", class: 'form-control' %>
+            <%= f.text_field :name, placeholder: "手放したもの等を入力", class: 'form-control' %>
           </div>
 
           <div class="form-group">
             <%= f.label :caption, "投稿文" %><br>
-            <%= f.text_area :caption, placeholder: "なぜ手放したのか、などふり返りながら自由に書き残しましょう！ハッシュタグもつけられます（例：#断捨離）", rows: "10", class: 'form-control' %>
+            <%= f.text_area :caption, placeholder: "なぜ手放したのか等自由に入力。ハッシュタグもつけられます（例：#断捨離）", rows: "10", class: 'form-control' %>
           </div>
 
           <div class="form-group">

@@ -1,11 +1,10 @@
 <!--ユーザ側／ユーザ編集画面-->
 <div class='container py-5'>
   <div class='row'>
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+    <div class="col-sm-12 col-md-8 col-lg-7 px-5 px-sm-0 mx-auto">
+      
       <div class="rounded-lg border p-5">
-        <h2 class="mb-4">
-          <i class="fas fa-user-gear"></i>プロフィール編集
-        </h2>
+        <h2 class="mb-4">プロフィール編集</h2>
         <%= form_with model: @user, url: user_path do |f| %>
           <div class="form-group">
             <%= f.label :profile_image, "プロフィール画像" %><br>
@@ -22,22 +21,20 @@
             <%= f.text_field :introduction, placeholder: "30字以内", class: 'form-control' %>
           </div>
 
-          <div class="form-group text-center">
-            <%= f.submit "変更する", class: 'btn btn-success' %>
+          <div class="form-group">
+            <%= f.submit "変更する", class: 'btn btn-sm btn-success' %>
           </div>
         <% end %>
 
-        <h4 class="mb-4">
-          <i class="far fa-envelope"></i>登録メールアドレス
-        </h4>
+        <h4 class="my-4">登録メールアドレス</h4>
         <%= form_with model: @user, url: user_path do |f| %>
           <div class="form-group">
             <%= f.label :email, "メールアドレス" %><br>
             <%= f.text_field :email, placeholder: "abc@stechao.com", class: 'form-control' %>
           </div>
 
-          <div class="form-group text-center">
-            <%= f.submit "変更する", class: 'btn btn-success' %>
+          <div class="form-group">
+            <%= f.submit "変更する", class: 'btn btn-sm btn-success' %>
           </div>
         <% end %>
       </div>
