@@ -4,14 +4,6 @@ $dark: #4e454a;//チャコールグレイ
 
 @use '~bootstrap/scss/bootstrap';
 
-@mixin row-cols($count) {
-  > * {
-    flex: 0 0 auto;
-    width: divide(100, $count);
-  }
-}
-
-
 html {
   height: 100%;
 }
