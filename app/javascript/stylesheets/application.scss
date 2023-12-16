@@ -2,6 +2,8 @@ $success: #54917f;// アンティークグリーン
 $danger: #941f57; //クラレット
 $dark: #4e454a;//チャコールグレイ
 
+@use '~bootstrap/scss/bootstrap';
+
 @mixin row-cols($count) {
   > * {
     flex: 0 0 auto;
@@ -9,7 +11,6 @@ $dark: #4e454a;//チャコールグレイ
   }
 }
 
-@use '~bootstrap/scss/bootstrap';
 
 html {
   height: 100%;
