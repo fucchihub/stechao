@@ -2,6 +2,13 @@ $success: #54917f;// アンティークグリーン
 $danger: #941f57; //クラレット
 $dark: #4e454a;//チャコールグレイ
 
+@mixin row-cols($count) {
+  > * {
+    flex: 0 0 auto;
+    width: divide(100, $count);
+  }
+}
+
 @use '~bootstrap/scss/bootstrap';
 
 html {
