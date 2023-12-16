@@ -2,7 +2,7 @@ $success: #54917f;// アンティークグリーン
 $danger: #941f57; //クラレット
 $dark: #4e454a;//チャコールグレイ
 
-@use '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap';
 
 html {
   height: 100%;
