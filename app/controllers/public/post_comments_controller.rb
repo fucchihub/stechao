@@ -1,5 +1,6 @@
 class Public::PostCommentsController < ApplicationController
-  
+  before_action :authenticate_user!
+
   # 非同期通信化
   def create
     @post = Post.find(params[:post_id])

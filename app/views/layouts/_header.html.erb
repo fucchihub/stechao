@@ -1,79 +1,80 @@
-<header class="shadow-sm">
-  <nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <a class="navbar-brand p-3" href="/"><span>Stechao</span><%#= image_tag('logo.png') %></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <div>
-          <div class="row">
-            <ul class="navbar-nav ml-auto">
-              <% if admin_signed_in? %>
-                <li class="nav-item"><%= link_to "ユーザー一覧", admin_top_path, class: 'nav-link text-light' %></li>
-                <li class="nav-item"><%= link_to "投稿一覧", admin_top_path, class: 'nav-link text-light' %></li>
-                <li class="nav-item"><%= link_to "コメント一覧", admin_top_path, class: 'nav-link text-light' %></li>
-                <li class="nav-item"><%= link_to "ログアウト", admin_top_path, class: 'nav-link text-light' %></li>
-              <% elsif user_signed_in? %>
-                <li class="nav-item mr-3">
-                  <%= link_to user_path(current_user), class: 'nav-link' do %>
-                    <div class="vertical_center">
-                      <i class="fas fa-flag fa-2x"></i> マイページ
-                    </div>
-                  <% end %>
-                </li>
-                <li class="nav-item mr-3">
-                  <%= link_to posts_path, class: 'nav-link' do %>
-                    <div class="vertical_center">
-                      <i class="fas fa-images fa-2x"></i> 投稿一覧
-                    </div>
-                  <% end %>
-                </li>
-                <li class="nav-item mr-3">
-                  <%= link_to users_path, class: 'nav-link' do %>
-                    <div class="vertical_center">
-                      <i class="fas fa-user-group fa-2x"></i> ユーザー一覧
-                    </div>
-                  <% end %>
-                </li>
-                <li class="nav-item mr-3">
-                  <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
-                    <div class="vertical_center">
-                      <i class="fas fa-right-from-bracket fa-2x"></i> ログアウト
-                    </div>
-                  <% end %>
-                </li>
-              <% else %> <!--ログインしてない時-->
-                <li class="nav-item mr-3">
-                  <%= link_to root_path, class: 'nav-link' do %>
-                    <div class="vertical_center">
-                      <i class="fas fa-circle-question fa-2x"></i> Stechaoとは
-                    </div>
-                  <% end %>
-                </li>
-                <li class="nav-item mr-3">
-                  <%= link_to new_user_registration_path, class: 'nav-link' do %>
-                    <div class="vertical_center">
-                      <i class="fas fa-user-plus fa-2x"></i> 新規登録
-                    </div>
-                  <% end %>
-                </li>
-                <li class="nav-item mr-3">
-                  <%= link_to new_user_session_path, class: 'nav-link' do %>
-                    <div class="vertical_center">
-                      <i class="fas fa-right-to-bracket fa-2x"></i> ログイン
-                    </div>
-                  <% end %>
-                </li>
-              <% end %>
-            </ul>
-          </div>
-          <div class="row">
-            <%= render "public/posts/search" %>
-          </div>
-        </div>
+<!--サイドバー-->
+<div id="sticky-sidebar" class="pt-5 shadow-sm">
+  <a id="sidebar-trigger" href="#" class="ml-4 p-2">
+    <%= image_tag 'stechao-logo.png', size: '200x50' %>
+  </a>
+  <div id="sidebar-menu">
+    <ul>
+      <% if admin_signed_in? %>
+        <li><%= link_to "ユーザー一覧", admin_top_path, class: 'text-light' %></li>
+        <li><%= link_to "投稿一覧", admin_top_path, class: 'text-light' %></li>
+        <li><%= link_to "コメント一覧", admin_top_path, class: 'text-light' %></li>
+        <li><%= link_to "ログアウト", admin_top_path, class: 'text-light' %></li>
+      <% elsif user_signed_in? %>
+        <li>
+          <%= link_to user_path(current_user) do %>
+            <%= image_tag current_user.get_profile_image(50,50), class: "rounded-circle shadow" %>
+            マイページ
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_post_path do %>
+            <i class="fas fa-paper-plane"></i> 新しい投稿
+          <% end %>
+        </li>
+        <li>
+          <%= link_to posts_path do %>
+            <i class="fas fa-images"></i> みんなの投稿
+          <% end %>
+        </li>
+        <li>
+          <%= link_to favorites_user_path(current_user) do %>
+            <i class="fas fa-heart"></i> お気に入りリスト
+          <% end %>
+        </li>
+        <li>
+          <%= link_to users_path do %>
+            <i class="fas fa-user-group"></i> ユーザーリスト
+          <% end %>
+        </li>
+        <li>
+          <%= link_to edit_user_path(current_user) do %>
+            <i class="fas fa-user-gear"></i> プロフィール編集
+          <% end %>
+        </li>
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <i class="fas fa-right-from-bracket"></i> ログアウト
+          <% end %>
+        </li>
+      <% else %> <!--ログインしてない時-->
+        <li>
+          <%= link_to root_path do %>
+              <i class="fas fa-circle-question"></i> Stechaoとは
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_user_registration_path do %>
+              <i class="fas fa-user-plus"></i> 新規登録
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_user_session_path do %>
+              <i class="fas fa-right-to-bracket"></i> ログイン
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<% if user_signed_in? %>
+  <div class="row justify-content-center mt-4">
+    <%= form_with url: search_posts_path, method: :get do |f| %>
+      <div class="input-group">
+        <%= f.text_field :keyword, placeholder: "投稿を検索", class: "form-control" %>
+        <%= f.submit "検索", class: "btn btn-sm btn-success ml-2" %>
       </div>
-    </div>
-  </nav>
-</header>
+    <% end %>
+  </div>
+<% end %>

@@ -1,15 +1,6 @@
-// $primary: #007bbb;紺碧
-// $secondary: #941f57;クラレっと
-// $success: #c3d825;若草色
-// $danger: #d7003a;くれない
-// $warning: #fcc500;あざやかな黄系の色
-// $info: #2cd4ab;強い緑系の色
-// $light: #f8f9fa;やや灰色い青紫系の色
-// $dark: #4e454a;チャコールグレイ
-
-// #f7f6f5 パールホワイト
-// #fafdff スノーホワイト
-// #f7fcfe 卯の花色
+$success: #54917f;// アンティークグリーン
+$danger: #941f57; //クラレット
+$dark: #4e454a;//チャコールグレイ
 
 @import '~bootstrap/scss/bootstrap';
 
@@ -21,42 +12,66 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #bce2e8; //水色
-  color: #043c78; //インディゴ
+  color: #4e454a; //チャコールグレイ
+  font-family: 'Zen Kaku Gothic New', sans-serif;
 }
 
 a {
-  color: #00608d; //マドンナブルー
+  color: #98605e; //ココアブラウン
 }
 
 a:hover {
-  color: #043c78; //インディゴ
+  color: #941f57; //クラレット
   text-decoration: none;
 }
 
 // ヘッダー用
-.navbar {
-  background-color: #f7f6f5; //パールホワイト
-}
+// .navbar {
+//   background-color: #f7f6f5; //パールホワイト
+// }
 
-.nav-item i {
-  margin-right: 10px;
-}
+// .nav-item i {
+//   margin-right: 10px;
+// }
 
-.vertical_center {
-  display: flex;
-  align-items: center;
-}
+// .vertical_center {
+//   display: flex;
+//   align-items: center;
+// }
 
 // .card {
   // width: auto;
   // background-color: #f8f9fa;}
-
-// 各画面のタイトル用
-.title {
-  margin-bottom: 30px;
-  border-bottom: 2px solid #043c78;
+  
+  
+// サイドバー
+#sticky-sidebar {
+  position: fixed;
+  height: 100%;
+  width: 300px;
+  left: 0;
+  transition: left 2s;
+  z-index: 100;
 }
+
+.sidebar-closed #sticky-sidebar {
+  left: -300px;
+}
+
+.sidebar-closed .sidebar-trigger {
+  display: block; /* サイドバーが非表示のときにトリガーを表示 */
+}
+
+#sidebar-menu li {
+  list-style: none;
+  margin: 30px 0;
+  font-size: 20px;
+}
+
+
+// #top-background {
+//   background: url('top-background.jpg');
+// }
 
 // プロフィール
 .profile-content {
@@ -64,30 +79,18 @@ a:hover {
 }
 
 // ユーザ一覧画面のテーブル用
-.table-container {
-  display: table;
-  margin: 0 auto;
+.users-index-table {
+  height: 150px;
 }
 
-.table-row {
-  display: table-row;
-  padding: 8px;
-  border-bottom: 1px solid #cccccc;
+.users-index-table:hover {
+  background-color:#f8f9fa;
 }
-
-.table-row:hover {
-  background-color:#abced8;
-}
-
-.table-cell {
-  display: table-cell;
-  padding: 8px
-  }
 
 // 投稿詳細画面用
 .postdetail-name {
   margin-bottom: 20px;
-  border-bottom: 2px solid #043c78;
+  border-bottom: 2px solid #f8f9fa;
   display: flex;
   justify-content: space-between;
 }
@@ -102,7 +105,6 @@ footer {
   position: sticky;
   top: 100vh;
   width: 100%;
-  background-color: #f7f6f5; //パールホワイト
 }
 
 // margin-top: auto;とどっちがいいか

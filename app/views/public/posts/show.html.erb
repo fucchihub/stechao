@@ -1,24 +1,17 @@
 <!--ユーザ側／投稿詳細画面-->
 <div class='container py-5'>
   <div class='row'>
+    <div class="col-sm-12 col-md-9 col-lg-9 px-5 px-sm-0 mx-auto">
 
-    <!--プロフィール-->
-    <div class="col-md-4">
-    </div>
-
-    <!--投稿詳細-->
-    <div class="col-md-8 bg-light rounded-lg">
-      <h2 class="title">
-        <i class="fas fa-image"></i>投稿詳細
-      </h2>
+      <h2 class="mb-4">投稿詳細</h2>
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-4">
           <%= image_tag @post.get_image(250,250) %>
           <% unless @post.quantity == 0 %>
             <p>断捨離した数は <strong><%= @post.quantity %></strong> です</p>
           <% end %>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
           <div class="postdetail-name">
             <h4><%= @post.name %></h4>
             <div>
@@ -29,32 +22,32 @@
                 <%= link_to edit_post_path(@post), class: "text-success fontawesome-button" do %>
                   <i class="fas fa-pen"></i>
                 <% end %>
-                <%= link_to post_path(@post), method: :delete, data: { confirm: "「#{@post.name.truncate(10)}」を本当に削除しますか？" }, class: "text-danger fontawesome-button" do  %>
+                <%= link_to post_path(@post), method: :delete, data: { confirm: "「#{@post.name.truncate(10)}」を本当に削除しますか？" }, class: "text-dark fontawesome-button" do  %>
                   <i class="fas fa-trash-can"></i>
                 <% end %>
               <% end %>
             </div>
           </div>
           <div class="text-break rounded-lg py-1 px-2">
-            <%= render_with_hashtags(@post.caption) %>
+            <%= simple_format(render_with_hashtags(@post.caption)) %>
           </div>
         </div>
       </div>
 
       <!--コメント機能-->
-      <div class="row">
-        <div class="col">
-          <p id="comment_counter">
+      <h3 id="comment_counter">
             <%= render "public/post_comments/counter", posts: @post %>
-          </p>
+            コメント
+          </h3>
           <div id="comment_index">
             <%= render "public/post_comments/index", posts: @post %>
           </div>
-        </div>
-        <div class="col">
-          <%= render "public/post_comments/form", posts: @post, post_comment: @post_comment %>
-        </div>
-      </div>
+          
+          
+          <div class="row justify-content-center align-items-center mt-5">
+            <%= render "public/post_comments/form", posts: @post, post_comment: @post_comment %>
+          </div>
+          
     </div>
   </div>
 </div>
