@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   has_many :taggings, dependent: :destroy
   has_many :hashtags, through: :taggings, dependent: :destroy
 
-  #validates :name, presence: true, length: { maximum: 20 }
+  validates :name, presence: true, length: { maximum: 99 }
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)

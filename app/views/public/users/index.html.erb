@@ -1,27 +1,25 @@
 <!--ユーザ側／ユーザ一覧画面-->
 <div class='container py-5'>
   <div class='row'>
-    <div class="col-md-4">
-    </div>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
 
-    <div class="col-md-8">
-      <h3 class="title">
-        <i class="fas fa-user-group"></i>ユーザ一覧
-      </h3>
-      <div class="table-container">
+      <h2 class="mb-4">ユーザーリスト</h2>
         <% @users.each do |user| %>
-          <%= link_to user_path(user), class: "text-decoration-none" do %>
-            <div class="table-row">
-              <div class="table-cell">
+          <%= link_to user_path(user) do %>
+            <div class="users-index-table row justify-content-center align-items-center">
+              <span class="col-sm text-center mx-2">
                 <%= image_tag user.get_profile_image(100,100), class: "rounded-circle shadow" %>
-              </div>
-              <div class="table-cell">
+              </span>
+              <span class="col-sm text-center mx-2">
                 <%= user.name %>
-              </div>
+              </span>
+              <span class="col-sm text-center mx-2">
+                <i class="fas fa-play"></i> 投稿を見る
+              </span>
             </div>
           <% end %>
         <% end %>
-      </div>
+
     </div>
   </div>
 </div>
