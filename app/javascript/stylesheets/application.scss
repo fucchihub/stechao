@@ -2,7 +2,7 @@ $success: #54917f;// アンティークグリーン
 $danger: #941f57; //クラレット
 $dark: #4e454a;//チャコールグレイ
 
-@import '~bootstrap/scss/bootstrap';
+@use '~bootstrap/scss/bootstrap';
 
 html {
   height: 100%;
@@ -42,8 +42,8 @@ a:hover {
 // .card {
   // width: auto;
   // background-color: #f8f9fa;}
-  
-  
+
+
 // サイドバー
 #sticky-sidebar {
   position: fixed;
