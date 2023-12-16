@@ -1,15 +1,6 @@
-// $primary: #007bbb;紺碧
-// $secondary: #941f57;クラレっと
-// $success: #c3d825;若草色
-// $danger: #d7003a;くれない
-// $warning: #fcc500;あざやかな黄系の色
-// $info: #2cd4ab;強い緑系の色
-// $light: #f8f9fa;やや灰色い青紫系の色
-// $dark: #4e454a;チャコールグレイ
-
-// #f7f6f5 パールホワイト
-// #fafdff スノーホワイト
-// #f7fcfe 卯の花色
+$success: #54917f;// アンティークグリーン
+$danger: #941f57; //クラレット
+$dark: #4e454a;//チャコールグレイ
 
 @import '~bootstrap/scss/bootstrap';
 
@@ -26,11 +17,11 @@ body {
 }
 
 a {
-  color: #a25768; //チャコールグレイ
+  color: #98605e; //ココアブラウン
 }
 
 a:hover {
-  color: #941f57; //クラレッと
+  color: #941f57; //クラレット
   text-decoration: none;
 }
 

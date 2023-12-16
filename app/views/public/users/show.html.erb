@@ -29,26 +29,30 @@
       <div class="row">
         <% @posts.each do |posts| %>
           <div class="col-4">
-            <%= link_to post_path(posts), class: "text-decoration-none" do %>
-              <div class="card shadow p-1 mx-1 mb-4">
-                <div class="card-body p-1">
-                  <p class="card-text">
+            <div class="card shadow p-1 mx-1 mb-4">
+              <div class="card-body p-1">
+                <p class="card-text row">
+                  <span class="col-md-6">
                     <%= posts.name.truncate(7) %>
-                    <%= link_to post_path(posts) do %>
-                      <i class="fas fa-comment"></i>
-                      <%= posts.post_comments.count %>
-                    <% end %>
-                    <span id="favorite_btn_<%= posts.id %>">
+                  </span>
+                  <span class="col-md-6 text-right">
+                    <span id="comment_counter" class="h5">
+                       <%= render "public/post_comments/counter", posts: posts %>
+                    </span>
+                    <span id="favorite_btn_<%= posts.id %>" class="h5">
                       <%= render "public/favorites/btn", posts: posts %>
                     </span>
-                  </p>
-                </div>
-                <%= image_tag posts.get_image(250,250), class: "card-img-top" %>
+                  </span>
+                </p>
               </div>
-            <% end %>
+              <%= link_to post_path(posts) do %>
+                <%= image_tag posts.get_image(250,250), class: "card-img-top" %>
+              <% end %>
+            </div>
           </div>
         <% end %>
       </div>
+
     </div>
 
   </div>

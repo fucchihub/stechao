@@ -4,29 +4,8 @@
     <div class="col-sm-12 col-md-8 col-lg-9 px-5 px-sm-0 mx-auto">
 
       <h2 class="mb-4">#<%= @hashtag.name %></h2>
-      <div class="row">
-        <% @posts.each do |posts| %>
-          <div class="col-4">
-            <%= link_to post_path(posts), class: "text-decoration-none" do %>
-              <div class="card shadow p-1 mx-1 mb-4">
-                <div class="p-1">
-                  <p class="card-text">
-                    <%= image_tag posts.user.get_profile_image(30,30), class: "rounded-circle" %>
-                    <span id="comment_counter">
-                       <%= render "public/post_comments/counter", posts: posts %>
-                    </span>
-                    <span id="favorite_btn_<%= posts.id %>">
-                      <%= render "public/favorites/btn", posts: posts %>
-                    </span>
-                  </p>
-                </div>
-                <%= image_tag posts.get_image(250,250), class: "card-img-top" %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+      <%= render "public/posts/index", posts: @posts %>
+      
     </div>
-
   </div>
 </div>
