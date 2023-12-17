@@ -8,7 +8,6 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts
-    @total_quantity = @posts.pluck(:quantity).sum
   end
 
   def edit

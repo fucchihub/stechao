@@ -1,8 +1,18 @@
-<div style="margin: 300px">
-  <h2>Counts</h2>
-<%= @counts %>
-<% @counts.each do |key, value| %>
-  <p><%= "#{key}: #{value}" %></p>
-<% end %>
+<!--ユーザ側／投稿を日付指定で絞り込んだ結果画面-->
+<div class='container py-5'>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-9 px-5 px-sm-0 mx-auto">
 
+    <!--プロフィール-->
+      <%= render "public/users/profile", user: @user, posts: @posts %>
+        
+    <!--絞り込み結果-->
+      <h2 class="mb-4">
+        <!--2099年12月17日(日)～2099年12月18日(月)【1件】のような形で表記-->
+        <%= I18n.l(@start_date, format: :long) %> ～ <%= I18n.l(@end_date, format: :long) %> 【<%= @filtered_posts.count %>件】
+      </h2>
+      <%= render "public/users/own_index", posts: @filtered_posts %>
+
+    </div>
+  </div>
 </div>

@@ -16,13 +16,12 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get "/posts/hashtag/:name" => "posts#hashtag"
-    get "/posts/filter_by_date" => "posts#filter_by_date", as: "filter_by_date"
     resources :posts do
       resource :favorites, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
       collection do
         get :search
-        get :count_by_range
+        get :filter_by_date
       end
     end
     resources :users, only: [:index, :show, :edit, :update] do

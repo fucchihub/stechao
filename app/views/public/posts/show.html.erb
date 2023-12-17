@@ -3,7 +3,10 @@
   <div class='row'>
     <div class="col-sm-12 col-md-9 col-lg-9 px-5 px-sm-0 mx-auto">
 
-      <h2 class="mb-4"><%= I18n.l(@post.created_at.to_date, format: :long) %></h2>
+      <div class="mb-4 d-flex align-items-center">
+        <h2><%= I18n.l(@post.created_at.to_date, format: :long) %></h2>
+        <h5>【最終更新日：<%= I18n.l(@post.updated_at.to_date, format: :long) %>】</h5>
+      </div>
       <div class="row">
         <div class="col-md-4">
           <%= image_tag @post.get_image(250,250) %>

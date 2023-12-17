@@ -4,69 +4,11 @@
     <div class="col-sm-12 col-md-8 col-lg-9 px-5 px-sm-0 mx-auto">
 
     <!--プロフィール-->
-      <div class="profile-content row justify-content-center align-items-center bg-light rounded-lg mb-5">
-        <div class="col-sm text-center">
-          <%= image_tag @user.get_profile_image(150,150), class: "rounded-circle shadow" %>
-        </div>
-        <div class="col-sm text-center py-3 text-break">
-          <h4><%= @user.name %></h4>
-          <%= @user.introduction %>
-        </div>
-        <div class="col-sm text-center py-3 text-break">
-          投稿記録を見る<br>
-          投稿した数　<%= @posts.count %><br>
-          断捨離した数　<%= @total_quantity %>
-        </div>
-        <div class="col-sm text-center py-3 text-break">
-          投稿を並び替える<br>
-          新しい順<br>
-          古い順<br>
-          お気に入りが多い順<br>
-        </div>
-      </div>
+      <%= render "public/users/profile", user: @user, posts: @posts %>
 
     <!--ユーザ自身の投稿一覧-->
-      <div class="row">
-        <% @posts.each do |posts| %>
-          <div class="col-4">
-            <div class="card shadow p-1 mx-1 mb-4">
-              <div class="card-body p-1">
-                <p class="card-text row">
-                  <span class="col-md-6">
-                    <%= posts.name.truncate(7) %>
-                  </span>
-                  <span class="col-md-6 text-right">
-                    <span id="comment_counter" class="h5">
-                       <%= render "public/post_comments/counter", posts: posts %>
-                    </span>
-                    <span id="favorite_btn_<%= posts.id %>" class="h5">
-                      <%= render "public/favorites/btn", posts: posts %>
-                    </span>
-                  </span>
-                </p>
-              </div>
-              <%= link_to post_path(posts) do %>
-                <%= image_tag posts.get_image(250,250), class: "card-img-top" %>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-
-<div>
-<%= form_tag(filter_by_date_path, method: :get) do %>
-  <%= label_tag 'start_date', 'Start Date:' %>
-  <%= text_field_tag 'start_date', params[:start_date] %>
-
-  <%= label_tag 'end_date', 'End Date:' %>
-  <%= text_field_tag 'end_date', params[:end_date] %>
-
-  <%= submit_tag 'Show Counts' %>
-<% end %>
-</div>
-
+      <%= render "public/users/own_index", posts: @posts %>
 
     </div>
-
   </div>
 </div>

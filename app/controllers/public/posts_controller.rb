@@ -77,14 +77,21 @@ class Public::PostsController < ApplicationController
     @posts.uniq!
   end
 
+  # 投稿を日時で絞り込む機能
   def filter_by_date
-    start_date = params[:start_date].to_date
-    end_date = params[:end_date].to_date
+    @user = current_user
+    @posts = @user.posts
+    # params[:search_type]が存在する場合はその値を使用し、存在しない場合はデフォルトで "created_at" を設定する
+    @search_type = params[:search_type] || "created_at"
+    
+    @start_date = params[:start_date].to_date
+    @end_date = params[:end_date].to_date
 
-    @counts = {
-      created: Post.where(created_at: start_date.beginning_of_day..end_date.end_of_day).count,
-      updated: Post.where(updated_at: start_date.beginning_of_day..end_date.end_of_day).count
-    }
+    @filtered_posts = if @search_type == "created_at"
+                        Post.where(created_at: @start_date.beginning_of_day..@end_date.end_of_day)
+                      else
+                        Post.where(updated_at: @start_date.beginning_of_day..@end_date.end_of_day)
+                      end
   end
 
   private

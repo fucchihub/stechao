@@ -1,0 +1,29 @@
+<!--（パーシャル）-->
+<div class="row">
+  <% posts.each do |posts| %>
+    <div class="col-4">
+      <div class="card shadow p-1 mx-1 mb-4">
+        <div class="card-body p-1">
+          <p class="card-text row">
+            <span class="col-md-6">
+              <%= posts.name.truncate(7) %>
+            </span>
+            <span class="col-md-6 text-right">
+              <!--コメント数-->
+              <span id="comment_counter" class="h5">
+                 <%= render "public/post_comments/counter", posts: posts %>
+              </span>
+              <!--お気に入りボタン-->
+              <span id="favorite_btn_<%= posts.id %>" class="h5">
+                <%= render "public/favorites/btn", posts: posts %>
+              </span>
+            </span>
+          </p>
+        </div>
+        <%= link_to post_path(posts) do %>
+          <%= image_tag posts.get_image(250,250), class: "card-img-top" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
