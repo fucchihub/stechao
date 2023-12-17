@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create, :destroy]
       collection do
         get "search"
+        get :count_by_range
       end
     end
     resources :users, only: [:index, :show, :edit, :update] do
