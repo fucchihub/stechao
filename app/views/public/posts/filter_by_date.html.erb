@@ -1,0 +1,8 @@
+<div style="margin: 300px">
+  <h2>Counts</h2>
+<%= @counts %>
+<% @counts.each do |key, value| %>
+  <p><%= "#{key}: #{value}" %></p>
+<% end %>
+
+</div>

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get "/posts/hashtag/:name" => "posts#hashtag"
+    get "/posts/filter_by_date" => "posts#filter_by_date", as: "filter_by_date"
     resources :posts do
       resource :favorites, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]

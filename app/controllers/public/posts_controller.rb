@@ -4,8 +4,8 @@ class Public::PostsController < ApplicationController
   def new
     @post = Post.new
   end
-  
-  # postモデル内にafter_createコールバックあり(ハッシュタグを作成)
+
+  # postモデル内にafter_createコールバックあり(ハッシュタグを作成するため)
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
@@ -29,8 +29,8 @@ class Public::PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
   end
-  
-  # モデル内にbefore_updateコールバックあり(ハッシュタグを更新)
+
+  # モデル内にbefore_updateコールバックあり(ハッシュタグを更新するため)
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
@@ -59,7 +59,7 @@ class Public::PostsController < ApplicationController
 
   # 複数のキーワードで検索できる機能
   def search
-    redirect_to root_path if params[:keyword] == ""
+    redirect_to request.referer if params[:keyword] == ""
     # 検索フォームから送られてくるキーワードを空白で分割
     split_keyword = params[:keyword].split(/[[:blank:]]+/)
     # 変数の中身を初期化
@@ -70,13 +70,24 @@ class Public::PostsController < ApplicationController
       next if keyword == ""
       # キーワードが#で始まる場合は#を取り除く(文字列の2文字目から最後までを取り出す)
       keyword = keyword.starts_with?('#') ? keyword[1..-1] : keyword
-      # キーワードごとに部分一致検索をし、検索結果のpostを累積して格納
+      # キーワードごとに部分一致検索をし、検索結果のpostを累積して格納（nameとcaption両方から検索）
       @posts += Post.where('name LIKE ? OR caption LIKE ?', "%#{keyword}%", "%#{keyword}%")
-      
     end
     # 重複したpostを削除する
     @posts.uniq!
-    
+  end
+
+  def filter_by_date
+    start_date = params[:start_date].to_date
+    end_date = params[:end_date].to_date
+
+    @counts = {
+      created: Post.where(created_at: start_date.beginning_of_day..end_date.end_of_day)
+               .count,
+
+      updated: Post.where(updated_at: start_date.beginning_of_day..end_date.end_of_day)
+               .count
+    }
   end
 
   private

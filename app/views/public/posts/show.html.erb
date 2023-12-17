@@ -36,18 +36,15 @@
 
       <!--コメント機能-->
       <h3 id="comment_counter">
-            <%= render "public/post_comments/counter", posts: @post %>
-            コメント
-          </h3>
-          <div id="comment_index">
-            <%= render "public/post_comments/index", posts: @post %>
-          </div>
-          
-          
-          <div class="row justify-content-center align-items-center mt-5">
-            <%= render "public/post_comments/form", posts: @post, post_comment: @post_comment %>
-          </div>
-          
+        <%= render "public/post_comments/counter", posts: @post %>
+        コメント
+      </h3>
+      <div id="comment_index">
+        <%= render "public/post_comments/index", posts: @post %>
+      </div>
+      <div class="row justify-content-center align-items-center mt-5">
+        <%= render "public/post_comments/form", posts: @post, post_comment: @post_comment %>
+      </div>
     </div>
   </div>
 </div>
