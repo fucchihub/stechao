@@ -82,11 +82,8 @@ class Public::PostsController < ApplicationController
     end_date = params[:end_date].to_date
 
     @counts = {
-      created: Post.where(created_at: start_date.beginning_of_day..end_date.end_of_day)
-               .count,
-
-      updated: Post.where(updated_at: start_date.beginning_of_day..end_date.end_of_day)
-               .count
+      created: Post.where(created_at: start_date.beginning_of_day..end_date.end_of_day).count,
+      updated: Post.where(updated_at: start_date.beginning_of_day..end_date.end_of_day).count
     }
   end
 
