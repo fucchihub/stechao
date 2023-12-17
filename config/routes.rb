@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
       collection do
-        get "search"
+        get :search
         get :count_by_range
       end
     end
