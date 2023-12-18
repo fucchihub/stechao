@@ -16,9 +16,3 @@ import "../stylesheets/application";
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-
-$(document).ready(function() {
-      $('#sidebar-trigger').click(function() {
-        $('body').toggleClass('sidebar-closed');
-      });
-    });

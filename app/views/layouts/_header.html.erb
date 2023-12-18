@@ -1,10 +1,9 @@
 <!--サイドバー-->
-<div id="sticky-sidebar" class="pt-5 shadow-sm">
-  <a id="sidebar-trigger" href="#" class="ml-4 p-2">
-    <%= image_tag 'stechao-logo.png', size: '200x50' %>
-  </a>
-
-</div>
+<!--<div id="sticky-sidebar" class="pt-5 shadow-sm">-->
+<!--  <a id="sidebar-trigger" href="#" class="ml-4 p-2">-->
+<!--    <%= image_tag 'stechao-logo.png', size: '200x50' %>-->
+<!--  </a>-->
+<!--</div>-->
 
 <div id="nav-toggle">
     <div>
@@ -16,6 +15,7 @@
 
 <aside id="sidebar">
   <nav id="global-nav">
+    <%= image_tag 'stechao-logo.png', size: '200x50' %>
     <ul>
       <% if admin_signed_in? %>
         <li><a href="#">Home</a></li>
@@ -24,8 +24,7 @@
         <li><%= link_to "コメント一覧", admin_top_path, class: 'text-light' %></li>
         <li><%= link_to "ログアウト", admin_top_path, class: 'text-light' %></li>
       <% elsif user_signed_in? %>
-        <li><a href="#">Link</a></li>
-                <li>
+        <li>
           <%= link_to user_path(current_user) do %>
             <%= image_tag current_user.get_profile_image(50,50), class: "rounded-circle shadow" %>
             マイページ
@@ -103,19 +102,19 @@ body {
 }
 
 /* ここから */
-#global-head {
-	position: fixed;
+/*#global-head {*/
+	/*position: fixed;*/
 	/*color: #033560;*/
-	width: 260px;
-	text-align: center;
-	padding-top: 60px;
+	/*width: 260px;*/
+	/*text-align: center;*/
+	/*padding-top: 60px;*/
 	/*z-index: 100;*/
-}
+/*}*/
 
 #sidebar {
   display: none;
-	/*font-size: 15px;*/
-	padding-top: 120px;
+	font-size: 20px;
+	padding-top: 90px;
 	width: 260px;
 	height: 100%;
 	position: fixed;
@@ -141,66 +140,66 @@ body {
 	-webkit-transition: background-color .3s linear;
 	transition: background-color .3s linear;
 }
-#global-nav .sub-menu.is-active > a,
-#global-nav a:hover {
+/*#global-nav .sub-menu.is-active > a,*/
+/*#global-nav a:hover {*/
 	/*color: #fff;*/
-	background: #033560;
-}
+	/*background: #033560;*/
+/*}*/
 
-#global-nav .sub-menu-nav a,
-#global-nav .sub-menu:hover .sub-menu-nav {
-	width: 230px;
-}
+/*#global-nav .sub-menu-nav a,*/
+/*#global-nav .sub-menu:hover .sub-menu-nav {*/
+/*	width: 230px;*/
+/*}*/
 
 /* sub-menu icon */
-#global-nav .sub-menu-head {
-	position: relative;
-}
-#global-nav .sub-menu-head:after {
-	content: "";
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	right: 18px;
-	margin: auto;
-	vertical-align: middle;
-	width: 8px;
-	height: 8px;
-	border-top: 1px solid #033560;
-	border-right: 1px solid #033560;
-	-moz-transform: rotate(45deg);
-	-webkit-transform: rotate(45deg);
-	transform: rotate(45deg);
-}
+/*#global-nav .sub-menu-head {*/
+/*	position: relative;*/
+/*}*/
+/*#global-nav .sub-menu-head:after {*/
+/*	content: "";*/
+/*	position: absolute;*/
+/*	top: 0;*/
+/*	bottom: 0;*/
+/*	right: 18px;*/
+/*	margin: auto;*/
+/*	vertical-align: middle;*/
+/*	width: 8px;*/
+/*	height: 8px;*/
+/*	border-top: 1px solid #033560;*/
+/*	border-right: 1px solid #033560;*/
+/*	-moz-transform: rotate(45deg);*/
+/*	-webkit-transform: rotate(45deg);*/
+/*	transform: rotate(45deg);*/
+/*}*/
 
 
 /* sub-menu */
-#global-nav .sub-menu-nav {
-	position: fixed;
-	background: #033560;
+/*#global-nav .sub-menu-nav {*/
+/*	position: fixed;*/
+/*	background: #033560;*/
 	/*color: #fff;*/
-	top: 0;
-	padding-top: 90px;
-	left: 260px;
-	width: 0;
-	height: 100%;
-	overflow: hidden;
+/*	top: 0;*/
+/*	padding-top: 90px;*/
+/*	left: 260px;*/
+/*	width: 0;*/
+/*	height: 100%;*/
+/*	overflow: hidden;*/
 
-	-moz-transition: width .2s ease-out;
-	-webkit-transition: width .2s ease-out;
-	transition: width .2s ease-out;
-}
-#global-nav .sub-menu.is-active > a:after,
-#global-nav .sub-menu-head:hover:after {
-	border-color: #fff;
-}
-#global-nav .sub-menu-nav a {
+/*	-moz-transition: width .2s ease-out;*/
+/*	-webkit-transition: width .2s ease-out;*/
+/*	transition: width .2s ease-out;*/
+/*}*/
+/*#global-nav .sub-menu.is-active > a:after,*/
+/*#global-nav .sub-menu-head:hover:after {*/
+/*	border-color: #fff;*/
+/*}*/
+/*#global-nav .sub-menu-nav a {*/
 	/*color: #fff;*/
-}
-#global-nav .sub-menu-nav a:hover {
+/*}*/
+/*#global-nav .sub-menu-nav a:hover {*/
 	/*color: #033560;*/
-	background: #fff;
-}
+/*	background: #fff;*/
+/*}*/
 
 /* nav-toggle */
 #nav-toggle {
@@ -241,7 +240,7 @@ body {
 #overlay {
 	display: none;
 	position: fixed;
-	background: rgba(0,0,0,.6);
+	/*background: rgba(0,0,0,.6);*/
 	width: 100%;
 	height: 100%;
 	top: 0;
@@ -253,17 +252,17 @@ body {
 
 
 /*/*@media screen and (max-width: 900px) {*/
-	#main-in {
-		padding-left: 0;
-	}
+	/*#main-in {*/
+	/*	padding-left: 0;*/
+	/*}*/
 
-	#global-head {
-		width: 100%;
-		padding: 10px;
-		background: rgba(255,255,255,.8);
-		display: -webkit-flex;
-		display: flex;
-	}
+	/*#global-head {*/
+	/*	width: 100%;*/
+	/*	padding: 10px;*/
+	/*	background: rgba(255,255,255,.8);*/
+	/*	display: -webkit-flex;*/
+	/*	display: flex;*/
+	/*}*/
 
 	#sidebar {
 		/*display: none;*/
@@ -280,10 +279,10 @@ body {
 	}
 
 	/* サブメニューは開けない */
-	#global-nav .sub-menu-head:after,
-	#global-nav .sub-menu-nav {
-		display: none;
-	}
+	/*#global-nav .sub-menu-head:after,*/
+	/*#global-nav .sub-menu-nav {*/
+	/*	display: none;*/
+	/*}*/
 	#nav-toggle {
 		display: block;
 	}
@@ -349,7 +348,6 @@ body {
 (function($) {
     $(function () {
         $('#nav-toggle,#overlay').on('click', function() {
-          console.log('hello');
             $('body').toggleClass('open');
         });
     });
