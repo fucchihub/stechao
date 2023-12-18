@@ -5,7 +5,6 @@
 
       <div class="rounded-lg border p-5">
         <h2 class="mb-4">ログイン</h2>
-
         <%= form_with model: @user, url: user_session_path, method: :post do |f| %>
           <%= render "public/shared/error_messages", resource: resource %>
 

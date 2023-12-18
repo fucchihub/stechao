@@ -1,5 +1,5 @@
 $success: #54917f;// アンティークグリーン
-$danger: #941f57; //クラレット
+$danger: #941f57; //クラレット（赤系）
 $dark: #4e454a;//チャコールグレイ
 
 @import '~bootstrap/scss/bootstrap';
@@ -17,31 +17,21 @@ body {
 }
 
 a {
-  color: #98605e; //ココアブラウン
+  color: #2a83a2; //はなあさぎ（青系）
 }
 
 a:hover {
-  color: #941f57; //クラレット
+  color: #941f57; //クラレット（赤系）
   text-decoration: none;
 }
 
-// ヘッダー用
-// .navbar {
-//   background-color: #f7f6f5; //パールホワイト
-// }
-
-// .nav-item i {
-//   margin-right: 10px;
-// }
-
-// .vertical_center {
-//   display: flex;
-//   align-items: center;
-// }
-
+// リンクになってる画像をホバー時に透けさせる
+.link-image-hover-transparent:hover {
+  opacity: 0.7;
+}
 
 // トップページ背景画像
-#top-background {
+#top-background-image {
   background: url('../images/top-background.jpg');
   background-size: cover;
   height: 100vh;
@@ -49,32 +39,32 @@ a:hover {
   opacity: 0.8;
 }
 
-// トップページのログイン画面透けさせる
-.bg-white {
+// トップページのbg-white適用されてる要素を透けさせる
+.top-bg-white-transparent {
   opacity: 0.9;
 }
 
-// プロフィール
-.profile-content {
+// ユーザのプロフィール用
+#users-profile-content-height {
   min-height: 200px;
 }
 
 // ユーザ一覧画面のテーブル用
-.users-index-table {
+#users-index-table {
   height: 150px;
 }
-
-.users-index-table:hover {
+#users-index-table:hover {
   background-color:#f8f9fa;
 }
 
 // 投稿詳細画面用
-.postdetail-name {
+#postdetail-name-css {
   margin-bottom: 20px;
   border-bottom: 2px solid #f8f9fa;
   display: flex;
   justify-content: space-between;
 }
+// 既に他のidがついているためidにしていない
 .fontawesome-button {
   font-size: 25px;
   margin: 0 5px;

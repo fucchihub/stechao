@@ -15,11 +15,12 @@
 
   <body>
     <%= render 'layouts/flash' %>
-    <%= render 'layouts/header' %>
+    <%= render 'layouts/sidebar' %>
     <%= render "public/posts/search" %>
-  
+
     <%= yield %>
+
     <div id="overlay"></div>
-  <%= render 'layouts/footer' %>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

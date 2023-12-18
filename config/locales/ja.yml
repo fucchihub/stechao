@@ -14,3 +14,13 @@ ja:
   time:
     formats:
       default: '%Y/%m/%d %H:%M'
+  activerecord:
+    models:
+      user: ユーザー
+      post: 投稿
+    attributes:
+      user:
+        name: ユーザー名
+      post:
+        name: 投稿名
+        quantity: 断捨離した数
