@@ -5,19 +5,19 @@
 
       <!--プロフィール-->
       <%= render "public/users/profile", user: @user, posts: @posts %>
-      
+
       <h2 class="mb-4">
         <!--2099年12月17日(日)～2099年12月18日(月)【1件】のような形で表記-->
         <%= I18n.l(@start_date, format: :long) %> ～ <%= I18n.l(@end_date, format: :long) %> 【<%= @filtered_posts.count %>件】
       </h2>
-      
+
       <!--投稿並び替え-->
       <div class="text-left px-3 pb-3 mb-4">
         <%= link_to '新しい順', filter_by_date_posts_path(latest: "true") %>
         | <%= link_to '古い順', filter_by_date_posts_path(old: "true") %>
         | <%= link_to 'お気に入りが多い順', filter_by_date_posts_path(most_favorites: "true") %>
       </div>
-      
+
       <!--絞り込み結果-->
       <%= render "public/users/own_index", posts: @filtered_posts %>
 
