@@ -3,16 +3,17 @@
   <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-9 px-5 px-sm-0 mx-auto">
 
-    <!--プロフィール-->
+      <!--プロフィール-->
       <%= render "public/users/profile", user: @user, posts: @posts %>
       
+      <!--投稿並び替え-->
       <div class="text-left px-3 pb-3 mb-4">
-  <%= link_to '新しい順', user_path(current_user, latest: "true") %>
-  | <%= link_to '古い順', user_path(current_user, old: "true") %>
-  | <%= link_to 'お気に入りが多い順', user_path(current_user, most_favorites: "true") %>
-</div>
+        <%= link_to '新しい順', user_path(current_user, latest: "true") %>
+        | <%= link_to '古い順', user_path(current_user, old: "true") %>
+        | <%= link_to 'お気に入りが多い順', user_path(current_user, most_favorites: "true") %>
+      </div>
 
-    <!--ユーザ自身の投稿一覧-->
+      <!--ユーザ自身の投稿一覧-->
       <%= render "public/users/own_index", posts: @posts %>
 
     </div>
