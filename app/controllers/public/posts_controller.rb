@@ -97,8 +97,6 @@ class Public::PostsController < ApplicationController
                       else
                         Post.where(updated_at: @start_date.beginning_of_day..@end_date.end_of_day)
                       end
-    @posts = @filtered_posts
-    set_posts
   end
   
   def set_posts

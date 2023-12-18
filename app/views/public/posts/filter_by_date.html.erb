@@ -5,6 +5,24 @@
 
       <!--プロフィール-->
       <%= render "public/users/profile", user: @user, posts: @posts %>
+      
+      <h4>
+      <%= I18n.l(@start_date, format: :long) %> ～ <%= I18n.l(@end_date, format: :long) %> 【<%= @filtered_posts.count %>件】
+      </h4>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <td>投稿した数</td>
+            <td><%= @filtered_posts.count %></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>断捨離した数</td>
+            <td><%= @filtered_posts.pluck(:quantity).sum %></td>
+          </tr>
+        </tbody>
+      </table>
 
       <h2 class="mb-4">
         <!--2099年12月17日(日)～2099年12月18日(月)【1件】のような形で表記-->
