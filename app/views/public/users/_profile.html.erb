@@ -1,22 +1,26 @@
 <!--（パーシャル）-->
 <div class="profile-content row justify-content-center align-items-center bg-light rounded-lg mb-5">
-  <div class="col-sm text-center">
+
+  <div class="col-sm-4 text-center">
     <%= image_tag user.get_profile_image(150,150), class: "rounded-circle shadow" %>
   </div>
-  <div class="col-sm text-center py-3 text-break">
-    <h4><%= user.name %></h4>
-    <%= user.introduction %>
-  </div>
-  <div class="col-sm text-center py-3 text-break">
-    投稿記録を見る<br>
-    投稿した数　<%= posts.count %><br>
-    断捨離した数　<%= posts.pluck(:quantity).sum %>
-  </div>
-  <div class="col-sm text-center py-3 text-break">
-    投稿を並び替える<br>
-    新しい順<br>
-    古い順<br>
-    お気に入りが多い順<br>
+
+  <div class="col-sm-8 text-center text-break">
+    <div class="row">
+      <h4><%= user.name %></h4>
+      <%= user.introduction %>
+    </div>
+
+    <div class="row">
+      <p>投稿した数　<%= posts.count %></p>
+      <p>断捨離した数　<%= posts.pluck(:quantity).sum %></p>
+    </div>
+    <div class="col-sm text-center py-3 text-break">
+      投稿を並び替える<br>
+      新しい順<br>
+      古い順<br>
+      お気に入りが多い順<br>
+    </div>
   </div>
 </div>
 
@@ -24,7 +28,7 @@
 <div class="text-left px-3 pb-3 mb-4">
   <p>◆投稿を日付で絞り込み検索</p>
   <%= form_with url: filter_by_date_posts_path, method: :get do |f| %>
-    <div class="form-group"> <!-- col-sm-8を追加 -->
+    <div class="form-group">
       <div class="row text-right">
         <div class="">
           <%= f.select 'search_type', options_for_select([['投稿日', 'created_at'], ['最終更新日', 'updated_at']], params[:search_type]), {}, class: 'form-control' %>

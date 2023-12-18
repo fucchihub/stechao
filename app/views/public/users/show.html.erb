@@ -5,6 +5,12 @@
 
     <!--プロフィール-->
       <%= render "public/users/profile", user: @user, posts: @posts %>
+      
+      <div class="text-left px-3 pb-3 mb-4">
+  <%= link_to '新しい順', user_path(current_user, latest: "true") %>
+  | <%= link_to '古い順', user_path(current_user, old: "true") %>
+  | <%= link_to 'お気に入りが多い順', user_path(current_user, most_favorites: "true") %>
+</div>
 
     <!--ユーザ自身の投稿一覧-->
       <%= render "public/users/own_index", posts: @posts %>

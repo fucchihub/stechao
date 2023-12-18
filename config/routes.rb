@@ -15,11 +15,11 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
-    get "/posts/hashtag/:name" => "posts#hashtag"
     resources :posts do
       resource :favorites, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
       collection do
+        get 'hashtag/:name', to: 'posts#hashtag', as: 'hashtag'
         get :search
         get :filter_by_date
       end
