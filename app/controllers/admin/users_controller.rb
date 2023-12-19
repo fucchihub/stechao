@@ -2,15 +2,17 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @user = User.all
+    @users = User.all
   end
 
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts
   end
 
   def edit
     @user = User.find(params[:id])
+    
   end
   
   def update

@@ -1,24 +1,26 @@
 <!--posts/index（パーシャル）-->
 <div class="row">
   <% posts.each do |posts| %>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="card shadow p-1 mx-1 mb-4">
         <div class="card-body p-1">
-          <p class="card-text row">
-            <span class="col-md-4">
+          <div class="card-text p-1 d-flex justify-content-between">
+            <span>
               <%= link_to user_path(posts), class: "link-image-hover-transparent" do %>
-                <%= image_tag posts.user.get_profile_image(30,30), class: "rounded-circle" %>
+                <%= image_tag posts.user.get_profile_image(35,35), class: "rounded-circle" %>
               <% end %>
             </span>
-            <span class="col-md-6 text-right ml-auto">
-              <span id="comment_counter" class="h5">
+            <span class="d-flex justify-content-end">
+              <!--コメント数-->
+              <span id="comment_counter" class="h5 mr-2">
                <%= render "public/post_comments/counter", posts: posts %>
-            </span>
-              <span id="favorite_btn_<%= posts.id %>" class="h5">
+              </span>
+              <!--お気に入りボタン-->
+              <span id="favorite_btn_<%= posts.id %>" class="h5 mr-2">
               <%= render "public/favorites/btn", posts: posts %>
             </span>
             </span>
-          </p>
+          </div>
         </div>
         <%= link_to post_path(posts), class: "link-image-hover-transparent" do %>
           <%= image_tag posts.get_image(250,250), class: "card-img-top" %>

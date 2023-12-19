@@ -1,55 +1,65 @@
 <!--ユーザ側／投稿詳細画面-->
 <div class='container py-5'>
   <div class='row'>
-    <div class="col-sm-12 col-md-9 col-lg-9 px-5 px-sm-0 mx-auto">
+    <div class="col-sm-12 col-md-8 col-lg-7 px-5 px-sm-0 mx-auto">
 
+      <!--2099年12月16日(金)のような形で日付表示-->
       <div class="mb-4">
-        <h2><%= I18n.l(@post.created_at.to_date, format: :long) %></h2>
-        <h5>【最終更新日：<%= I18n.l(@post.updated_at.to_date, format: :long) %>】</h5>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <%= image_tag @post.get_image(250,250) %>
-          <% unless @post.quantity == 0 %>
-            <p class="text-left border rounded-lg p-2">
-              ◆断捨離した数は <strong><%= @post.quantity %></strong> です
-            </p>
-          <% end %>
-        </div>
-        <div class="col-md-8">
-          <div id="postdetail-name-css">
-            <h4><%= @post.name %></h4>
-            <div>
-              <span class="fontawesome-button" id="favorite_btn_<%= @post.id %>">
-                <%= render "public/favorites/btn", posts: @post %>
-              </span>
-              <% if @post.user == current_user %>
-                <%= link_to edit_post_path(@post), class: "text-success fontawesome-button" do %>
-                  <i class="fas fa-pen"></i>
-                <% end %>
-                <%= link_to post_path(@post), method: :delete, data: { confirm: "「#{@post.name.truncate(10)}」を本当に削除しますか？" }, class: "text-dark fontawesome-button" do  %>
-                  <i class="fas fa-trash-can"></i>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-          <div class="text-break rounded-lg py-1 px-2">
-            <%= simple_format(render_with_hashtags(@post.caption)) %>
-          </div>
-        </div>
+        <h4><%= I18n.l(@post.created_at.to_date, format: :long) %></h4>
+        <h5><%= I18n.l(@post.updated_at.to_date, format: :long) %>に更新</h5>
       </div>
 
-      <!--コメント機能-->
-      <h3 id="comment_counter" class="border-">
+      <!--断捨離した数が0以外なら表示-->
+      <% unless @post.quantity == 0 %>
+        <p class="text-left border rounded-lg p-2">
+          ◆断捨離した数は <strong><%= @post.quantity %></strong> です
+        </p>
+      <% end %>
+
+      <!--投稿画像-->
+      <div class="d-flex justify-content-center align-items-center">
+        <%= image_tag @post.get_image(350,350) %>
+      </div>
+
+      <div class="pale-border-bottom row ml-1 mb-3">
+        <!--お気に入りボタン-->
+        <span class="fontawesome-button" id="favorite_btn_<%= @post.id %>">
+          <%= render "public/favorites/btn", posts: @post %>
+        </span>
+        <!--投稿がログインユーザーのものなら編集・削除ボタン表示-->
+        <% if @post.user == current_user %>
+          <%= link_to edit_post_path(@post), class: "text-success fontawesome-button" do %>
+            <i class="fas fa-pen"></i>
+          <% end %>
+          <%= link_to post_path(@post), method: :delete, data: { confirm: "「#{@post.name.truncate(10)}」を本当に削除しますか？" }, class: "text-dark fontawesome-button" do  %>
+            <i class="fas fa-trash-can"></i>
+          <% end %>
+        <% end %>
+      </div>
+
+      <!--投稿名-->
+      <h5 class="mb-4"><%= @post.name %></h5>
+
+      <!--投稿キャプション-->
+      <div class="text-break py-1 px-2">
+        <!--キャプション内の改行を維持する＆各ハッシュタグをリンクに変換-->
+        <%= simple_format(render_with_hashtags(@post.caption)) %>
+      </div>
+
+      <!--コメント数-->
+      <h5 id="comment_counter" class="border-top pt-3">
         <%= render "public/post_comments/counter", posts: @post %>
         コメント
-      </h3>
+      </h5>
+      <!--コメント一覧-->
       <div id="comment_index">
         <%= render "public/post_comments/index", posts: @post %>
       </div>
+      <!--コメントフォーム-->
       <div class="row justify-content-center align-items-center mt-5">
         <%= render "public/post_comments/form", posts: @post, post_comment: @post_comment %>
       </div>
+
     </div>
   </div>
 </div>

@@ -36,7 +36,8 @@ ja:
       send_paranoid_instructions: メールアドレスが登録済みの場合、本人確認用のメールが数分以内に送信されます。
     failure:
       already_authenticated: すでにログインしています。
-      inactive: アカウントが有効化されていません。メールに記載された手順にしたがって、アカウントを有効化してください。
+      inactive: このアカウントは退会済みです。別のアカウントでログインまたは新規登録をお願いします。
+      # アカウントが有効化されていません。メールに記載された手順にしたがって、アカウントを有効化してください。
       invalid: "%{authentication_keys}またはパスワードが違います。"
       last_attempt: もう一回誤るとアカウントがロックされます。
       locked: アカウントはロックされています。
@@ -113,7 +114,7 @@ ja:
       already_signed_out: 既にログアウト済みです。
       new:
         sign_in: ログイン
-      signed_in: ログインしました！
+      signed_in: ログインしました。
       signed_out: ""
     shared:
       links:

@@ -13,7 +13,8 @@ ja:
       - 土
   time:
     formats:
-      default: '%Y/%m/%d %H:%M'
+      default: '%Y/%m/%d'
+      short: '%y/%m/%d'
   activerecord:
     models:
       user: ユーザー
@@ -21,6 +22,7 @@ ja:
     attributes:
       user:
         name: ユーザー名
+        introduction: 自己紹介
       post:
         name: 投稿名
         quantity: 断捨離した数

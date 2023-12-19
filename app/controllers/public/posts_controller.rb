@@ -10,10 +10,10 @@ class Public::PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
-      flash[:success] = "「#{@post.name.truncate(10)}」を投稿しました！"
+      flash[:success] = "投稿しました。"
       redirect_to post_path(@post)
     else
-      flash[:error] = "投稿に失敗しました"
+      flash[:error] = "投稿に失敗しました。"
       render :new
     end
   end
@@ -36,10 +36,10 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      flash[:success] = "「#{@post.name.truncate(10)}」を変更しました！"
+      flash[:success] = "「#{@post.name.truncate(10)}」を変更しました。"
       redirect_to post_path(@post)
     else
-      flash[:danger] = "変更に失敗しました"
+      flash[:danger] = "変更に失敗しました。"
       render :edit
     end
   end
@@ -47,7 +47,7 @@ class Public::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    flash[:notice] = "投稿を削除しました！"
+    flash[:notice] = "投稿を削除しました。"
     redirect_to user_path(current_user)
   end
 
@@ -63,7 +63,7 @@ class Public::PostsController < ApplicationController
   # 複数のキーワードで検索できる機能
   def search
     redirect_to request.referer if params[:keyword].nil?
-    
+
       # 検索フォームから送られてくるキーワードを空白で分割
       split_keyword = params[:keyword].split(/[[:blank:]]+/)
       # 変数の中身を初期化
@@ -98,7 +98,7 @@ class Public::PostsController < ApplicationController
                         Post.where(updated_at: @start_date.beginning_of_day..@end_date.end_of_day)
                       end
   end
-  
+
   def set_posts
     @posts = case
              when params[:latest]
@@ -112,7 +112,7 @@ class Public::PostsController < ApplicationController
              end
   end
 
-  
+
   private
 
   def post_params

@@ -1,11 +1,11 @@
-<!--users/profile（パーシャル）-->
-<div id="users-profile-content-height" class="row justify-content-center align-items-center bg-light rounded-lg mb-5">
+<!--public/users/profile（パーシャル）-->
+<div id="users-profile-content-height" class="row bg-light rounded-lg mb-5">
 
-  <div class="col-sm-3 text-center">
+  <div class="col-md-4 d-flex justify-content-center align-items-center pt-4 px-4">
     <%= image_tag user.get_profile_image(150,150), class: "rounded-circle shadow" %>
   </div>
 
-  <div class="col-sm-7 p-4">
+  <div class="col-md-8 p-4">
     <div class="row p-1 text-break">
       <h4><%= user.name %></h4>
     </div>
@@ -17,9 +17,9 @@
         投稿した数　<%= posts.count %><br>
         断捨離した数　<%= posts.pluck(:quantity).sum %>
       </div>
-
     </div>
   </div>
+  
 </div>
 
 <!--投稿を日付指定で絞り込む検索フォーム-->
@@ -28,19 +28,20 @@
   <%= form_with url: filter_by_date_posts_path, method: :get do |f| %>
     <div class="form-group">
       <div class="row text-right">
-        <div class="">
+        <div class="col-md-3 mb-4">
           <%= f.select 'search_type', options_for_select([['投稿日', 'created_at'], ['最終更新日', 'updated_at']], params[:search_type]), {}, class: 'form-control' %>
         </div>
-        <div class="col-sm-3">
+        <div class="col-md-4">
           <%= f.date_field :start_date, value: params[:start_date], placeholder: "開始", class: "form-control" %>
+          <%= f.label :start_date, "から" %>
         </div>
-        <div class="d-flex justify-content-center align-items-center">
-          <strong>～</strong>
-        </div>
-        <div class="col-sm-3">
+        <div class="col-md-4">
           <%= f.date_field :end_date, value: params[:end_date], placeholder: "終了", class: "form-control" %>
+          <%= f.label :end_date, "まで" %>
         </div>
+        <div class="col-md-1">
           <%= f.submit "検索", class: "btn btn-sm btn-success" %>
+        </div>
       </div>
     </div>
   <% end %>

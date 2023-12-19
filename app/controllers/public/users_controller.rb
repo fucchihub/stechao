@@ -22,7 +22,7 @@ class Public::UsersController < ApplicationController
       flash[:success] = "プロフィールを変更しました！"
       redirect_to user_path(@user)
     else
-      flash[:danger] = "変更に失敗しました"
+      flash.now[:danger] = "変更に失敗しました"
       render :edit
     end
   end
@@ -34,6 +34,12 @@ class Public::UsersController < ApplicationController
     favorites= Favorite.where(user_id: @user.id).pluck(:post_id)
     # 取得したpost_idを使ってuserがお気に入りした投稿を見つける
     @posts = Post.find(favorites)
+  end
+
+  def withdraw
+    current_user.update(is_active: false)
+    reset_session
+    redirect_to root_path
   end
 
   def set_posts

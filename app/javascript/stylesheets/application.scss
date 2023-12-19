@@ -57,19 +57,14 @@ a:hover {
   background-color:#f8f9fa;
 }
 
-// 投稿詳細画面用
-#postdetail-name-css {
-  margin-bottom: 20px;
+// 投稿詳細画面の薄い線
+.pale-border-bottom {
   border-bottom: 2px solid #f8f9fa;
-  display: flex;
-  justify-content: space-between;
 }
-// 既に他のidがついているためidにしていない
+// 投稿詳細画面のアイコンボタン
 .fontawesome-button {
   font-size: 25px;
   margin: 0 5px;
-  height: 20px;
-  width: 20px;
 }
 
 // フッター
