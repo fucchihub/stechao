@@ -14,12 +14,12 @@
     	<%= image_tag 'stechao-logo.png', size: '200x50' , class: "mb-4" %>
     <% end %>
     <ul>
-      <% if admin_signed_in? %>
-        <li><%= link_to "ユーザー一覧", admin_top_path, class: 'text-light' %></li>
-        <li><%= link_to "投稿一覧", admin_top_path, class: 'text-light' %></li>
-        <li><%= link_to "コメント一覧", admin_top_path, class: 'text-light' %></li>
-        <li><%= link_to "ログアウト", admin_top_path, class: 'text-light' %></li>
-      <% elsif user_signed_in? %>
+      <% if admin_signed_in? && request.path.include?("admin") %>
+        <li><%= link_to "ユーザーリスト", admin_users_path %></li>
+        <li><%= link_to "投稿リスト", admin_top_path %></li>
+        <li><%= link_to "コメントリスト", admin_post_comments_path %></li>
+        <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+      <% elsif user_signed_in? && !request.path.include?("admin") %>
         <li>
           <%= link_to user_path(current_user) do %>
             <%= image_tag current_user.get_profile_image(50,50), class: "rounded-circle shadow" %>

@@ -1,0 +1,36 @@
+<!--管理者側／全ユーザの一覧画面-->
+<div class='container py-5'>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-8 px-5 px-sm-0 mx-auto">
+
+      <h2 class="mb-4">ユーザーリスト</h2>
+      <table class="table table-hover">
+        <thead class="table-active">
+          <tr>
+            <th>ユーザーID</th>
+            <th></th>
+            <th>ユーザー名</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <%=link_to admin_user_path(user) do %>
+              <tr>
+                <td><%= user.id %></td>
+                <td><%= image_tag user.get_profile_image(250,250), class: "rounded-circle" %></td>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td class="<%= user.is_active ? 'text-success' : 'text-muted' %>">
+                  <strong><%= user.is_active ? '有効' : '退会' %></strong>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

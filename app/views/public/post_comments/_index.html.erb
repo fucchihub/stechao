@@ -10,8 +10,10 @@
   </div>
   <div class="col-md-9 text-break">
   <%= post_comment.comment %><br>
-  <% if post_comment.user == current_user %>
+  <% if post_comment.user == current_user && !request.path.include?("admin") %>
     <%= link_to "削除する", post_post_comment_path(post_comment.post, post_comment), method: :delete, remote: true, class: "text-danger mt-3" %>
+  <% elsif admin_signed_in? && request.path.include?("admin") %>
+    <%= link_to "削除する", post_post_comment_path(post_comment.post, post_comment), method: :delete, data: { confirm: "このコメントを削除しますか？" }, class: "text-danger mt-3" %>
   <% end %>
   </div>
 </div>

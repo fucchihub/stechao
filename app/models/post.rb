@@ -10,9 +10,8 @@ class Post < ApplicationRecord
   validates :name, presence: true, length: { maximum: 99 }
   validates :quantity, presence: true
 
-
   def favorited_by?(user)
-    favorites.exists?(user_id: user.id)
+    user.present? && favorites.exists?(user_id: user.id)
   end
 
   def get_image(width, height)
