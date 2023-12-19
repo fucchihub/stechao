@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   sessions: "public/sessions"
 }
 
+  devise_scope :user do
+    post 'public/users/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
+
   namespace :admin do
     get "top" => "homes#top", as: "top"
     resources :users, only: [:index, :show, :edit, :update]

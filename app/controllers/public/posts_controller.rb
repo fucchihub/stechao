@@ -93,9 +93,9 @@ class Public::PostsController < ApplicationController
     @end_date = params[:end_date].to_date
 
     @filtered_posts = if @search_type == "created_at"
-                        Post.where(created_at: @start_date.beginning_of_day..@end_date.end_of_day)
+                        @posts.where(created_at: @start_date.beginning_of_day..@end_date.end_of_day)
                       else
-                        Post.where(updated_at: @start_date.beginning_of_day..@end_date.end_of_day)
+                        @posts.where(updated_at: @start_date.beginning_of_day..@end_date.end_of_day)
                       end
   end
 
