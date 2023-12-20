@@ -21,9 +21,9 @@ class User < ApplicationRecord
     profile_image.variant(resize_to_fill: [width, height]).processed
   end
 
-  def active_for_authentication?
-    super && (self.is_active == true)
-  end
+  # def active_for_authentication?
+  #   super && (self.is_active == true)
+  # end
   
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|

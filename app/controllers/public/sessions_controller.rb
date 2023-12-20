@@ -37,7 +37,7 @@ class Public::SessionsController < Devise::SessionsController
 
   # 退会済みユーザーがログインしようとしたときの処理
   def user_state
-    user = User.find_by(email: params[:user][:email])
+    user = User.find_by(name: params[:user][:name])
     return if user.nil?
     if user.is_active
       return unless user.valid_password?(params[:user][:password])

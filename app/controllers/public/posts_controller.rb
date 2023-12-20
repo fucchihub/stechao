@@ -119,3 +119,25 @@ class Public::PostsController < ApplicationController
     params.require(:post).permit(:name, :image, :caption, :quantity)
   end
 end
+
+# 検索機能
+# if params[:filter_by_date]
+
+#       #@posts = @posts.where(...)
+
+#     end
+
+#     if params[:keyword]
+
+#       #@posts = @posts.where( .....)
+#     end
+
+#     if params[:order]
+#       if params[:order] == 'latest'
+#         @posts = @posts.order(created_at: :desc)
+#       elsif params[:order] == 'old'
+#         @posts = @posts.order(created_at: :asc)
+#       elsif params[:order] == 'favorites'
+#         @posts = @posts.joins(:favorites).group('posts.id').order('COUNT(favorites.id) DESC') if @posts.present?
+#       end
+#     end
