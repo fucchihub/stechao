@@ -3,6 +3,12 @@
 class Public::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: [:create]
   before_action :user_state, only: [:create]
+  
+  def guest_sign_in
+    user = User.guest
+    sign_in user
+    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
 
   # GET /resource/sign_in
   # def new
@@ -31,7 +37,7 @@ class Public::SessionsController < Devise::SessionsController
 
   # 退会済みユーザーがログインしようとしたときの処理
   def user_state
-    user = User.find_by(email: params[:user][:email])
+    user = User.find_by(name: params[:user][:name])
     return if user.nil?
     if user.is_active
       return unless user.valid_password?(params[:user][:password])
@@ -44,7 +50,7 @@ class Public::SessionsController < Devise::SessionsController
   protected
 
   def configure_sign_in_params
-    devise_parameter_sanitizer.permit(:sign_in, keys: [:name, :email])
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
   end
 
 end

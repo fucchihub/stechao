@@ -1,5 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_posts, only: [:show, :favorites]
 
   def index
     @users = User.all
@@ -8,6 +9,7 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts
+    set_posts
   end
 
   def edit
@@ -20,7 +22,7 @@ class Public::UsersController < ApplicationController
       flash[:success] = "プロフィールを変更しました！"
       redirect_to user_path(@user)
     else
-      flash[:danger] = "変更に失敗しました"
+      flash.now[:danger] = "変更に失敗しました"
       render :edit
     end
   end
@@ -31,7 +33,26 @@ class Public::UsersController < ApplicationController
     # favoritesテーブルから@user.idが一致するレコードを取得し、その中からpost_idカラムだけ取得
     favorites= Favorite.where(user_id: @user.id).pluck(:post_id)
     # 取得したpost_idを使ってuserがお気に入りした投稿を見つける
-    @favorite_posts = Post.find(favorites)
+    @posts = Post.find(favorites)
+  end
+
+  def withdraw
+    current_user.update(is_active: false)
+    reset_session
+    redirect_to root_path
+  end
+
+  def set_posts
+    @posts = case
+             when params[:latest]
+               @posts.order(created_at: :desc) if @posts.present?
+             when params[:old]
+               @posts.order(created_at: :asc) if @posts.present?
+             when params[:most_favorites]
+               @posts.joins(:favorites).group('posts.id').order('COUNT(favorites.id) DESC') if @posts.present?
+             else
+               @posts
+             end
   end
 
   private

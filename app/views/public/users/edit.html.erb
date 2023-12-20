@@ -2,10 +2,12 @@
 <div class='container py-5'>
   <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-7 px-5 px-sm-0 mx-auto">
-      
+
       <div class="rounded-lg border p-5">
         <h2 class="mb-4">プロフィール編集</h2>
         <%= form_with model: @user, url: user_path do |f| %>
+          <%= render "public/shared/error_messages", resource: @user %>
+
           <div class="form-group">
             <%= f.label :profile_image, "プロフィール画像" %><br>
             <%= f.file_field :profile_image, accept: "image/*" %>
@@ -17,25 +19,23 @@
           </div>
 
           <div class="form-group">
-            <%= f.label :introduction, "ひとこと" %><br>
-            <%= f.text_field :introduction, placeholder: "30字以内", class: 'form-control' %>
+            <%= f.label :introduction, "自己紹介" %><br>
+            <%= f.text_area :introduction, placeholder: "200字以内", class: 'form-control' %>
           </div>
 
-          <div class="form-group">
-            <%= f.submit "変更する", class: 'btn btn-sm btn-success' %>
-          </div>
-        <% end %>
-
-        <h4 class="my-4">登録メールアドレス</h4>
-        <%= form_with model: @user, url: user_path do |f| %>
+          <h4 class="my-4">登録メールアドレス</h4>
           <div class="form-group">
             <%= f.label :email, "メールアドレス" %><br>
             <%= f.text_field :email, placeholder: "abc@stechao.com", class: 'form-control' %>
           </div>
 
-          <div class="form-group">
-            <%= f.submit "変更する", class: 'btn btn-sm btn-success' %>
+          <div class="form-group text-center">
+            <%= f.submit "変更する", class: 'btn btn-success' %>
           </div>
+          
+          <% if user_signed_in? && @user.id == current_user.id %>
+            <%= link_to "退会する", withdraw_user_path(current_user), method: :put, data: { confirm: "本当に退会しますか？" }, class: "btn btn-danger" %>
+          <% end %>
         <% end %>
       </div>
     </div>

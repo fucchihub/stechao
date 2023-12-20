@@ -1,5 +1,5 @@
 $success: #54917f;// アンティークグリーン
-$danger: #941f57; //クラレット
+$danger: #941f57; //クラレット（赤系）
 $dark: #4e454a;//チャコールグレイ
 
 @import '~bootstrap/scss/bootstrap';
@@ -17,94 +17,70 @@ body {
 }
 
 a {
-  color: #98605e; //ココアブラウン
+  color: #2a83a2; //はなあさぎ（青系）
 }
 
 a:hover {
-  color: #941f57; //クラレット
+  color: #941f57; //クラレット（赤系）
   text-decoration: none;
 }
 
-// ヘッダー用
-// .navbar {
-//   background-color: #f7f6f5; //パールホワイト
-// }
-
-// .nav-item i {
-//   margin-right: 10px;
-// }
-
-// .vertical_center {
-//   display: flex;
-//   align-items: center;
-// }
-
-// .card {
-  // width: auto;
-  // background-color: #f8f9fa;}
-
-
-// サイドバー
-#sticky-sidebar {
-  position: fixed;
-  height: 100%;
-  width: 300px;
-  left: 0;
-  transition: left 2s;
-  z-index: 100;
+// リンクになってる画像をホバー時に透けさせる
+.link-image-hover-transparent:hover {
+  opacity: 0.7;
 }
 
-.sidebar-closed #sticky-sidebar {
-  left: -300px;
+// トップページ背景画像
+#top-background-image {
+  background: url('../images/top-background.jpg');
+  background-size: cover;
+  height: 100vh;
+  background-position: center;
+  opacity: 0.8;
 }
 
-.sidebar-closed .sidebar-trigger {
-  display: block; /* サイドバーが非表示のときにトリガーを表示 */
+// トップページのbg-white適用されてる要素を透けさせる
+.top-bg-white-transparent {
+  opacity: 0.9;
 }
 
-#sidebar-menu li {
-  list-style: none;
-  margin: 30px 0;
-  font-size: 20px;
-}
-
-
-// #top-background {
-//   background: url('top-background.jpg');
-// }
-
-// プロフィール
-.profile-content {
-  height: 200px;
+// ユーザのプロフィール用
+#users-profile-content-height {
+  min-height: 200px;
 }
 
 // ユーザ一覧画面のテーブル用
-.users-index-table {
+#users-index-table {
   height: 150px;
 }
-
-.users-index-table:hover {
+#users-index-table:hover {
   background-color:#f8f9fa;
 }
 
-// 投稿詳細画面用
-.postdetail-name {
-  margin-bottom: 20px;
+// 投稿詳細画面の薄い線
+.pale-border-bottom {
   border-bottom: 2px solid #f8f9fa;
-  display: flex;
-  justify-content: space-between;
 }
+// 投稿詳細画面のアイコンボタン
 .fontawesome-button {
   font-size: 25px;
   margin: 0 5px;
-  height: 20px;
-  width: 20px;
 }
 
+// フッター
 footer {
   position: sticky;
   top: 100vh;
   width: 100%;
 }
 
-// margin-top: auto;とどっちがいいか
+// .flash-message-position {
+//   position: absolute;
+//   top: 0;
+//   width: 100%;
+//   z-index: 2;
+// }
+
+.field_with_errors{
+  width: 100%;
+}

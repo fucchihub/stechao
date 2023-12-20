@@ -1,0 +1,346 @@
+<!--ハンバーガーメニュー-->
+<div id="nav-toggle">
+    <div>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+
+<!--サイドバー-->
+<aside id="sidebar" class="shadow">
+  <nav id="global-nav">
+  	<%= link_to root_path, class: "link-image-hover-transparent" do %>
+    	<%= image_tag 'stechao-logo.png', size: '200x50' , class: "mb-4" %>
+    <% end %>
+    <ul>
+      <% if admin_signed_in? && request.path.include?("admin") %>
+        <li><%= link_to "ユーザーリスト", admin_users_path %></li>
+        <li><%= link_to "投稿リスト", admin_top_path %></li>
+        <li><%= link_to "コメントリスト", admin_post_comments_path %></li>
+        <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+      <% elsif user_signed_in? && !request.path.include?("admin") %>
+        <li>
+          <%= link_to user_path(current_user) do %>
+            <%= image_tag current_user.get_profile_image(50,50), class: "rounded-circle shadow" %>
+            マイページ
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_post_path do %>
+            <i class="fas fa-paper-plane"></i> 新しい投稿
+          <% end %>
+        </li>
+        <li>
+          <%= link_to posts_path do %>
+            <i class="fas fa-images"></i> みんなの投稿
+          <% end %>
+        </li>
+        <li>
+          <%= link_to favorites_user_path(current_user) do %>
+            <i class="fas fa-heart"></i> お気に入りリスト
+          <% end %>
+        </li>
+        <li>
+          <%= link_to users_path do %>
+            <i class="fas fa-user-group"></i> ユーザーリスト
+          <% end %>
+        </li>
+        <li>
+          <%= link_to edit_user_path(current_user) do %>
+            <i class="fas fa-user-gear"></i> プロフィール編集
+          <% end %>
+        </li>
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <i class="fas fa-right-from-bracket"></i> ログアウト
+          <% end %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to new_user_registration_path do %>
+              <i class="fas fa-user-plus"></i> 新規登録
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_user_session_path do %>
+              <i class="fas fa-right-to-bracket"></i> ログイン
+          <% end %>
+        </li>
+        <li><%= link_to 'ゲストログイン（閲覧用）', public_users_guest_sign_in_path, method: :post %></li>
+      <% end %>
+    </ul>
+  </nav>
+</aside>
+
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+*, *:before, *:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html,body {
+	height: 100%;
+}
+body {
+	-webkit-text-size-adjust: 100%;
+}
+
+/* ここから */
+/*#global-head {*/
+	/*position: fixed;*/
+	/*color: #033560;*/
+	/*width: 260px;*/
+	/*text-align: center;*/
+	/*padding-top: 60px;*/
+	/*z-index: 100;*/
+/*}*/
+
+#sidebar {
+  display: none;
+	font-size: 17px;
+	padding-top: 90px;
+	width: 260px;
+	height: 100%;
+	position: fixed;
+	/*color: #033560;*/
+	background: #fff;
+	text-align: center;
+}
+
+#global-nav ul {
+	list-style: none;
+	margin-left: 0;
+}
+#global-nav > ul > li {
+	position: relative;
+}
+
+#global-nav a {
+	/*color: #033560;*/
+	/*text-decoration: none;*/
+	display: block;
+	padding: 15px 0;
+	-moz-transition: background-color .3s linear;
+	-webkit-transition: background-color .3s linear;
+	transition: background-color .3s linear;
+}
+/*#global-nav .sub-menu.is-active > a,*/
+/*#global-nav a:hover {*/
+	/*color: #fff;*/
+	/*background: #033560;*/
+/*}*/
+
+/*#global-nav .sub-menu-nav a,*/
+/*#global-nav .sub-menu:hover .sub-menu-nav {*/
+/*	width: 230px;*/
+/*}*/
+
+/* sub-menu icon */
+/*#global-nav .sub-menu-head {*/
+/*	position: relative;*/
+/*}*/
+/*#global-nav .sub-menu-head:after {*/
+/*	content: "";*/
+/*	position: absolute;*/
+/*	top: 0;*/
+/*	bottom: 0;*/
+/*	right: 18px;*/
+/*	margin: auto;*/
+/*	vertical-align: middle;*/
+/*	width: 8px;*/
+/*	height: 8px;*/
+/*	border-top: 1px solid #033560;*/
+/*	border-right: 1px solid #033560;*/
+/*	-moz-transform: rotate(45deg);*/
+/*	-webkit-transform: rotate(45deg);*/
+/*	transform: rotate(45deg);*/
+/*}*/
+
+
+/* sub-menu */
+/*#global-nav .sub-menu-nav {*/
+/*	position: fixed;*/
+/*	background: #033560;*/
+	/*color: #fff;*/
+/*	top: 0;*/
+/*	padding-top: 90px;*/
+/*	left: 260px;*/
+/*	width: 0;*/
+/*	height: 100%;*/
+/*	overflow: hidden;*/
+
+/*	-moz-transition: width .2s ease-out;*/
+/*	-webkit-transition: width .2s ease-out;*/
+/*	transition: width .2s ease-out;*/
+/*}*/
+/*#global-nav .sub-menu.is-active > a:after,*/
+/*#global-nav .sub-menu-head:hover:after {*/
+/*	border-color: #fff;*/
+/*}*/
+/*#global-nav .sub-menu-nav a {*/
+	/*color: #fff;*/
+/*}*/
+/*#global-nav .sub-menu-nav a:hover {*/
+	/*color: #033560;*/
+/*	background: #fff;*/
+/*}*/
+
+/* nav-toggle */
+#nav-toggle {
+	/*display: none;*/
+	display: block;
+	position: fixed;
+	top: 15px;
+	left: 15px;
+	height: 32px;
+}
+#nav-toggle > div {
+	position: relative;
+	width: 32px;
+}
+#nav-toggle span {
+	width: 100%;
+	height: 2px;
+	left: 0;
+	display: block;
+	background: #033560;
+	position: absolute;
+	-webkit-transition: .35s ease-in-out;
+	-moz-transition: .35s ease-in-out;
+	transition: .35s ease-in-out;
+}
+
+#nav-toggle span:nth-child(1) {
+	top: 0;
+}
+#nav-toggle span:nth-child(2) {
+	top: 11px;
+}
+#nav-toggle span:nth-child(3) {
+	top: 22px;
+}
+
+
+#overlay {
+	display: none;
+	position: fixed;
+	/*background: rgba(0,0,0,.6);*/
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+
+
+/*/*@media screen and (max-width: 900px) {*/
+	/*#main-in {*/
+	/*	padding-left: 0;*/
+	/*}*/
+
+	/*#global-head {*/
+	/*	width: 100%;*/
+	/*	padding: 10px;*/
+	/*	background: rgba(255,255,255,.8);*/
+	/*	display: -webkit-flex;*/
+	/*	display: flex;*/
+	/*}*/
+
+	#sidebar {
+		/*display: none;*/
+		display: block;
+		position: fixed;
+		left: -300px;
+		top: 0;
+		height: 100%;
+		width: 300px;
+		/*color: #333;*/
+		background: #fff;
+		-webkit-transition: .35s ease-in-out;
+		transition: .35s ease-in-out;
+	}
+
+	/* サブメニューは開けない */
+	/*#global-nav .sub-menu-head:after,*/
+	/*#global-nav .sub-menu-nav {*/
+	/*	display: none;*/
+	/*}*/
+	#nav-toggle {
+		display: block;
+	}
+
+	/* nav open */
+	.open {
+		overflow: hidden;
+	}
+	.open #overlay {
+		display: block;
+	}
+	.open #sidebar  {
+		-webkit-transform: translate3d(300px,0,0);
+		transform: translate3d(300px,0,0);
+	}
+
+	/* #nav-toggle close */
+	.open #nav-toggle span:nth-child(1) {
+		top: 11px;
+		-webkit-transform: rotate(45deg);
+		-moz-transform: rotate(45deg);
+		transform: rotate(45deg);
+	}
+	.open #nav-toggle span:nth-child(2) {
+		width: 0;
+		left: 50%;
+	}
+	.open #nav-toggle span:nth-child(3) {
+		top: 11px;
+		-webkit-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		transform: rotate(-45deg);
+	}
+
+	/* z-index */
+	#overlay {
+		z-index: 200;
+	}
+	#sidebar {
+		z-index: 300;
+	}
+	#nav-toggle {
+		z-index: 400;
+	}
+
+
+/*}*/
+
+@media screen and (max-width: 400px) {
+	#sidebar {
+		left: -200px;
+		width: 200px;
+		padding-top: 60px;
+	}
+	.open #sidebar  {
+		-webkit-transform: translate3d(200px,0,0);
+		transform: translate3d(200px,0,0);
+	}
+}
+</style>
+
+<script type="text/javascript">
+(function($) {
+    $(function () {
+        $('#nav-toggle,#overlay').on('click', function() {
+            $('body').toggleClass('open');
+        });
+    });
+})(jQuery);
+</script>

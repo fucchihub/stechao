@@ -5,7 +5,9 @@
 
       <div class="rounded-lg border p-5">
         <h2 class="mb-4">新しい投稿</h2>
+
         <%= form_with model: @post, url: posts_path, method: :post do |f| %>
+          <%= render "public/shared/error_messages", resource: @post %>
           <div class="form-group">
             <%= f.label :image, "投稿画像" %><br>
             <%= f.file_field :image, accept: "image/*" %>

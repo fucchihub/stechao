@@ -12,7 +12,7 @@ class Public::PostCommentsController < ApplicationController
   # 非同期通信化
   def destroy
     @comment = PostComment.find(params[:id])
-    PostComment.find(params[:id]).destroy
+    @comment.destroy
   end
 
   private
