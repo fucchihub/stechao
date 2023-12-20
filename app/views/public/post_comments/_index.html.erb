@@ -1,19 +1,20 @@
 <% posts.post_comments.each do |post_comment| %>
-
   <div class="row justify-content-center align-items-center mt-3">
-
+    <!--コメントしたユーザのプロフィール画像-->
     <div class="col-md-2">
       <%= image_tag post_comment.user.get_profile_image(50,50), class: "rounded-circle shadow" %>
     </div>
 
     <div class="col-md-10">
+      <!--コメントした日付-->
       <div class="row text-break">
         <%= I18n.l(post_comment.created_at) %>
       </div>
+      <!--コメントしたユーザ名-->
       <div class="row text-break">
-        <strong>  <%= post_comment.user.name %></strong>
+        <strong><%= post_comment.user.name %></strong>
       </div>
-
+      <!--コメント内容-->
       <div class="row text-break">
         <%= post_comment.comment %>
       </div>
@@ -22,7 +23,7 @@
         <!--コメントがログインユーザーのものかつ現在のURLにadminが含まれてないなら、削除ボタン表示-->
         <!--または、管理者がログイン中かつ現在のURLにadminが含まれてるなら、削除ボタン表示-->
         <% if post_comment.user == current_user && !request.path.include?("admin") %>
-          <%= link_to "削除する", post_post_comment_path(post_comment.post, post_comment), method: :delete, remote: true, class: "text-danger mt-1" %>
+          <%= link_to "削除する", post_post_comment_path(post_comment.post, post_comment), method: :delete, remote: true, data: { confirm: "このコメントを削除しますか？" }, class: "text-danger mt-1" %>
         <% elsif admin_signed_in? && request.path.include?("admin") %>
           <%= link_to "削除する", admin_post_comment_path(post_comment), method: :delete, remote: true, data: { confirm: "このコメントを削除しますか？" }, class: "btn btn-sm btn-danger mt-1" %>
         <% end %>

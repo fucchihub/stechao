@@ -4,27 +4,29 @@
     <div class="col-sm-12 col-md-8 col-lg-7 px-5 px-sm-0 mx-auto">
 
       <!--2099年12月16日(金)のような形で日付表示-->
-      <div class="mb-4">
-        <h4><%= I18n.l(@post.created_at.to_date, format: :long) %></h4>
-        <h5><%= I18n.l(@post.updated_at.to_date, format: :long) %>に更新</h5>
-      </div>
+      <h4 class="row justify-content-center align-items-center">
+        <%= I18n.l(@post.created_at.to_date, format: :long) %>
+      </h4>
+      <h5 class="row justify-content-center align-items-center mb-4">
+        <%= I18n.l(@post.updated_at.to_date, format: :long) %>に更新
+      </h5>
 
       <!--断捨離した数が0以外なら表示-->
       <% unless @post.quantity == 0 %>
-        <p class="text-left border rounded-lg p-2">
+        <p class="row justify-content-center align-items-center border rounded-lg p-2">
           ◆断捨離した数は <strong><%= @post.quantity %></strong> です
         </p>
       <% end %>
 
       <!--投稿画像-->
       <div class="d-flex justify-content-center align-items-center">
-        <%= image_tag @post.get_image(400,400) %>
+        <%= image_tag @post.get_image(300,300) %>
       </div>
 
-      <div class="pale-border-bottom row ml-1 mb-3">
+      <div class="pale-border-bottom row justify-content-center align-items-center my-3">
         <!--管理者がログイン中かつ現在のURLにadminが含まれてるなら、削除ボタン表示-->
         <% if admin_signed_in? && request.path.include?("admin") %>
-          <%= link_to "投稿を削除する", admin_post_path(@post), method: :delete, data: { confirm: "この投稿を削除しますか？" }, class: " btn btn-danger"   %>
+          <%= link_to "投稿を削除する", admin_post_path(@post), method: :delete, data: { confirm: "この投稿を削除しますか？" }, class: "btn btn-danger mb-3"   %>
         <% end %>
       </div>
 
