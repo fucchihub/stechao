@@ -10,6 +10,10 @@ class Post < ApplicationRecord
   validates :name, presence: true, length: { maximum: 99 }
   validates :quantity, presence: true
 
+  def start_time
+    created_at
+  end
+
   def favorited_by?(user)
     user.present? && favorites.exists?(user_id: user.id)
   end

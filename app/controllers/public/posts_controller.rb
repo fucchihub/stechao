@@ -116,7 +116,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:name, :image, :caption, :quantity)
+    params.require(:post).permit(:name, :image, :caption, :quantity, :start_date)
   end
 end
 

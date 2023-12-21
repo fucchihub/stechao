@@ -5,6 +5,17 @@
 
       <!--プロフィール-->
       <%= render "public/users/profile", user: @user, posts: @posts %>
+      
+      <%= month_calendar events: @posts do |date, posts| %>
+        <%= date.day %>
+        <% posts.each do |post| %>
+          <div class="calendar_event">
+            <% if post.present? %>
+              <%= link_to post.name.truncate(8),post_path(post) %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
 
       <!--投稿並び替え-->
       <div class="text-left px-3 pb-3 mb-4">
