@@ -1,10 +1,10 @@
 <!--ユーザ側／新規投稿画面-->
 <div class='container py-5'>
   <div class='row'>
-    <div class="col-sm-12 col-md-8 col-lg-7 px-5 px-sm-0 mx-auto">
+    <div class="col-sm-8 col-md-6 col-lg-5 px-5 px-sm-0 mx-auto">
 
-      <div class="rounded-lg border p-5">
-        <h2 class="mb-4">新しい投稿</h2>
+      <div class="rounded-lg border p-3">
+        <h5 class="mb-4">新しい投稿</h5>
 
         <%= form_with model: @post, url: posts_path, method: :post do |f| %>
           <%= render "public/shared/error_messages", resource: @post %>
@@ -26,7 +26,7 @@
           <div class="form-group">
             <%= f.label :quantity, "断捨離した数" %><br>
             <div class="input-group">
-              <%= f.number_field :quantity, placeholder: "記録しない場合は0を入力してください", class: 'form-control' %>
+              <%= f.number_field :quantity, placeholder: "記録しない場合は0と入力", class: 'form-control' %>
             </div>
           </div>
 
