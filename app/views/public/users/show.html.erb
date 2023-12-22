@@ -6,6 +6,7 @@
       <!--プロフィール-->
       <%= render "public/users/profile", user: @user, posts: @posts %>
       
+      <div class="border-bottom py-3">
       <%= month_calendar events: @posts do |date, posts| %>
         <%= date.day %>
         <% posts.each do |post| %>
@@ -16,6 +17,8 @@
           </div>
         <% end %>
       <% end %>
+      <p><i class="fas fa-paper-plane"></i> 投稿した数／<i class="fas fa-star"></i> 断捨離した数</p>
+      </div>
 
       <!--投稿並び替え-->
       <div class="text-left px-3 pb-3 mb-4">
