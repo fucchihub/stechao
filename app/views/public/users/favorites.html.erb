@@ -3,14 +3,7 @@
   <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-9 px-5 px-sm-0 mx-auto">
 
-      <h2 class="mb-4"><%= current_user.name %>のお気に入り</h2>
-
-      <!--投稿並び替えボタン-->
-      <div class="text-left px-3 pb-3 mb-4">
-        <%= link_to '新しい順', favorites_user_path(latest: "true") %>
-        | <%= link_to '古い順', favorites_user_path(old: "true") %>
-        | <%= link_to 'お気に入りが多い順', favorites_user_path(most_favorites: "true") %>
-      </div>
+      <h4 class="text-center mx-auto mb-4"><%= current_user.name %>のお気に入り</h4>
 
       <!--お気に入り投稿一覧-->
       <%= render "public/posts/index", posts: @posts %>

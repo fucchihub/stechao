@@ -80,14 +80,103 @@
   </nav>
 </header>
 
-<!--これだとうまくいかない-->
-<!--def user_state-->
-<!--    user = User.find_by(email: params[:user][:email])-->
-<!--    return if user.nil?-->
-<!--    if user.is_active-->
-<!--      return unless user.valid_password?(params[:user][:password])-->
-<!--    else-->
-<!--      flash[:danger] = 'このアカウントは退会済みです。別のアカウントでログインまたは新規登録をお願いします。'-->
-<!--      redirect_to new_user_session_path-->
-<!--    end-->
-<!--  end-->
+# 検索機能
+# if params[:filter_by_date]
+
+#       #@posts = @posts.where(...)
+
+#     end
+
+#     if params[:keyword]
+
+#       #@posts = @posts.where( .....)
+#     end
+
+#     if params[:order]
+#       if params[:order] == 'latest'
+#         @posts = @posts.order(created_at: :desc)
+#       elsif params[:order] == 'old'
+#         @posts = @posts.order(created_at: :asc)
+#       elsif params[:order] == 'favorites'
+#         @posts = @posts.joins(:favorites).group('posts.id').order('COUNT(favorites.id) DESC') if @posts.present?
+#       end
+#     end
+
+検索機能
+if params[:filter_by_date]
+      @posts = current_user.posts
+      # params[:search_type]が存在する場合はその値を使用し、存在しない場合はデフォルトで "created_at" を設定する
+      @search_type = params[:search_type] || "created_at"
+      @start_date = params[:start_date].to_date
+      @end_date = params[:end_date].to_date
+
+      if @search_type == "created_at"
+        @posts.where(created_at: @start_date.beginning_of_day..@end_date.end_of_day)
+      else
+        @posts.where(updated_at: @start_date.beginning_of_day..@end_date.end_of_day)
+      end
+
+    elsif params[:keyword]
+
+      redirect_to request.referer if params[:keyword].nil?
+
+      # 検索フォームから送られてくるキーワードを空白で分割
+      split_keyword = params[:keyword].split(/[[:blank:]]+/)
+      # 分割したキーワードごとに検索
+      split_keyword.each do |keyword|
+        # キーワードが空白の場合は検索しないでスキップ(空白で検索すると全レコードを取得してしまう)
+        next if keyword == ""
+        # キーワードが#で始まる場合は#を取り除く(文字列の2文字目から最後までを取り出す)
+        keyword = keyword.starts_with?('#') ? keyword[1..-1] : keyword
+        # キーワードごとに部分一致検索をし、検索結果のpostを累積して格納（nameとcaption両方から検索）
+        @posts += Post.where('name LIKE ? OR caption LIKE ?', "%#{keyword}%", "%#{keyword}%")
+      end
+      # 重複したpostを削除する
+      @posts.uniq!
+
+    elsif params[:order]
+
+      if params[:order] == 'latest'
+        @posts = @posts.order(created_at: :desc)
+      elsif params[:order] == 'old'
+        @posts = @posts.order(created_at: :asc)
+      elsif params[:order] == 'favorites'
+        @posts = @posts.joins(:favorites).group('posts.id').order('COUNT(favorites.id) DESC') if @posts.present?
+      end
+    else
+      @posts = Post.all
+    end
+
+    <!--public/posts/filter_by_date_form（パーシャル）-->
+<div class="text-left px-3 pb-3 mb-4">
+  <p>◆日付指定して投稿を絞り込む</p>
+  <%= form_with url: filter_by_date_posts_path, method: :get do |f| %>
+    <%# if params["order"] %>
+    <%#= f.hidden_field :order, value: params[:order] %>
+    <%# end %>
+    <div class="form-group">
+      <div class="row text-right">
+
+<!--投稿並び替えボタン-->
+      <div class="text-left px-3 pb-3 mb-4">
+        <%#= link_to '新しい順', posts_path(order: "latest") %>
+        <%= link_to '新しい順', posts_path(latest: "true") %>
+        | <%= link_to '古い順', posts_path(old: "true") %>
+        | <%= link_to 'お気に入りが多い順', posts_path(most_favorites: "true") %>
+      </div>
+      
+      
+<!--投稿の検索フォーム-->
+<!--public/posts/search（パーシャル）-->
+<!--ユーザがログイン中かつ現在のURLにadminが含まれていないかつhomes#topではない場合に表示される-->
+<% if user_signed_in? && !request.path.include?("admin") && controller_name != 'homes' && action_name != 'top' %>
+  <div class="row justify-content-center mt-4">
+    <%= form_with url: search_posts_path, method: :get do |f| %>
+      <%# if params[:order] %>
+        <%#= f.hidden_field :order, value: params[:order] %>
+      <%# end %>
+      <%# if params[:start_date] %>
+        <%#= f.hidden_field :start_date, value: params[:start_date] %>
+      <%# end %>
+      <div class="input-group">
+        <%= f.text_field :keyword, placeholder: "投稿を検索", class: "form-control" %>

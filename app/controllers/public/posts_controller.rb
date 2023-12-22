@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_posts, only: [:index, :hashtag, :filter_by_date]
+  before_action :set_posts, only: [:index]
 
   def new
     @post = Post.new
@@ -20,7 +20,6 @@ class Public::PostsController < ApplicationController
 
   def index
     @posts = Post.all
-    set_posts
   end
 
   def show
@@ -57,10 +56,9 @@ class Public::PostsController < ApplicationController
     # URLの:nameからハッシュタグの名前を取得
     @hashtag = Hashtag.find_by(name: params[:name])
     @posts = @hashtag.posts
-    set_posts
   end
 
-  # 複数のキーワードで検索できる機能
+  # 投稿を複数のキーワードで検索できる機能
   def search
     redirect_to request.referer if params[:keyword].nil?
 
@@ -79,7 +77,6 @@ class Public::PostsController < ApplicationController
       end
       # 重複したpostを削除する
       @posts.uniq!
-
   end
 
   # 投稿を日時で絞り込む機能
@@ -99,6 +96,7 @@ class Public::PostsController < ApplicationController
                       end
   end
 
+  # 投稿を新しい順、古い順、お気に入りが多い順で並び替える機能
   def set_posts
     @posts = case
              when params[:latest]
@@ -112,32 +110,9 @@ class Public::PostsController < ApplicationController
              end
   end
 
-
   private
 
   def post_params
-    params.require(:post).permit(:name, :image, :caption, :quantity, :start_date)
+    params.require(:post).permit(:name, :image, :caption, :quantity)
   end
 end
-
-# 検索機能
-# if params[:filter_by_date]
-
-#       #@posts = @posts.where(...)
-
-#     end
-
-#     if params[:keyword]
-
-#       #@posts = @posts.where( .....)
-#     end
-
-#     if params[:order]
-#       if params[:order] == 'latest'
-#         @posts = @posts.order(created_at: :desc)
-#       elsif params[:order] == 'old'
-#         @posts = @posts.order(created_at: :asc)
-#       elsif params[:order] == 'favorites'
-#         @posts = @posts.joins(:favorites).group('posts.id').order('COUNT(favorites.id) DESC') if @posts.present?
-#       end
-#     end

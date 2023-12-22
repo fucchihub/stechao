@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_posts, only: [:show, :favorites]
+  before_action :set_posts, only: [:show]
 
   def index
     @users = User.all
@@ -9,7 +9,6 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts
-    set_posts
   end
 
   def edit
@@ -42,6 +41,7 @@ class Public::UsersController < ApplicationController
     redirect_to root_path
   end
 
+  # 投稿を新しい順、古い順、お気に入りが多い順で並び替える機能
   def set_posts
     @posts = case
              when params[:latest]

@@ -4,21 +4,23 @@
     <div class="col-sm-12 col-md-8 col-lg-7 px-5 px-sm-0 mx-auto">
 
       <!--2099年12月16日(金)のような形で日付表示-->
-      <div class="mb-4">
-        <h4><%= I18n.l(@post.created_at.to_date, format: :long) %></h4>
-        <h5><%= I18n.l(@post.updated_at.to_date, format: :long) %>に更新</h5>
-      </div>
+      <h4 class="row justify-content-center align-items-center">
+        <%= I18n.l(@post.created_at.to_date, format: :long) %>
+      </h4>
+      <h5 class="row justify-content-center align-items-center mb-4">
+        <%= I18n.l(@post.updated_at.to_date, format: :long) %>に更新
+      </h5>
 
-      <!--断捨離した数が0以外なら表示-->
+      <!--断捨離した数を表示（0の時は表示しない）-->
       <% unless @post.quantity == 0 %>
-        <p class="text-left border rounded-lg p-2">
-          ◆断捨離した数は <strong><%= @post.quantity %></strong> です
-        </p>
+        <div class="d-flex justify-content-center align-items-center p-2">
+          <i class="fas fa-star text-warning"></i> 断捨離した数は <strong><%= @post.quantity %></strong> です
+        </div>
       <% end %>
 
       <!--投稿画像-->
-      <div class="d-flex justify-content-center align-items-center">
-        <%= image_tag @post.get_image(350,350) %>
+      <div class="d-flex justify-content-center align-items-center my-3">
+        <%= image_tag @post.get_image(300,300) %>
       </div>
 
       <div class="pale-border-bottom row ml-1 mb-3">
