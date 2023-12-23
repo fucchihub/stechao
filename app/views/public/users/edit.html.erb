@@ -1,10 +1,13 @@
 <!--ユーザ側／ユーザ編集画面-->
 <div class='container py-5'>
   <div class='row'>
-    <div class="col-sm-12 col-md-8 col-lg-7 px-5 px-sm-0 mx-auto">
+    <div class="col-sm-8 col-md-6 col-lg-5 px-5 px-sm-0 mx-auto">
 
-      <div class="rounded-lg border p-5">
-        <h2 class="mb-4">プロフィール編集</h2>
+      <div class="rounded-lg border p-3">
+        <h5 class="text-center mx-auto mb-4">
+          プロフィール編集<br>
+          <i class="fas fa-user-gear"></i>
+        </h5>
         <%= form_with model: @user, url: user_path do |f| %>
           <%= render "public/shared/error_messages", resource: @user %>
 
@@ -23,16 +26,16 @@
             <%= f.text_area :introduction, placeholder: "200字以内", class: 'form-control' %>
           </div>
 
-          <h4 class="my-4">登録メールアドレス</h4>
           <div class="form-group">
-            <%= f.label :email, "メールアドレス" %><br>
+            <%= f.label :email, "登録メールアドレス" %><br>
             <%= f.text_field :email, placeholder: "abc@stechao.com", class: 'form-control' %>
           </div>
+          <p>メールアドレスは他の人には表示されません。</p>
 
           <div class="form-group text-center">
             <%= f.submit "変更する", class: 'btn btn-success' %>
           </div>
-          
+
           <% if user_signed_in? && @user.id == current_user.id %>
             <%= link_to "退会する", withdraw_user_path(current_user), method: :put, data: { confirm: "本当に退会しますか？" }, class: "btn btn-danger" %>
           <% end %>

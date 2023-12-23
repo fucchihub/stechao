@@ -19,10 +19,10 @@ class Public::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:success] = "プロフィールを変更しました！"
+      flash[:success] = "プロフィールを変更しました。"
       redirect_to user_path(@user)
     else
-      flash.now[:danger] = "変更に失敗しました"
+      flash.now[:error] = "変更に失敗しました。"
       render :edit
     end
   end
@@ -39,6 +39,7 @@ class Public::UsersController < ApplicationController
   def withdraw
     current_user.update(is_active: false)
     reset_session
+    flash[:notice] = "ご利用ありがとうございました。"
     redirect_to root_path
   end
 

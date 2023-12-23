@@ -36,10 +36,10 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      flash[:success] = "「#{@post.name.truncate(10)}」を変更しました。"
+      flash[:success] = "投稿内容を変更しました。"
       redirect_to post_path(@post)
     else
-      flash[:danger] = "変更に失敗しました。"
+      flash[:error] = "変更に失敗しました。"
       render :edit
     end
   end
@@ -61,7 +61,10 @@ class Public::PostsController < ApplicationController
 
   # 投稿を複数のキーワードで検索できる機能
   def search
-    redirect_to request.referer if params[:keyword].nil?
+    if params[:keyword].nil?
+      flash[:error] = "キーワードを入力してください。"
+      redirect_to request.referer
+    end
 
       # 検索フォームから送られてくるキーワードを空白で分割
       split_keyword = params[:keyword].split(/[[:blank:]]+/)
