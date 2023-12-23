@@ -24,10 +24,10 @@
       <%= render "public/posts/filter_by_date_form" %>
 
       <!--投稿並び替えボタン-->
-      <div class="text-left px-3 pb-3 mb-4">
+      <div class="text-center mx-auto pb-3 mb-4">
         <%= link_to '新しい順', user_path(current_user, latest: "true") %>
         | <%= link_to '古い順', user_path(current_user, old: "true") %>
-        | <%= link_to 'お気に入りが多い順', user_path(current_user, most_favorites: "true") %>
+        | <%= link_to 'お気に入り順', user_path(current_user, most_favorites: "true") %>
       </div>
 
       <!--ユーザ自身の投稿一覧-->

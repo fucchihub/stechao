@@ -20,6 +20,7 @@ class Public::PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    set_posts
   end
 
   def show

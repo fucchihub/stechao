@@ -151,8 +151,17 @@ if params[:filter_by_date]
 <div class="text-left px-3 pb-3 mb-4">
   <p>◆日付指定して投稿を絞り込む</p>
   <%= form_with url: filter_by_date_posts_path, method: :get do |f| %>
-    <%# if params["order"] %>
-    <%#= f.hidden_field :order, value: params[:order] %>
+    <%# if params[:order] %>
+      <%#= f.hidden_field :order, value: params[:order] %>
+    <%# end %>
+    <%# if params[:search_type] %>
+      <%#= f.hidden_field :search_type, value: params[:search_type] %>
+    <%# end %>
+    <%# if params[:start_date] %>
+      <%#= f.hidden_field :start_date, value: params[:start_date] %>
+    <%# end %>
+    <%# if params[:end_date] %>
+      <%#= f.hidden_field :end_date, value: params[:end_date] %>
     <%# end %>
     <div class="form-group">
       <div class="row text-right">
@@ -175,8 +184,8 @@ if params[:filter_by_date]
       <%# if params[:order] %>
         <%#= f.hidden_field :order, value: params[:order] %>
       <%# end %>
-      <%# if params[:start_date] %>
-        <%#= f.hidden_field :start_date, value: params[:start_date] %>
+      <%# if params[:keyword] %>
+        <%#= f.hidden_field :keyword, value: params[:keywo] %>
       <%# end %>
       <div class="input-group">
         <%= f.text_field :keyword, placeholder: "投稿を検索", class: "form-control" %>
