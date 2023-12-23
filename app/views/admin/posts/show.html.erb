@@ -41,12 +41,12 @@
 
       <!--コメント数-->
       <h5 id="comment_counter" class="border-top pt-3">
-        <%= render "public/post_comments/counter", posts: @post %>
+        <%= render "public/post_comments/counter", post: @post %>
         コメント
       </h5>
       <!--コメント一覧-->
       <div id="comment_index">
-        <%= render "public/post_comments/index", posts: @post %>
+        <%= render "public/post_comments/index", post: @post %>
       </div>
 
     </div>

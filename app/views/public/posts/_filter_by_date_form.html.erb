@@ -2,9 +2,6 @@
 <div class="text-left px-3 pb-3 mb-4">
   <p>◆日付指定して投稿を絞り込む</p>
   <%= form_with url: filter_by_date_posts_path, method: :get do |f| %>
-    <%# if params["order"] %>
-    <%#= f.hidden_field :order, value: params[:order] %>
-    <%# end %>
     <div class="form-group">
       <div class="row justify-content-center">
         <div class="col-md-4 mb-4">

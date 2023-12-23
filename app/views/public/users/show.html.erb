@@ -8,12 +8,12 @@
 
       <!--カレンダー-->
       <div class="border-bottom pb-3 mb-4">
-        <%= month_calendar events: @posts do |date, posts| %>
+        <%= month_calendar events: @posts do |date, post| %>
           <%= date.day %>
           <div class="calendar_event">
-            <% if posts.present? %>
-              <span class="text-info"><i class="fas fa-paper-plane"></i><%= posts.count %></span>
-              <span class="text-warning"><i class="fas fa-star"></i><%= posts.pluck(:quantity).sum %></span>
+            <% if post.present? %>
+              <span class="text-info"><i class="fas fa-paper-plane"></i><%= post.count %></span>
+              <span class="text-warning"><i class="fas fa-star"></i><%= post.pluck(:quantity).sum %></span>
             <% end %>
           </div>
         <% end %>
