@@ -15,6 +15,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
+    #byebug
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:notice] = "ユーザの登録情報を変更しました。"
@@ -28,6 +29,6 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :introduction, :email, :is_active)
+    params.require(:user).permit(:name, :introduction, :email, :is_active, :profile_image)
   end
 end
