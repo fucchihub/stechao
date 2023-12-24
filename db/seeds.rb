@@ -11,21 +11,32 @@ Admin.create!(
   password: 'zzzzzz'
 )
 
-  5.times do |n|
+  4.times do |u|
     user = User.create!(
-      name: "stechaoユーザー#{n + 1}",
-      email: "stechao#{n + 1}@stechao.com",
+      name: "stechaoユーザー#{u + 1}",
+      email: "stechao#{u + 1}@stechao.com",
       password: "ssssss"
     )
 
-    4.times do |m|
-      Post.create!(
+    4.times do |p|
+      post = Post.create!(
         user_id: user.id,
-        name: "投稿#{n * 4 + m + 1}",
-        caption: "#投稿 説明#{n * 4 + m + 1}"
+        name: "投稿#{u * 4 + p + 1}",
+        caption: "#投稿 説明#{u * 4 + p + 1}",
+        quantity: 1,
+        image: ActiveStorage::Blob.create_and_upload!(io: File.open(Rails.root.join("app/assets/images/post#{u * 4 + p + 1}.jpg")), filename: "post#{u * 4 + p + 1}.jpg")
       )
+
+      3.times do |c|
+        PostComment.create!(
+          user_id: user.id,
+          post_id: post.id,
+          comment: "コメント#{u * 3 + p * 3 + c + 1}"
+        )
+      end
     end
-      # １回目は0*4+0+1=1～0*4+3+1=4、２回目は1*4+0+1=5～1*4+3+1=8、、、となり、
-      # ユーザー１の投稿は投稿1～4、ユーザー２の投稿は投稿5～8、、、となる。
 
   end
+
+  # 投稿データ作成時、１回目は0*4+0+1=1～0*4+3+1=4、２回目は1*4+0+1=5～1*4+3+1=8、、、となり、
+  # ユーザー１の投稿は投稿1～4、ユーザー２の投稿は投稿5～8、、、となる。

@@ -6,17 +6,21 @@
       <!--プロフィール-->
       <div id="users-profile-content-height" class="row bg-light rounded-lg mb-5">
 
+        <!--プロフィール画像-->
         <div class="col-md-4 d-flex justify-content-center align-items-center pt-4 px-4">
           <%= image_tag @user.get_profile_image(150,150), class: "rounded-circle shadow" %>
         </div>
 
         <div class="col-md-8 p-4">
+          <!--ユーザ名-->
           <div class="row p-1 text-break">
             <h4><%= @user.name %></h4>
           </div>
+          <!--ユーザ自己紹介-->
           <div class="row p-2 text-break border-bottom">
             <%= @user.introduction %>
           </div>
+          <!--投稿した数・断捨離した数-->
           <div class="d-flex flex-row">
             <div class="text-center py-3">
               投稿した数　<%= @posts.count %><br>
@@ -27,34 +31,32 @@
       </div>
 
       <!--管理者がログイン中かつ現在のURLにadminが含まれてるなら、編集ボタン表示-->
-      <% if admin_signed_in? && request.path.include?("admin") %>
-        <%= link_to "ユーザーを編集する", edit_admin_user_path(@user), class: "btn btn-success mb-5"   %>
-      <% end %>
-      
+      <div class="row justify-content-center align-items-center">
+        <% if admin_signed_in? && request.path.include?("admin") %>
+          <%= link_to "ユーザーを編集する", edit_admin_user_path(@user), class: "btn btn-success mb-5"   %>
+        <% end %>
+      </div>
+
       <!--ユーザ自身の投稿一覧-->
       <div class="row">
-        <% @posts.each do |posts| %>
+        <% @posts.each do |post| %>
           <div class="col-md-6">
             <div class="card shadow p-1 mx-1 mb-4">
               <div class="card-body p-1">
-                <p class="card-text row">
-                  <span class="col-md-6">
-                    <%= posts.name.truncate(7) %>
-                  </span>
-                  <span class="col-md-6 text-right">
+                <div class="card-text p-1 d-flex justify-content-between">
+                  <!--投稿名-->
+                  <span><%= post.name.truncate(8) %></span>
+                  <span class="d-flex justify-content-end">
                     <!--コメント数-->
-                    <span id="comment_counter" class="h5">
-                       <%= render "public/post_comments/counter", posts: posts %>
-                    </span>
-                    <!--お気に入りボタン-->
-                    <span id="favorite_btn_<%= posts.id %>" class="h5">
-                      <%= render "public/favorites/btn", posts: posts %>
-                    </span>
+                    <div id="comment_counter" class="h5 mr-2">
+                       <%= render "public/post_comments/counter", post: post %>
+                    </div>
                   </span>
-                </p>
+                </div>
               </div>
-              <%= link_to post_path(posts), class: "link-image-hover-transparent" do %>
-                <%= image_tag posts.get_image(250,250), class: "card-img-top" %>
+              <!--投稿画像-->
+              <%= link_to admin_post_path(post), class: "link-image-hover-transparent" do %>
+                <%= image_tag post.get_image(250,250), class: "card-img-top" %>
               <% end %>
             </div>
           </div>

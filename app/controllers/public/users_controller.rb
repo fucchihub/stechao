@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_posts, only: [:show, :favorites]
+  before_action :set_posts, only: [:show]
 
   def index
     @users = User.all
@@ -19,10 +19,10 @@ class Public::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:success] = "プロフィールを変更しました！"
+      flash[:success] = "プロフィールを変更しました。"
       redirect_to user_path(@user)
     else
-      flash.now[:danger] = "変更に失敗しました"
+      flash.now[:error] = "変更に失敗しました。"
       render :edit
     end
   end
@@ -39,9 +39,12 @@ class Public::UsersController < ApplicationController
   def withdraw
     current_user.update(is_active: false)
     reset_session
+    flash[:notice] = "ご利用ありがとうございました。"
     redirect_to root_path
   end
 
+  private
+  # 投稿を新しい順、古い順、お気に入りが多い順で並び替える機能
   def set_posts
     @posts = case
              when params[:latest]
@@ -55,7 +58,6 @@ class Public::UsersController < ApplicationController
              end
   end
 
-  private
 
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction, :email)

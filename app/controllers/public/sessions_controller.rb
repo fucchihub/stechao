@@ -3,11 +3,12 @@
 class Public::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: [:create]
   before_action :user_state, only: [:create]
-  
+
   def guest_sign_in
     user = User.guest
     sign_in user
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+    flash[:notice] = 'ゲストユーザーとしてログインしました。'
+    redirect_to root_path
   end
 
   # GET /resource/sign_in
@@ -30,6 +31,7 @@ class Public::SessionsController < Devise::SessionsController
   end
 
   def after_sign_out_path_for(resource)
+    flash[:notice] = "ログアウトしました。"
     root_path
   end
 
@@ -42,7 +44,7 @@ class Public::SessionsController < Devise::SessionsController
     if user.is_active
       return unless user.valid_password?(params[:user][:password])
     else
-      flash[:danger] = 'このアカウントは退会済みです。別のアカウントでログインまたは新規登録をお願いします。'
+      flash[:error] = 'このアカウントは退会済みです。別のアカウントでログインまたは新規登録をお願いします。'
       redirect_to new_user_session_path
     end
   end

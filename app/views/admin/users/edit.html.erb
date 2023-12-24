@@ -1,10 +1,10 @@
 <!--管理者側／ユーザ編集画面-->
 <div class='container py-5'>
   <div class='row'>
-    <div class="col-sm-12 col-md-8 col-lg-7 px-5 px-sm-0 mx-auto">
+    <div class="col-sm-8 col-md-6 col-lg-5 px-5 px-sm-0 mx-auto">
 
-      <div class="rounded-lg border p-5">
-        <h2 class="mb-4">ユーザー編集</h2>
+      <div class="rounded-lg border p-3">
+        <h5 class="mb-4">ユーザー編集</h5>
         <%= form_with model: @user, url: admin_user_path do |f| %>
         <%= render "admin/shared/error_messages", resource: @user %>
 
@@ -23,13 +23,13 @@
             <%= f.text_area :introduction, placeholder: "200字以内", class: 'form-control' %>
           </div>
 
-          <h4 class="my-4">登録メールアドレス</h4>
+          <h5 class="my-4">登録メールアドレス</h5>
           <div class="form-group">
             <%= f.label :email, "メールアドレス" %><br>
             <%= f.text_field :email, placeholder: "abc@stechao.com", class: 'form-control' %>
           </div>
-          
-          <h4 class="my-4">ステータス</h4>
+
+          <h5 class="my-4">ステータス</h5>
           <div class="form-group">
             <%= f.radio_button :is_active, true %>
             <%= f.label :is_active_true, "有効", class: "mr-3" %>

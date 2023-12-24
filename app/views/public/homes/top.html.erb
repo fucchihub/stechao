@@ -2,22 +2,20 @@
 <div id="top-background-image">
   <div class='container py-5'>
     <div class='row'>
-      <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <div class="col-sm-6 col-md-6 col-lg-4 px-5 px-sm-0 mx-auto">
 
         <% if user_signed_in? %>
           <!--ログインしてる時はあいさつ文-->
-          <div class="top-bg-white-transparent bg-white p-4">
+          <div class="top-bg-white-transparent bg-white rounded-lg p-3">
             <div class="row justify-content-center align-items-center">
               <%= image_tag 'stechao-logo.png', size: '220x55' %>
             </div>
             <div class="text-center pt-3">
-              <h3 class="mb-3">ようこそ</h3>
-              <h5>
-                <p>stechaoはあなたの断捨離をサポートします。</p><br>
-                <p>あなたが手放したものを記録し、<br>なぜ手放したのか振り返ることができます。</p><br>
-                <p>また、それらを投稿として共有し、<br>自由に閲覧できます。</p><br>
+              <h4 class="mb-3">ようこそ</h4>
+                <p>stechaoはあなたの断捨離を<br>サポートします。<br>
+                <p>あなたが手放したものを記録し、<br>なぜ手放したのか<br>振り返ることができます。<br>
+                <p>また、<br>それらを投稿として共有し、<br>自由に閲覧できます。<br>
                 <p>今すぐ始めましょう！</p>
-              </h5>
             </div>
             <div class="row justify-content-center align-items-center">
               <%= link_to "マイページへ", user_path(current_user), class: "btn btn-success my-2" %>
@@ -25,7 +23,7 @@
           </div>
         <% else %>
           <!--ログインしてない時はログイン画面-->
-          <div class="top-bg-white-transparent rounded-lg bg-white border p-5">
+          <div class="top-bg-white-transparent rounded-lg bg-white border p-3">
             <div class="row justify-content-center align-items-center">
               <%= image_tag 'stechao-logo.png', size: '180x45' %>
             </div>

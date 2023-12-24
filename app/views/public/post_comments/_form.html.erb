@@ -1,4 +1,4 @@
-<%= form_with model: [posts, post_comment], local: false do |f| %>
+<%= form_with model: [post, post_comment], local: false do |f| %>
 <div class="form-group">
   <%= f.text_area :comment, rows: "5", size: "70", placeholder: "コメントする（500字以内）", class: "form-control", id: "comment_textarea" %>
 </div>
