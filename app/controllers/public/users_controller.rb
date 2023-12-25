@@ -4,12 +4,18 @@ class Public::UsersController < ApplicationController
   # sorted_by(params)は投稿並び替え機能(app/models/concerns/sortable.rbとモデルに記載)
 
   def index
-    @users = User.all
+    # 有効なユーザの投稿だけ表示
+    @users = User.where(is_active: true)
   end
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.sorted_by(params)
+    if !@user.is_active
+      flash[:error] = "アクセスが無効です。"
+      redirect_to posts_path
+    else
+      @posts = @user.posts.sorted_by(params)
+    end
   end
 
   def edit
@@ -33,7 +39,10 @@ class Public::UsersController < ApplicationController
     # favoritesテーブルから@user.idが一致するレコードを取得し、その中からpost_idカラムだけ取得
     favorites= Favorite.where(user_id: @user.id).pluck(:post_id)
     # 取得したpost_idを使ってuserがお気に入りした投稿を見つける
-    @posts = Post.where(id: favorites).sorted_by(params)
+    @posts = Post.where(id: favorites)
+    # 有効なユーザの投稿だけ表示
+    active_user_ids = User.where(is_active: true).pluck(:id)
+    @posts = @posts.where(user_id: active_user_ids).sorted_by(params)
   end
 
   def withdraw
