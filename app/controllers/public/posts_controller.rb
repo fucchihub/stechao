@@ -14,7 +14,7 @@ class Public::PostsController < ApplicationController
       flash[:success] = "投稿しました。"
       redirect_to post_path(@post)
     else
-      flash[:error] = "投稿に失敗しました。"
+      flash[:alert] = "投稿に失敗しました。"
       render :new
     end
   end
@@ -56,7 +56,7 @@ class Public::PostsController < ApplicationController
       flash[:success] = "投稿内容を変更しました。"
       redirect_to post_path(@post)
     else
-      flash[:error] = "変更に失敗しました。"
+      flash[:alert] = "変更に失敗しました。"
       render :edit
     end
   end

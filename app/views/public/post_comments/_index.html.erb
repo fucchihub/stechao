@@ -1,5 +1,5 @@
 <% post.post_comments.each do |post_comment| %>
-  <!--コメントしたユーザが退会済みかつ現在のURLにadminを含まない場合-->
+  <!--コメントしたユーザが退会済みかつ現在のURLにadminを含まない場合、コメントを表示しない-->
   <% if !post_comment.user.is_active && !request.path.include?("admin") %>
     <div class="pale-border-bottom row align-items-center px-3 py-2 mb-1">
       <div class="offset-md-2 col-md-10">
@@ -10,7 +10,9 @@
     <div class="pale-border-bottom row justify-content-center align-items-center py-2 mb-1">
     <!--コメントしたユーザのプロフィール画像-->
     <div class="col-md-2">
-      <%= image_tag post_comment.user.get_profile_image(50,50), class: "rounded-circle shadow" %>
+      <%= link_to user_path(post_comment.user.id) do %>
+        <%= image_tag post_comment.user.get_profile_image(50,50), class: "rounded-circle shadow link-image-hover-transparent" %>
+      <% end %>
     </div>
     <div class="col-md-10">
       <!--コメントした日付-->
