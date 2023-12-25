@@ -9,8 +9,11 @@ class Public::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    if !@user.is_active
+    @user = User.find_by(id: params[:id])
+    if @user.nil?
+      flash[:error] = "ページが存在しません。"
+      redirect_to posts_path
+    elsif !@user.is_active
       flash[:error] = "アクセスが無効です。"
       redirect_to posts_path
     else
@@ -19,7 +22,14 @@ class Public::UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
+    if @user.nil?
+      flash[:error] = "ページが存在しません。"
+      redirect_to posts_path
+    elsif @user != current_user
+      flash[:error] = "禁止された操作です。"
+      redirect_to posts_path
+    end
   end
 
   def update

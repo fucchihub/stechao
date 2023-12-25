@@ -1,31 +1,31 @@
 <!--管理者側／全ユーザの一覧画面-->
 <div class='container py-5'>
   <div class='row'>
-    <div class="col-sm-12 col-md-8 col-lg-8 px-sm-0 mx-auto">
+    <div class="col-sm-12 col-md-8 col-lg-6 px-sm-0 mx-auto">
 
       <h4 class="text-center mx-auto mb-4">ユーザーリスト</h4>
 
       <% @users.each do |user| %>
         <%= link_to admin_user_path(user) do %>
-          <div class="index-table-row row justify-content-center align-items-center border-bottom py-4">
-            <div class="col-md-1 d-flex justify-content-center align-items-center py-2">
+          <div class="index-table-row row justify-content-center align-items-center border-bottom py-4 px-2">
+            <div class="col-1 col-sm-2 col-md-2 py-2 px-0 px-sm-3 d-flex justify-content-center">
               <%= user.id %>
             </div>
 
-            <div class="col-md-2 d-flex justify-content-center align-items-center py-2">
-              <%= image_tag user.get_profile_image(80,80), class: "rounded-circle shadow" %>
+            <div class="col-3 col-sm-3 col-md-3 py-2 px-0 px-sm-3 d-flex justify-content-center">
+              <%= image_tag user.get_profile_image(70,70), class: "rounded-circle shadow" %>
             </div>
 
-            <div class="col-md-7 py-2">
-              <div class="row justify-content-center align-items-center text-break">
-                <strong><%= user.name.truncate(15) %></strong>
+            <div class="col-6 col-sm-5 col-md-5 py-2">
+              <div class="row justify-content-center align-items-center text-break px-0 px-sm-3">
+                <strong><%= user.name.truncate(11) %></strong>
               </div>
-              <div class="row justify-content-center align-items-center text-break">
-                <%= user.email.truncate(25) %>
+              <div class="row justify-content-center align-items-center text-break px-0 px-sm-3">
+                <%= user.email.truncate(20) %>
               </div>
             </div>
 
-            <div class="col-md-2 <%= user.is_active ? 'text-success' : 'text-muted' %> d-flex justify-content-center align-items-center py-2">
+            <div class="<%= user.is_active ? 'text-success' : 'text-muted' %> col-2 col-sm-2 col-md-2 py-2 px-0 px-sm-3 d-flex justify-content-center">
               <strong><%= user.is_active ? '有効' : '退会' %></strong>
             </div>
           </div>

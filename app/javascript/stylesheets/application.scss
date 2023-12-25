@@ -1,7 +1,7 @@
 $info: #2a83a2; //はなあさぎ（青系）
 $success: #54917f;// アンティークグリーン
 $warning: #d9a62e;// はじぞめ（黄系）
-$danger: #941f57; //クラレット（赤系）
+$danger: #942343; //ガーネット（赤系）
 $dark: #4e454a;//チャコールグレイ
 
 @import '~bootstrap/scss/bootstrap';
@@ -23,7 +23,7 @@ a {
 }
 
 a:hover {
-  color: #941f57; //クラレット（赤系）
+  color: #942343; //ガーネット（赤系）
   text-decoration: none;
 }
 
@@ -51,7 +51,7 @@ a:hover {
   min-height: 200px;
 }
 
-// ユーザ一覧画面用
+// 一覧画面用
 .index-table-row {
   min-height: 150px;
 }
@@ -59,7 +59,7 @@ a:hover {
   background-color: #f8f9fa;
 }
 
-// 投稿詳細画面の薄い線
+// 薄い線
 .pale-border-bottom {
   border-bottom: 2px solid #f8f9fa;
 }

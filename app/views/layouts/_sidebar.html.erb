@@ -10,15 +10,17 @@
 <!--サイドバー-->
 <aside id="sidebar" class="shadow">
   <nav id="global-nav" class="pb-5">
-  	<%= link_to root_path, class: "link-image-hover-transparent" do %>
-    	<%= image_tag 'stechao-logo.png', size: '200x50' %>
+    <%= link_to root_path, class: "link-image-hover-transparent" do %>
+      <%= image_tag 'stechao-logo.png', size: '200x50' %>
     <% end %>
     <ul>
+      <!--管理者がログイン中かつ現在のURLにadminを含む場合-->
       <% if admin_signed_in? && request.path.include?("admin") %>
         <li><%= link_to "ユーザーリスト", admin_users_path %></li>
         <li><%= link_to "投稿リスト", admin_top_path %></li>
         <li><%= link_to "コメントリスト", admin_post_comments_path %></li>
         <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+      <!--ユーザがログイン中かつ現在のURLにadminを含まない場合-->
       <% elsif user_signed_in? && !request.path.include?("admin") %>
         <li>
           <%= link_to user_path(current_user), class: "py-1 py-sm-3" do %>
@@ -56,6 +58,7 @@
             <i class="fas fa-right-from-bracket"></i> ログアウト
           <% end %>
         </li>
+      <!--ログインしてない場合-->
       <% else %>
         <li>
           <%= link_to new_user_registration_path do %>
@@ -73,166 +76,167 @@
   </nav>
 </aside>
 
+<!--サイドバー用-->
 <style>
 * {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 *, *:before, *:after {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html,body {
-	height: 100%;
+  height: 100%;
 }
 body {
-	-webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 #sidebar {
   display: none;
-	font-size: 16px;
-	padding-top: 50px;
-	width: 260px;
-	height: 100%;
-	position: fixed;
-	background: #fff;
-	text-align: center;
+  font-size: 16px;
+  padding-top: 50px;
+  width: 260px;
+  height: 100%;
+  position: fixed;
+  background: #fff;
+  text-align: center;
 }
 
 #global-nav ul {
-	list-style: none;
-	margin-left: 0;
+  list-style: none;
+  margin-left: 0;
 }
 #global-nav > ul > li {
-	position: relative;
+  position: relative;
 }
 
 #global-nav a {
-	display: block;
-	padding: 15px 0;
-	-moz-transition: background-color .3s linear;
-	-webkit-transition: background-color .3s linear;
-	transition: background-color .3s linear;
+  display: block;
+  padding: 15px 0;
+  -moz-transition: background-color .3s linear;
+  -webkit-transition: background-color .3s linear;
+  transition: background-color .3s linear;
 }
 
 #nav-toggle {
-	display: block;
-	position: fixed;
-	top: 15px;
-	left: 15px;
-	height: 32px;
+  display: block;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  height: 32px;
 }
 #nav-toggle > div {
-	position: relative;
-	width: 32px;
+  position: relative;
+  width: 32px;
 }
 #nav-toggle span {
-	width: 100%;
-	height: 2px;
-	left: 0;
-	display: block;
-	background: #033560;
-	position: absolute;
-	-webkit-transition: .35s ease-in-out;
-	-moz-transition: .35s ease-in-out;
-	transition: .35s ease-in-out;
+  width: 100%;
+  height: 2px;
+  left: 0;
+  display: block;
+  background: #033560;
+  position: absolute;
+  -webkit-transition: .35s ease-in-out;
+  -moz-transition: .35s ease-in-out;
+  transition: .35s ease-in-out;
 }
 
 #nav-toggle span:nth-child(1) {
-	top: 0;
+  top: 0;
 }
 #nav-toggle span:nth-child(2) {
-	top: 11px;
+  top: 11px;
 }
 #nav-toggle span:nth-child(3) {
-	top: 22px;
+  top: 22px;
 }
 
 
 #overlay {
-	display: none;
-	position: fixed;
-	background: rgba(248,249,250,0.6);
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+  display: none;
+  position: fixed;
+  background: rgba(248,249,250,0.6);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
-	#sidebar {
-		display: block;
-		position: fixed;
-		left: -300px;
-		top: 0;
-		height: 100%;
-		width: 300px;
-		background: #fff;
-		-webkit-transition: .35s ease-in-out;
-		transition: .35s ease-in-out;
-	}
+  #sidebar {
+    display: block;
+    position: fixed;
+    left: -300px;
+    top: 0;
+    height: 100%;
+    width: 300px;
+    background: #fff;
+    -webkit-transition: .35s ease-in-out;
+    transition: .35s ease-in-out;
+  }
 
-	#nav-toggle {
-		display: block;
-	}
+  #nav-toggle {
+    display: block;
+  }
 
-	/* nav open */
-	.open {
-		overflow: hidden;
-	}
-	.open #overlay {
-		display: block;
-	}
-	.open #sidebar  {
-		-webkit-transform: translate3d(300px,0,0);
-		transform: translate3d(300px,0,0);
-	}
+  /* nav open */
+  .open {
+    overflow: hidden;
+  }
+  .open #overlay {
+    display: block;
+  }
+  .open #sidebar  {
+    -webkit-transform: translate3d(300px,0,0);
+    transform: translate3d(300px,0,0);
+  }
 
-	/* #nav-toggle close */
-	.open #nav-toggle span:nth-child(1) {
-		top: 11px;
-		-webkit-transform: rotate(45deg);
-		-moz-transform: rotate(45deg);
-		transform: rotate(45deg);
-	}
-	.open #nav-toggle span:nth-child(2) {
-		width: 0;
-		left: 50%;
-	}
-	.open #nav-toggle span:nth-child(3) {
-		top: 11px;
-		-webkit-transform: rotate(-45deg);
-		-moz-transform: rotate(-45deg);
-		transform: rotate(-45deg);
-	}
+  /* #nav-toggle close */
+  .open #nav-toggle span:nth-child(1) {
+    top: 11px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  .open #nav-toggle span:nth-child(2) {
+    width: 0;
+    left: 50%;
+  }
+  .open #nav-toggle span:nth-child(3) {
+    top: 11px;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
 
-	/* z-index */
-	#overlay {
-		z-index: 200;
-	}
-	#sidebar {
-		z-index: 300;
-	}
-	#nav-toggle {
-		z-index: 400;
-	}
+  /* z-index */
+  #overlay {
+    z-index: 200;
+  }
+  #sidebar {
+    z-index: 300;
+  }
+  #nav-toggle {
+    z-index: 400;
+  }
 
 
 @media screen and (max-width: 400px) {
-	#sidebar {
-		left: -200px;
-		width: 200px;
-		padding-top: 40px;
-	}
-	.open #sidebar  {
-		-webkit-transform: translate3d(200px,0,0);
-		transform: translate3d(200px,0,0);
-	}
+  #sidebar {
+    left: -200px;
+    width: 200px;
+    padding-top: 40px;
+  }
+  .open #sidebar  {
+    -webkit-transform: translate3d(200px,0,0);
+    transform: translate3d(200px,0,0);
+  }
 }
 </style>
 
