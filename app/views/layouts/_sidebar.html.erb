@@ -21,38 +21,38 @@
         <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
       <% elsif user_signed_in? && !request.path.include?("admin") %>
         <li>
-          <%= link_to user_path(current_user), class: "py-2 py-sm-3" do %>
+          <%= link_to user_path(current_user), class: "py-1 py-sm-3" do %>
             <%= image_tag current_user.get_profile_image(50,50), class: "rounded-circle shadow" %>
             マイページ
           <% end %>
         </li>
         <li>
-          <%= link_to new_post_path do %>
+          <%= link_to new_post_path, class: "pb-1 py-sm-3" do %>
             <i class="fas fa-paper-plane"></i> 新しい投稿
           <% end %>
         </li>
         <li>
-          <%= link_to posts_path do %>
+          <%= link_to posts_path, class: "pb-1 py-sm-3" do %>
             <i class="fas fa-images"></i> みんなの投稿
           <% end %>
         </li>
         <li>
-          <%= link_to favorites_user_path(current_user) do %>
+          <%= link_to favorites_user_path(current_user), class: "pb-1 py-sm-3" do %>
             <i class="fas fa-heart"></i> お気に入りリスト
           <% end %>
         </li>
         <li>
-          <%= link_to users_path do %>
+          <%= link_to users_path, class: "pb-1 py-sm-3" do %>
             <i class="fas fa-user-group"></i> ユーザーリスト
           <% end %>
         </li>
         <li>
-          <%= link_to edit_user_path(current_user) do %>
+          <%= link_to edit_user_path(current_user), class: "pb-1 py-sm-3" do %>
             <i class="fas fa-user-gear"></i> プロフィール編集
           <% end %>
         </li>
         <li>
-          <%= link_to destroy_user_session_path, method: :delete do %>
+          <%= link_to destroy_user_session_path, method: :delete, class: "pb-1 py-sm-3" do %>
             <i class="fas fa-right-from-bracket"></i> ログアウト
           <% end %>
         </li>

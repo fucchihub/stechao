@@ -1,7 +1,7 @@
 <!--ユーザ側／投稿詳細画面-->
 <div class='container py-5'>
   <div class='row'>
-    <div class="col-sm-12 col-md-8 col-lg-7 px-5 px-sm-0 mx-auto">
+    <div class="col-sm-12 col-md-8 col-lg-7 px-sm-0 mx-auto">
 
       <!--2099年12月16日(金)のような形で日付表示-->
       <h4 class="row justify-content-center align-items-center">
@@ -23,7 +23,7 @@
         <%= image_tag @post.get_image(300,300) %>
       </div>
 
-      <div class="pale-border-bottom row ml-1 mb-3">
+      <div class="pale-border-bottom d-flex justify-content-end px-2 mb-3">
         <!--お気に入りボタン-->
         <span class="fontawesome-button" id="favorite_btn_<%= @post.id %>">
           <%= render "public/favorites/btn", post: @post %>
@@ -51,14 +51,14 @@
       <!--コメント数-->
       <h5 id="comment_counter" class="border-top pt-3">
         <%= render "public/post_comments/counter", post: @post %>
-        コメント
+        <span>コメント</span>
       </h5>
       <!--コメント一覧-->
       <div id="comment_index">
         <%= render "public/post_comments/index", post: @post %>
       </div>
       <!--コメントフォーム-->
-      <div class="row justify-content-center align-items-center mt-5">
+      <div class="row justify-content-center align-items-center mt-5 mx-1">
         <%= render "public/post_comments/form", post: @post, post_comment: @post_comment %>
       </div>
 

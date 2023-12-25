@@ -6,7 +6,7 @@
         <div class="card-body p-1">
           <div class="card-text p-1 d-flex justify-content-between">
             <span>
-              <%= link_to user_path(post), class: "link-image-hover-transparent" do %>
+              <%= link_to user_path(post.user.id), class: "link-image-hover-transparent" do %>
                 <%= image_tag post.user.get_profile_image(35,35), class: "rounded-circle" %>
               <% end %>
             </span>

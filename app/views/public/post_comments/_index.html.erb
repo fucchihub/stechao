@@ -7,19 +7,19 @@
 
     <div class="col-md-10">
       <!--コメントした日付-->
-      <div class="row text-break">
+      <div class="row text-break px-3">
         <%= I18n.l(post_comment.created_at) %>
       </div>
       <!--コメントしたユーザ名-->
-      <div class="row text-break">
+      <div class="row text-break px-3">
         <strong><%= post_comment.user.name %></strong>
       </div>
       <!--コメント内容-->
-      <div class="row text-break">
+      <div class="row text-break px-3">
         <%= post_comment.comment %>
       </div>
 
-      <div class="row">
+      <div class="row px-3">
         <!--コメントがログインユーザーのものかつ現在のURLにadminが含まれてないなら、削除ボタン表示-->
         <!--または、管理者がログイン中かつ現在のURLにadminが含まれてるなら、削除ボタン表示-->
         <% if post_comment.user == current_user && !request.path.include?("admin") %>
