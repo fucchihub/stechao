@@ -13,10 +13,10 @@
             </div>
 
             <div class="col-sm">
-              <div class="row justify-content-center align-items-center text-break">
+              <div class="row justify-content-center align-items-center pt-2">
                 <strong><%= user.name.truncate(10) %></strong>
               </div>
-              <div class="row justify-content-center align-items-center text-break">
+              <div class="row justify-content-center align-items-center">
                 　投稿した数：<%= user.posts.pluck(:id).count %><br>
                 断捨離した数：<%= user.posts.pluck(:quantity).sum %>
               </div>

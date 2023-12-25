@@ -1,8 +1,8 @@
 <!--ユーザ側／トップページ-->
 <div id="top-background-image">
-  <div class='container py-5'>
+  <div class='container pt-5'>
     <div class='row'>
-      <div class="col-sm-6 col-md-6 col-lg-4 px-5 px-sm-0 mx-auto">
+      <div class="col-sm-7 col-md-6 col-lg-4 px-sm-0 px-md-3 mx-auto">
 
         <% if user_signed_in? %>
           <!--ログインしてる時はあいさつ文-->
@@ -10,11 +10,10 @@
             <div class="row justify-content-center align-items-center">
               <%= image_tag 'stechao-logo.png', size: '220x55' %>
             </div>
-            <div class="text-center pt-3">
-              <h4 class="mb-3">ようこそ</h4>
+            <div class="text-center mt-2">
                 <p>stechaoはあなたの断捨離を<br>サポートします。<br>
                 <p>あなたが手放したものを記録し、<br>なぜ手放したのか<br>振り返ることができます。<br>
-                <p>また、<br>それらを投稿として共有し、<br>自由に閲覧できます。<br>
+                <p>それらは投稿として共有され、<br>自由に閲覧できます。<br>
                 <p>今すぐ始めましょう！</p>
             </div>
             <div class="row justify-content-center align-items-center">
