@@ -1,4 +1,8 @@
 class Post < ApplicationRecord
+
+  # 投稿並び替え機能(sorted_by(params))をapp/models/concerns/sortable.rbから呼び出し。
+  include Sortable
+
   has_one_attached :image
 
   belongs_to :user
@@ -19,6 +23,7 @@ class Post < ApplicationRecord
     user.present? && favorites.exists?(user_id: user.id)
   end
 
+  # 投稿画像があればサイズ指定、なければノーイメージ画像を表示。
   def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/stechao-pale.jpg')
@@ -29,7 +34,7 @@ class Post < ApplicationRecord
 
   # 新しいpostが作成された後、キャプションからハッシュタグを抽出してHashtagモデルに関連付ける
   after_create do
-    #   新しく作成されたpostを取得
+    # 新しく作成されたpostを取得
     post = Post.find_by(id: self.id)
     # キャプションからハッシュタグ(#で始まり、その後に英数字や日本語が続く)を抽出して格納
     hashtags = self.caption.scan(/[#][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)

@@ -4,21 +4,26 @@
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
 
       <h4 class="text-center mx-auto mb-4">ユーザーリスト</h4>
-        <% @users.each do |user| %>
-          <%= link_to user_path(user) do %>
-            <div id="users-index-table" class="row justify-content-center align-items-center">
-              <span class="col-sm text-center mx-2">
-                <%= image_tag user.get_profile_image(100,100), class: "rounded-circle shadow" %>
-              </span>
-              <span class="col-sm text-center mx-2">
-                <%= user.name %>
-              </span>
-              <span class="col-sm text-center mx-2">
-                <i class="fas fa-play"></i> 投稿を見る
-              </span>
+
+      <% @users.each do |user| %>
+        <%= link_to user_path(user) do %>
+          <div class="index-table-row row justify-content-center align-items-center border-bottom py-4">
+            <div class="col-sm d-flex justify-content-center align-items-center">
+              <%= image_tag user.get_profile_image(80,80), class: "rounded-circle shadow" %>
             </div>
-          <% end %>
+
+            <div class="col-sm">
+              <div class="row justify-content-center align-items-center text-break">
+                <strong><%= user.name.truncate(10) %></strong>
+              </div>
+              <div class="row justify-content-center align-items-center text-break">
+                　投稿した数：<%= user.posts.pluck(:id).count %><br>
+                断捨離した数：<%= user.posts.pluck(:quantity).sum %>
+              </div>
+            </div>
+          </div>
         <% end %>
+      <% end %>
 
     </div>
   </div>

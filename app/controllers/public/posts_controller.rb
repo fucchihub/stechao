@@ -1,6 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_posts, only: [:index]
+
+  # sorted_by(params)は投稿並び替え機能(app/models/concerns/sortable.rbとモデルに記載)
 
   def new
     @post = Post.new
@@ -19,8 +20,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
-    set_posts
+    @posts = Post.sorted_by(params)
   end
 
   def show
@@ -51,37 +51,38 @@ class Public::PostsController < ApplicationController
     redirect_to user_path(current_user)
   end
 
+
   # ハッシュタグ検索機能(ハッシュタグのリンク押すと一覧表示)
   def hashtag
     @user = current_user
     # URLの:nameからハッシュタグの名前を取得
     @hashtag = Hashtag.find_by(name: params[:name])
-    @posts = @hashtag.posts
+    @posts = @hashtag.posts.sorted_by(params)
   end
+
 
   # 投稿を複数のキーワードで検索できる機能
   def search
-    if params[:keyword].nil?
-      flash[:error] = "キーワードを入力してください。"
+    if params[:keyword] == ""
+      flash[:error] = "検索キーワードを入力してください。"
       redirect_to request.referer
     end
-
-      # 検索フォームから送られてくるキーワードを空白で分割
-      split_keyword = params[:keyword].split(/[[:blank:]]+/)
-      # 変数の中身を初期化
-      @posts = []
-      # 分割したキーワードごとに検索
-      split_keyword.each do |keyword|
-        # キーワードが空白の場合は検索しないでスキップ(空白で検索すると全レコードを取得してしまう)
-        next if keyword == ""
-        # キーワードが#で始まる場合は#を取り除く(文字列の2文字目から最後までを取り出す)
-        keyword = keyword.starts_with?('#') ? keyword[1..-1] : keyword
-        # キーワードごとに部分一致検索をし、検索結果のpostを累積して格納（nameとcaption両方から検索）
-        @posts += Post.where('name LIKE ? OR caption LIKE ?', "%#{keyword}%", "%#{keyword}%")
-      end
-      # 重複したpostを削除する
-      @posts.uniq!
+    # 検索フォームから送られてくるキーワードを空白で分割
+    split_keyword = params[:keyword].split(/[[:blank:]]+/)
+    # 変数の中身を空にする
+    @posts = Post.none
+    split_keyword.each do |keyword|
+      # キーワードが空白の場合は検索しないでスキップ(空白で検索すると全レコードを取得してしまう)
+      next if keyword == ""
+      # キーワードが#で始まる場合は#を取り除く(文字列の2文字目から最後までを取り出す)
+      keyword = keyword.starts_with?('#') ? keyword[1..-1] : keyword
+      # 「nameとcaption両方からキーワードで部分一致検索」という条件で探したpostを@postsに結合
+      @posts = @posts.or(Post.where('name LIKE :keyword OR caption LIKE :keyword', keyword: "%#{keyword}%"))
+    end
+    # 重複したpostを削除する(並び替えもする)
+    @posts = @posts.distinct.sorted_by(params)
   end
+
 
   # 投稿を日時で絞り込む機能
   def filter_by_date
@@ -90,28 +91,27 @@ class Public::PostsController < ApplicationController
     # params[:search_type]が存在する場合はその値を使用し、存在しない場合はデフォルトで "created_at" を設定する
     @search_type = params[:search_type] || "created_at"
 
-    @start_date = params[:start_date].to_date
-    @end_date = params[:end_date].to_date
+    # if params[:start_date].present? && !params[:start_date].is_a?(Date)
+    #   @start_date = params[:start_date].to_date
+    # else
+    #   @start_date = params[:start_date]
+    # end
+    # if params[:end_date].present? && !params[:end_date].is_a?(Date)
+    #   @end_date = params[:end_date].to_date
+    # else
+    #   @end_date = params[:end_date]
+    # end
+    
+    @start_date = params[:start_date].presence && !params[:start_date].is_a?(Date) ? params[:start_date].to_date : params[:start_date]
+    @end_date = params[:end_date].presence && !params[:end_date].is_a?(Date) ? params[:end_date].to_date : params[:end_date]
 
-    @filtered_posts = if @search_type == "created_at"
-                        @posts.where(created_at: @start_date.beginning_of_day..@end_date.end_of_day)
-                      else
-                        @posts.where(updated_at: @start_date.beginning_of_day..@end_date.end_of_day)
-                      end
-  end
 
-  # 投稿を新しい順、古い順、お気に入りが多い順で並び替える機能
-  def set_posts
-    @posts = case
-             when params[:latest]
-               @posts.order(created_at: :desc) if @posts.present?
-             when params[:old]
-               @posts.order(created_at: :asc) if @posts.present?
-             when params[:most_favorites]
-               @posts.joins(:favorites).group('posts.id').order('COUNT(favorites.id) DESC') if @posts.present?
+    @posts = if @search_type == "created_at"
+               @posts.where(created_at: @start_date.beginning_of_day..@end_date.end_of_day)
              else
-               @posts
+               @posts.where(updated_at: @start_date.beginning_of_day..@end_date.end_of_day)
              end
+    @posts = @posts.sorted_by(params)
   end
 
   private

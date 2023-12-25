@@ -51,12 +51,12 @@ a:hover {
   min-height: 200px;
 }
 
-// ユーザ一覧画面のテーブル用
-#users-index-table {
-  height: 150px;
+// ユーザ一覧画面用
+.index-table-row {
+  min-height: 150px;
 }
-#users-index-table:hover {
-  background-color:#f8f9fa;
+.index-table-row:hover {
+  background-color: #f8f9fa;
 }
 
 // 投稿詳細画面の薄い線
@@ -76,13 +76,7 @@ footer {
   width: 100%;
 }
 
-// .flash-message-position {
-//   position: absolute;
-//   top: 0;
-//   width: 100%;
-//   z-index: 2;
-// }
-
+// フォームのnumber_fieldのレイアウト崩れを防ぐ
 .field_with_errors{
   width: 100%;
 }
