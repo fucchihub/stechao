@@ -44,7 +44,7 @@ class Public::SessionsController < Devise::SessionsController
     if user.is_active
       return unless user.valid_password?(params[:user][:password])
     else
-      flash[:error] = 'このアカウントは退会済みです。別のアカウントでログインまたは新規登録をお願いします。'
+      flash[:error] = '別のアカウントでログインまたは新規登録をお願いします。'
       redirect_to new_user_session_path
     end
   end

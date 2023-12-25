@@ -20,12 +20,19 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.sorted_by(params)
+    # 有効なユーザの投稿だけ表示
+    active_user_ids = User.where(is_active: true).pluck(:id)
+    @posts = Post.where(user_id: active_user_ids).sorted_by(params)
   end
 
   def show
     @post = Post.find(params[:id])
-    @post_comment = PostComment.new
+    if !@post.user.is_active
+      flash[:error] = "アクセスが無効です。"
+      redirect_to posts_path
+    else
+      @post_comment = PostComment.new
+    end
   end
 
   def edit
@@ -57,7 +64,9 @@ class Public::PostsController < ApplicationController
     @user = current_user
     # URLの:nameからハッシュタグの名前を取得
     @hashtag = Hashtag.find_by(name: params[:name])
-    @posts = @hashtag.posts.sorted_by(params)
+    # 有効なユーザの投稿だけ表示
+    active_user_ids = User.where(is_active: true).pluck(:id)
+    @posts = @hashtag.posts.where(user_id: active_user_ids).sorted_by(params)
   end
 
 
@@ -79,8 +88,11 @@ class Public::PostsController < ApplicationController
       # 「nameとcaption両方からキーワードで部分一致検索」という条件で探したpostを@postsに結合
       @posts = @posts.or(Post.where('name LIKE :keyword OR caption LIKE :keyword', keyword: "%#{keyword}%"))
     end
-    # 重複したpostを削除する(並び替えもする)
-    @posts = @posts.distinct.sorted_by(params)
+    # 重複したpostを削除する
+    @posts = @posts.distinct
+     # 有効なユーザの投稿だけ表示
+    active_user_ids = User.where(is_active: true).pluck(:id)
+    @posts = @posts.where(user_id: active_user_ids).sorted_by(params)
   end
 
 
@@ -91,27 +103,19 @@ class Public::PostsController < ApplicationController
     # params[:search_type]が存在する場合はその値を使用し、存在しない場合はデフォルトで "created_at" を設定する
     @search_type = params[:search_type] || "created_at"
 
-    # if params[:start_date].present? && !params[:start_date].is_a?(Date)
-    #   @start_date = params[:start_date].to_date
-    # else
-    #   @start_date = params[:start_date]
-    # end
-    # if params[:end_date].present? && !params[:end_date].is_a?(Date)
-    #   @end_date = params[:end_date].to_date
-    # else
-    #   @end_date = params[:end_date]
-    # end
-    
+    # params[:start_date(end_date)]が存在してかつDate型になっていないならDate型にし、そうでないならそのままparams[]のデータを使う
     @start_date = params[:start_date].presence && !params[:start_date].is_a?(Date) ? params[:start_date].to_date : params[:start_date]
     @end_date = params[:end_date].presence && !params[:end_date].is_a?(Date) ? params[:end_date].to_date : params[:end_date]
-
 
     @posts = if @search_type == "created_at"
                @posts.where(created_at: @start_date.beginning_of_day..@end_date.end_of_day)
              else
                @posts.where(updated_at: @start_date.beginning_of_day..@end_date.end_of_day)
              end
-    @posts = @posts.sorted_by(params)
+
+     # 有効なユーザの投稿だけ表示
+    active_user_ids = User.where(is_active: true).pluck(:id)
+    @posts = @posts.where(user_id: active_user_ids).sorted_by(params)
   end
 
   private

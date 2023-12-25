@@ -11,7 +11,7 @@
 <aside id="sidebar" class="shadow">
   <nav id="global-nav">
   	<%= link_to root_path, class: "link-image-hover-transparent" do %>
-    	<%= image_tag 'stechao-logo.png', size: '200x50' , class: "mb-4" %>
+    	<%= image_tag 'stechao-logo.png', size: '200x50' , class: "mb-2" %>
     <% end %>
     <ul>
       <% if admin_signed_in? && request.path.include?("admin") %>
@@ -95,7 +95,7 @@ body {
 #sidebar {
   display: none;
 	font-size: 17px;
-	padding-top: 90px;
+	padding-top: 70px;
 	width: 260px;
 	height: 100%;
 	position: fixed;
