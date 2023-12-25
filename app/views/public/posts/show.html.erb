@@ -20,23 +20,30 @@
 
       <!--投稿画像-->
       <div class="d-flex justify-content-center align-items-center my-3">
-        <%= image_tag @post.get_image(300,300) %>
+        <%= image_tag @post.get_image(300,300), class: "shadow-sm" %>
       </div>
 
-      <div class="pale-border-bottom d-flex justify-content-end px-2 mb-3">
-        <!--お気に入りボタン-->
-        <span class="fontawesome-button" id="favorite_btn_<%= @post.id %>">
-          <%= render "public/favorites/btn", post: @post %>
-        </span>
-        <!--投稿がログインユーザーのものなら編集・削除ボタン表示-->
-        <% if @post.user == current_user %>
-          <%= link_to edit_post_path(@post), class: "text-success fontawesome-button" do %>
-            <i class="fas fa-pen"></i>
+      <div class="pale-border-bottom d-flex justify-content-between px-2 mb-3">
+        <!--投稿したユーザの画像と名前-->
+        <div class="d-flex justify-content-center align-items-center">
+          <%= image_tag @post.user.get_profile_image(50,50), class: "rounded-circle p-2" %>
+          <%= @post.user.name %>
+        </div>
+        <div class="d-flex justify-content-end align-items-end">
+          <!--お気に入りボタン-->
+          <span id="favorite_btn_<%= @post.id %>" class="fontawesome-button">
+            <%= render "public/favorites/btn", post: @post %>
+          </span>
+          <!--投稿がログインユーザーのものなら編集・削除ボタン表示-->
+          <% if @post.user == current_user %>
+            <%= link_to edit_post_path(@post), class: "text-success fontawesome-button" do %>
+              <i class="fas fa-pen"></i>
+            <% end %>
+            <%= link_to post_path(@post), method: :delete, data: { confirm: "この投稿を本当に削除しますか？" }, class: "text-dark fontawesome-button" do  %>
+              <i class="fas fa-trash-can"></i>
+            <% end %>
           <% end %>
-          <%= link_to post_path(@post), method: :delete, data: { confirm: "「#{@post.name.truncate(10)}」を本当に削除しますか？" }, class: "text-dark fontawesome-button" do  %>
-            <i class="fas fa-trash-can"></i>
-          <% end %>
-        <% end %>
+        </div>
       </div>
 
       <!--投稿名-->

@@ -26,8 +26,11 @@ class Public::PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
-    if !@post.user.is_active
+    @post = Post.find_by(id: params[:id])
+    if @post.nil?
+      flash[:error] = "ページが存在しません。"
+      redirect_to posts_path
+    elsif !@post.user.is_active
       flash[:error] = "アクセスが無効です。"
       redirect_to posts_path
     else
@@ -36,7 +39,14 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = Post.find_by(id: params[:id])
+    if @post.nil?
+      flash[:error] = "ページが存在しません。"
+      redirect_to posts_path
+    elsif @post.user != current_user
+      flash[:error] = "禁止された操作です。"
+      redirect_to posts_path
+    end
   end
 
   # モデル内にbefore_updateコールバックあり(ハッシュタグを更新するため)
