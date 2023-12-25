@@ -9,9 +9,9 @@
 
 <!--サイドバー-->
 <aside id="sidebar" class="shadow">
-  <nav id="global-nav">
+  <nav id="global-nav" class="pb-5">
   	<%= link_to root_path, class: "link-image-hover-transparent" do %>
-    	<%= image_tag 'stechao-logo.png', size: '200x50' , class: "mb-2" %>
+    	<%= image_tag 'stechao-logo.png', size: '200x50' %>
     <% end %>
     <ul>
       <% if admin_signed_in? && request.path.include?("admin") %>
@@ -21,7 +21,7 @@
         <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
       <% elsif user_signed_in? && !request.path.include?("admin") %>
         <li>
-          <%= link_to user_path(current_user) do %>
+          <%= link_to user_path(current_user), class: "py-2 py-sm-3" do %>
             <%= image_tag current_user.get_profile_image(50,50), class: "rounded-circle shadow" %>
             マイページ
           <% end %>
@@ -94,8 +94,8 @@ body {
 
 #sidebar {
   display: none;
-	font-size: 17px;
-	padding-top: 70px;
+	font-size: 16px;
+	padding-top: 50px;
 	width: 260px;
 	height: 100%;
 	position: fixed;
@@ -227,7 +227,7 @@ body {
 	#sidebar {
 		left: -200px;
 		width: 200px;
-		padding-top: 60px;
+		padding-top: 40px;
 	}
 	.open #sidebar  {
 		-webkit-transform: translate3d(200px,0,0);
