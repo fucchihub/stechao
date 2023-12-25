@@ -1,6 +1,7 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_posts, only: [:show]
+
+  # sorted_by(params)は投稿並び替え機能(app/models/concerns/sortable.rbとモデルに記載)
 
   def index
     @users = User.all
@@ -8,8 +9,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts
-    set_posts
+    @posts = @user.posts.sorted_by(params)
   end
 
   def edit
@@ -33,7 +33,7 @@ class Public::UsersController < ApplicationController
     # favoritesテーブルから@user.idが一致するレコードを取得し、その中からpost_idカラムだけ取得
     favorites= Favorite.where(user_id: @user.id).pluck(:post_id)
     # 取得したpost_idを使ってuserがお気に入りした投稿を見つける
-    @posts = Post.find(favorites)
+    @posts = Post.where(id: favorites).sorted_by(params)
   end
 
   def withdraw
@@ -44,20 +44,6 @@ class Public::UsersController < ApplicationController
   end
 
   private
-  # 投稿を新しい順、古い順、お気に入りが多い順で並び替える機能
-  def set_posts
-    @posts = case
-             when params[:latest]
-               @posts.order(created_at: :desc) if @posts.present?
-             when params[:old]
-               @posts.order(created_at: :asc) if @posts.present?
-             when params[:most_favorites]
-               @posts.joins(:favorites).group('posts.id').order('COUNT(favorites.id) DESC') if @posts.present?
-             else
-               @posts
-             end
-  end
-
 
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction, :email)

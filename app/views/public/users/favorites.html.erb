@@ -5,6 +5,15 @@
 
       <h4 class="text-center mx-auto mb-4"><%= current_user.name %>のお気に入り</h4>
 
+      <!--投稿並び替えボタン-->
+      <div class="text-center mx-auto pb-3 mb-4">
+        <%= link_to '新しい順', favorites_user_path(current_user, latest: "true") %>
+        | <%= link_to '古い順', favorites_user_path(current_user, old: "true") %>
+        | <%= link_to favorites_user_path(current_user, most_favorites: "true") do %>
+            <i class="fas fa-heart"></i>が多い順
+          <% end %>
+      </div>
+
       <!--お気に入り投稿一覧-->
       <%= render "public/posts/index", posts: @posts %>
 
