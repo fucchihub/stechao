@@ -31,9 +31,15 @@
       </div>
 
       <!--投稿したユーザの画像と名前-->
-      <div class="pale-border-bottom d-flex align-items-center px-2 mb-3">
-        <%= image_tag @post.user.get_profile_image(50,50), class: "rounded-circle p-2" %>
-        <%= @post.user.name.truncate(10) %>
+      <div class="row px-3 pb-3">
+        <div class="col-2 col-sm-1 d-flex justify-content-center align-items-center">
+          <%= link_to admin_user_path(@post.user.id) do %>
+            <%= image_tag @post.user.get_profile_image(50,50), class: "rounded-circle link-image-hover-transparent" %>
+          <% end %>
+        </div>
+        <div class="col-10 col-sm-11 pr-0 pl-1 pl-sm-2 d-flex align-items-center">
+          <%= @post.user.name.truncate(17) %>
+        </div>
       </div>
 
       <!--投稿名-->
