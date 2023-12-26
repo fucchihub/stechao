@@ -6,7 +6,7 @@
       <div class="rounded-lg border p-3">
         <h5 class="mb-4">管理者ログイン</h5>
         <%= form_with model: resource, url: admin_session_path, method: :post do |f| %>
-          <%= render "public/shared/error_messages", resource: resource %>
+          <%= render "admin/shared/error_messages", resource: resource %>
 
           <div class="form-group">
             <%= f.label :name, "名前" %><br>

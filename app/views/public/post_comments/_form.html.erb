@@ -1,6 +1,6 @@
 <%= form_with model: [post, post_comment], local: false do |f| %>
-<div class="form-group">
-  <%= f.text_area :comment, size: "70", placeholder: "コメントする（500字以内）", class: "form-control", id: "comment_textarea" %>
-</div>
+  <div class="form-group">
+    <%= f.text_area :comment, size: "70", placeholder: "コメントする（500字以内）", class: "form-control", id: "comment_textarea" %>
+  </div>
   <%= f.submit "送信する", class: "btn btn-success" %>
 <% end %>

@@ -6,7 +6,7 @@
       <div class="rounded-lg border p-2 p-sm-3">
         <h5 class="mb-4">ユーザー編集</h5>
         <%= form_with model: @user, url: admin_user_path do |f| %>
-        <%= render "admin/shared/error_messages", resource: @user %>
+          <%= render "admin/shared/error_messages", resource: @user %>
 
           <div class="form-group">
             <%= f.label :profile_image, "プロフィール画像" %><br>
