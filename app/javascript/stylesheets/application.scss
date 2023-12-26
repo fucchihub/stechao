@@ -1,0 +1,82 @@
+$info: #2a83a2; //はなあさぎ（青系）
+$success: #54917f;// アンティークグリーン
+$warning: #d9a62e;// はじぞめ（黄系）
+$danger: #942343; //ガーネット（赤系）
+$dark: #4e454a;//チャコールグレイ
+
+@import '~bootstrap/scss/bootstrap';
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color: #4e454a; //チャコールグレイ
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+}
+
+a {
+  color: #2a83a2; //はなあさぎ（青系）
+}
+
+a:hover {
+  color: #942343; //ガーネット（赤系）
+  text-decoration: none;
+}
+
+// リンクになってる画像をホバー時に透けさせる
+.link-image-hover-transparent:hover {
+  opacity: 0.7;
+}
+
+// トップページ背景画像
+#top-background-image {
+  background: url('../images/top-background.jpg');
+  background-size: cover;
+  height: 100vh;
+  background-position: center;
+  opacity: 0.8;
+}
+
+// トップページのbg-white適用されてる要素を透けさせる
+.top-bg-white-transparent {
+  opacity: 0.9;
+}
+
+// ユーザのプロフィール用
+#users-profile-content-height {
+  min-height: 200px;
+}
+
+// 一覧画面用
+.index-table-row {
+  min-height: 150px;
+}
+.index-table-row:hover {
+  background-color: #f8f9fa;
+}
+
+// 薄い線
+.pale-border-bottom {
+  border-bottom: 2px solid #f8f9fa;
+}
+// 投稿詳細画面のアイコンボタン
+.fontawesome-button {
+  font-size: 25px;
+  margin: 0 5px;
+}
+
+// フッター
+footer {
+  position: sticky;
+  top: 100vh;
+  width: 100%;
+}
+
+// フォームのnumber_fieldのレイアウト崩れを防ぐ
+.field_with_errors{
+  width: 100%;
+}

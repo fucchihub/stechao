@@ -1,0 +1,41 @@
+<!--ユーザ側／ユーザ詳細画面（マイページ）-->
+<div class='container py-5'>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-9 px-sm-0 mx-auto">
+
+      <!--プロフィール-->
+      <%= render "public/users/profile", user: @user, posts: @posts %>
+
+      <!--カレンダー-->
+      <% if @user == current_user %>
+        <div class="border-bottom pb-3 mb-4">
+          <%= month_calendar events: @posts do |date, post| %>
+            <%= date.day %>
+            <div class="calendar_event">
+              <% if post.present? %>
+                <span class="text-info"><i class="fas fa-paper-plane"></i><%= post.count %></span>
+                <span class="text-warning"><i class="fas fa-star"></i><%= post.pluck(:quantity).sum %></span>
+              <% end %>
+            </div>
+          <% end %>
+          <p><i class="fas fa-paper-plane text-info"></i> 投稿した数／<i class="fas fa-star text-warning"></i> 断捨離した数</p>
+        </div>
+        <!--投稿を日付指定で絞り込む検索フォーム-->
+        <%= render "public/posts/filter_by_date_form" %>
+      <% end %>
+
+      <!--投稿並び替えボタン-->
+      <div class="text-center mx-auto py-4 mb-4">
+        <%= link_to '新しい順', user_path(@user, latest: "true") %>
+        | <%= link_to '古い順', user_path(@user, old: "true") %>
+        | <%= link_to user_path(@user, most_favorites: "true") do %>
+            <i class="fas fa-heart"></i>が多い順
+          <% end %>
+      </div>
+
+      <!--ユーザ自身の投稿一覧-->
+      <%= render "public/users/own_index", posts: @posts %>
+
+    </div>
+  </div>
+</div>

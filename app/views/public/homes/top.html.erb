@@ -1,0 +1,55 @@
+<!--ユーザ側／トップページ-->
+<div id="top-background-image">
+  <div class='container pt-5'>
+    <div class='row'>
+      <div class="col-sm-7 col-md-6 col-lg-4 px-sm-0 px-md-3 mx-auto">
+
+        <% if user_signed_in? %>
+          <!--ログインしてる時はあいさつ文-->
+          <div class="top-bg-white-transparent bg-white rounded-lg p-3">
+            <div class="row justify-content-center align-items-center">
+              <%= image_tag 'stechao-logo.png', size: '220x55' %>
+            </div>
+            <div class="text-center mt-2">
+                <p>stechaoはあなたの断捨離を<br>サポートします。<br>
+                <p>あなたが手放したものを記録し、<br>なぜ手放したのか<br>振り返ることができます。<br>
+                <p>それらは投稿として共有され、<br>自由に閲覧できます。<br>
+                <p>今すぐ始めましょう！</p>
+            </div>
+            <div class="row justify-content-center align-items-center">
+              <%= link_to "マイページへ", user_path(current_user), class: "btn btn-success my-2" %>
+            </div>
+          </div>
+        <% else %>
+          <!--ログインしてない時はログイン画面-->
+          <div class="top-bg-white-transparent rounded-lg bg-white border p-3">
+            <div class="row justify-content-center align-items-center">
+              <%= image_tag 'stechao-logo.png', size: '180x45' %>
+            </div>
+            <div class="text-center mb-4">
+              ログインして始める
+            </div>
+            <%= form_with model: @user, url: user_session_path, method: :post do |f| %>
+              <%= render "public/shared/error_messages", resource: @user %>
+
+              <div class="form-group">
+                <%= f.label :name, "ユーザー名" %><br>
+                <%= f.text_field :name, autofocus: true, class: "form-control" %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :password, "パスワード(6字以上)" %><br>
+                <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+              </div>
+
+              <div class="form-group text-center">
+                <%= f.submit "ログイン", class: "btn btn-success" %>
+              </div>
+            <% end %>
+            <%= link_to "新規登録はこちら", new_user_registration_path %>
+          </div>
+        <% end %>
+
+    </div>
+  </div>
+</div>

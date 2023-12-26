@@ -1,0 +1,50 @@
+<% post.post_comments.each do |post_comment| %>
+  <!--コメントしたユーザが退会済みかつ現在のURLにadminを含まない場合、コメントを表示しない-->
+  <% if !post_comment.user.is_active && !request.path.include?("admin") %>
+    <div class="pale-border-bottom row align-items-center px-3 py-2 mb-1">
+      <div class="offset-md-2 col-md-10">
+        <i class="fas fa-circle-exclamation"></i> 閲覧できないコメントです。
+      </div>
+    </div>
+  <% else %>
+    <div class="pale-border-bottom row justify-content-center align-items-center py-2 mb-1">
+    <!--コメントしたユーザのプロフィール画像-->
+    <div class="col-md-2">
+      <!--管理者がログイン中かつ現在のURLにadminが含まれてる場合、管理者側の詳細画面に遷移-->
+      <% if admin_signed_in? && request.path.include?("admin") %>
+        <%= link_to admin_user_path(post_comment.user.id) do %>
+          <%= image_tag post_comment.user.get_profile_image(50,50), class: "rounded-circle shadow link-image-hover-transparent" %>
+        <% end %>
+      <% else %>
+        <%= link_to user_path(post_comment.user.id) do %>
+          <%= image_tag post_comment.user.get_profile_image(50,50), class: "rounded-circle shadow link-image-hover-transparent" %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-md-10">
+      <!--コメントした日付-->
+      <div class="row text-break px-3">
+        <%= I18n.l(post_comment.created_at) %>
+      </div>
+      <!--コメントしたユーザ名-->
+      <div class="row text-break px-3">
+        <strong><%= post_comment.user.name.truncate(17) %></strong>
+      </div>
+      <!--コメント内容-->
+      <div class="row text-break px-3">
+        <%= post_comment.comment %>
+      </div>
+
+      <div class="row px-3">
+        <!--コメントがログインユーザーのものかつ現在のURLにadminが含まれてないなら、削除ボタン表示-->
+        <!--または、管理者がログイン中かつ現在のURLにadminが含まれてるなら、削除ボタン表示-->
+        <% if post_comment.user == current_user && !request.path.include?("admin") %>
+          <%= link_to "削除する", post_post_comment_path(post_comment.post, post_comment), method: :delete, remote: true, data: { confirm: "このコメントを削除しますか？" }, class: "text-danger mt-1" %>
+        <% elsif admin_signed_in? && request.path.include?("admin") %>
+          <%= link_to "削除する", admin_post_comment_path(post_comment), method: :delete, remote: true, data: { confirm: "このコメントを削除しますか？" }, class: "btn btn-sm btn-danger mt-1" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+<% end %>

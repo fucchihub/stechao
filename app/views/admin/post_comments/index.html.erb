@@ -1,0 +1,42 @@
+<!--管理者側／全コメント一覧画面-->
+<div class='container py-5'>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-6 px-sm-0 mx-auto">
+
+      <h4 class="text-center mx-auto mb-4">コメントリスト</h4>
+
+      <% @comments.each do |comment| %>
+        <div class="index-table-row row justify-content-center align-items-center border-bottom py-4 px-2">
+          <div class="col-1 col-sm-2 col-md-2 py-2 px-0 px-sm-3 d-flex justify-content-center">
+            <%= comment.id %>
+          </div>
+
+          <div class="col-3 col-sm-3 col-md-3 py-2 px-0 px-sm-3 d-flex justify-content-center">
+            <%= link_to admin_post_path(comment.post_id) do %>
+              <%= image_tag comment.user.get_profile_image(70,70), class: "rounded-circle shadow" %>
+            <% end %>
+          </div>
+
+          <div class="col-6 col-sm-5 col-md-5 py-2">
+            <%= link_to admin_post_path(comment.post_id) do %>
+              <div class="row justify-content-center align-items-center px-0 px-sm-3">
+                <%= I18n.l(comment.created_at, format: :short) %>
+              </div>
+              <div class="row justify-content-center align-items-center text-break px-0 px-sm-3">
+                <strong><%= comment.user.name.truncate(11) %></strong>
+              </div>
+              <div class="row justify-content-center align-items-center text-break px-0 px-sm-3">
+                <%= comment.comment.truncate(11) %>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="col-2 col-sm-2 col-md-2 py-2 px-0 px-sm-3 d-flex justify-content-center">
+            <%= link_to "削除", admin_post_comment_path(comment), method: :delete, data: { confirm: "このコメントを削除しますか？" }, class: " btn btn-sm btn-danger" %>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

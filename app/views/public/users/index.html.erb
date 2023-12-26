@@ -1,0 +1,30 @@
+<!--ユーザ側／ユーザ一覧画面-->
+<div class='container py-5'>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+
+      <h4 class="text-center mx-auto mb-4">ユーザーリスト</h4>
+
+      <% @users.each do |user| %>
+        <%= link_to user_path(user) do %>
+          <div class="index-table-row row justify-content-center align-items-center border-bottom py-4">
+            <div class="col-sm d-flex justify-content-center align-items-center">
+              <%= image_tag user.get_profile_image(80,80), class: "rounded-circle shadow" %>
+            </div>
+
+            <div class="col-sm">
+              <div class="row justify-content-center align-items-center pt-2">
+                <strong><%= user.name.truncate(10) %></strong>
+              </div>
+              <div class="row justify-content-center align-items-center">
+                　投稿した数：<%= user.posts.pluck(:id).count %><br>
+                断捨離した数：<%= user.posts.pluck(:quantity).sum %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

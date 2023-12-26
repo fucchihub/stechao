@@ -1,0 +1,22 @@
+<!--ユーザ側／ハッシュタグ検索結果画面-->
+<div class='container py-5'>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-9 px-sm-0 mx-auto">
+
+      <h4 class="text-center mx-auto mb-4">#<%= @hashtag.name %></h4>
+
+      <!--投稿並び替えボタン-->
+      <div class="text-center mx-auto pb-3 mb-4">
+        <%= link_to '新しい順', hashtag_posts_path(params[:name], latest: "true") %>
+        | <%= link_to '古い順', hashtag_posts_path(params[:name], old: "true") %>
+        | <%= link_to hashtag_posts_path(params[:name], most_favorites: "true") do %>
+            <i class="fas fa-heart"></i>が多い順
+          <% end %>
+      </div>
+
+      <!--ハッシュタグ検索結果一覧-->
+      <%= render "public/posts/index", posts: @posts %>
+
+    </div>
+  </div>
+</div>

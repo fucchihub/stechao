@@ -1,0 +1,47 @@
+<!--ユーザ側／日付指定で投稿を絞り込んだ結果画面-->
+<div class='container py-5'>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-9 px-sm-0 mx-auto">
+
+      <!--プロフィール-->
+      <%= render "public/users/profile", user: @user, posts: @posts %>
+
+      <!--投稿を日付指定で絞り込む検索フォーム-->
+      <%= render "public/posts/filter_by_date_form" %>
+
+      <!--2099年12月24日(日)～2099年12月25日(月)のような形で日付表示-->
+      <h5 class="row justify-content-center align-items-center text-center">
+        <%= I18n.l(@start_date) %> ～ <%= I18n.l(@end_date) %>
+      </h5>
+
+      <!--日付期間内の投稿数と断捨離数を表示-->
+      <table class="table table-bordered mx-auto" style="max-width: 300px;">
+        <thead class="bg-light">
+          <tr>
+            <td>投稿した数</td>
+            <td>断捨離した数</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @posts.pluck(:id).count %></td>
+            <td><%= @posts.pluck(:quantity).sum %></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!--投稿並び替えボタン-->
+      <div class="text-center mx-auto py-4 mb-4">
+        <%= link_to '新しい順', filter_by_date_posts_path(search_type: params[:search_type], start_date: params[:start_date], end_date: params[:end_date], latest: "true") %>
+        | <%= link_to '古い順', filter_by_date_posts_path(search_type: params[:search_type], start_date: params[:start_date], end_date: params[:end_date], old: "true") %>
+        | <%= link_to filter_by_date_posts_path(search_type: params[:search_type], start_date: params[:start_date], end_date: params[:end_date], most_favorites: "true") do %>
+            <i class="fas fa-heart"></i>が多い順
+          <% end %>
+      </div>
+
+      <!--絞り込み結果-->
+      <%= render "public/users/own_index", posts: @posts %>
+
+    </div>
+  </div>
+</div>

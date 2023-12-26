@@ -1,0 +1,79 @@
+<!--ユーザ側／投稿詳細画面-->
+<div class='container py-5'>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-7 px-sm-0 mx-auto">
+
+      <!--2099年12月16日(金)のような形で日付表示-->
+      <h4 class="row justify-content-center align-items-center">
+        <%= I18n.l(@post.created_at.to_date, format: :long) %>
+      </h4>
+      <h5 class="row justify-content-center align-items-center mb-4">
+        <%= I18n.l(@post.updated_at.to_date, format: :long) %>に更新
+      </h5>
+
+      <!--断捨離した数を表示（0の時は表示しない）-->
+      <% unless @post.quantity == 0 %>
+        <div class="d-flex justify-content-center align-items-center p-2">
+          <i class="fas fa-star text-warning"></i> 断捨離した数は <strong><%= @post.quantity %></strong> です
+        </div>
+      <% end %>
+
+      <!--投稿画像-->
+      <div class="d-flex justify-content-center align-items-center my-3">
+        <%= image_tag @post.get_image(300,300), class: "shadow-sm" %>
+      </div>
+
+      <div class="pale-border-bottom row justify-content-end align-items-end p-2 mb-3">
+        <!--お気に入りボタン-->
+        <span id="favorite_btn_<%= @post.id %>" class="fontawesome-button">
+          <%= render "public/favorites/btn", post: @post %>
+        </span>
+        <!--投稿がログインユーザーのものなら編集・削除ボタン表示-->
+        <% if @post.user == current_user %>
+          <%= link_to edit_post_path(@post), class: "text-success fontawesome-button" do %>
+            <i class="fas fa-pen"></i>
+          <% end %>
+          <%= link_to post_path(@post), method: :delete, data: { confirm: "この投稿を本当に削除しますか？" }, class: "text-dark fontawesome-button" do  %>
+            <i class="fas fa-trash-can"></i>
+          <% end %>
+        <% end %>
+      </div>
+
+      <!--投稿したユーザの画像と名前-->
+      <div class="row px-3 pb-3">
+        <div class="col-2 col-sm-1 d-flex justify-content-center align-items-center">
+          <%= link_to user_path(@post.user.id) do %>
+            <%= image_tag @post.user.get_profile_image(50,50), class: "rounded-circle link-image-hover-transparent" %>
+          <% end %>
+        </div>
+        <div class="col-10 col-sm-11 pr-0 pl-1 pl-sm-2 d-flex align-items-center">
+          <%= @post.user.name.truncate(17) %>
+        </div>
+      </div>
+
+      <!--投稿名-->
+      <h5 class="mb-4"><%= @post.name %></h5>
+
+      <!--投稿キャプション-->
+      <div class="text-break py-1 px-2">
+        <!--キャプション内の改行を維持する＆各ハッシュタグをリンクに変換-->
+        <%= simple_format(render_with_hashtags(@post.caption)) %>
+      </div>
+
+      <!--コメント数-->
+      <h5 id="comment_counter" class="border-top pt-3">
+        <%= render "public/post_comments/counter", post: @post %>
+        <span>コメント</span>
+      </h5>
+      <!--コメント一覧-->
+      <div id="comment_index">
+        <%= render "public/post_comments/index", post: @post %>
+      </div>
+      <!--コメントフォーム-->
+      <div class="row justify-content-center align-items-center mt-5 mx-1">
+        <%= render "public/post_comments/form", post: @post, post_comment: @post_comment %>
+      </div>
+
+    </div>
+  </div>
+</div>

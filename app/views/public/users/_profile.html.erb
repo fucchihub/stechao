@@ -1,0 +1,23 @@
+<!--public/users/profile（パーシャル）-->
+<div id="users-profile-content-height" class="row bg-light rounded-lg p-4 mb-5">
+
+  <div class="col-md-5 d-flex justify-content-center align-items-center p-2">
+    <%= image_tag user.get_profile_image(150,150), class: "rounded-circle shadow" %>
+  </div>
+
+  <div class="col-md-7 p-2">
+    <div class="row p-1 text-break">
+      <h4><%= user.name %></h4>
+    </div>
+    <div class="row p-2 text-break border-bottom">
+      <%= user.introduction %>
+    </div>
+    <div class="d-flex flex-row">
+      <div class="text-center py-3">
+        投稿した数　<%= posts.pluck(:id).count %><br>
+        断捨離した数　<%= posts.pluck(:quantity).sum %>
+      </div>
+    </div>
+  </div>
+
+</div>

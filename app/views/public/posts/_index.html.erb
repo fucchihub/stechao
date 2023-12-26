@@ -1,0 +1,31 @@
+<!--posts/index（パーシャル）-->
+<div class="row">
+  <% posts.each do |post| %>
+    <div class="col-md-6">
+      <div class="card shadow p-1 mx-1 mb-4">
+        <div class="card-body p-1">
+          <div class="card-text p-1 d-flex justify-content-between">
+            <span>
+              <%= link_to user_path(post.user.id), class: "link-image-hover-transparent" do %>
+                <%= image_tag post.user.get_profile_image(35,35), class: "rounded-circle" %>
+              <% end %>
+            </span>
+            <span class="d-flex justify-content-end">
+              <!--コメント数-->
+              <span id="comment_counter" class="h5 mr-2">
+               <%= render "public/post_comments/counter", post: post %>
+              </span>
+              <!--お気に入りボタン-->
+              <span id="favorite_btn_<%= post.id %>" class="h5 mr-2">
+                <%= render "public/favorites/btn", post: post %>
+              </span>
+            </span>
+          </div>
+        </div>
+        <%= link_to post_path(post), class: "link-image-hover-transparent" do %>
+          <%= image_tag post.get_image(250,250), class: "card-img-top" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
