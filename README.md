@@ -22,7 +22,7 @@
 - 他の人がどんなものをなぜ断捨離したか知りたい時。
 ​
 ## 設計書
-- テーブル定義書(https://docs.google.com/spreadsheets/d/1zqArP2UiEOINWpOsM9x2cFM6HADGKdJa/edit?usp=sharing&ouid=105848788524554887104&rtpof=true&sd=true)
+- [テーブル定義書](https://docs.google.com/spreadsheets/d/1zqArP2UiEOINWpOsM9x2cFM6HADGKdJa/edit?usp=sharing&ouid=105848788524554887104&rtpof=true&sd=true)
 
 ​
 ## 開発環境
@@ -34,6 +34,6 @@
 ​
 ## 使用素材
 - フリー画像素材として以下を使用
-  - Unsplash(https://unsplash.com/ja)
+  - [Unsplash](https://unsplash.com/ja)
 
 折りたたむ
