@@ -24,6 +24,7 @@
 ## 設計書
 - [テーブル定義書](https://docs.google.com/spreadsheets/d/1zqArP2UiEOINWpOsM9x2cFM6HADGKdJa/edit?usp=sharing&ouid=105848788524554887104&rtpof=true&sd=true)
 - [ER図](https://drive.google.com/file/d/18ImwtOei5uYCDuiLHEkTsPz1Ws5fC3jN/view?usp=sharing)
+- [画面遷移図](https://drive.google.com/file/d/183MdHpsRM8ukcu_4CIhgt0M3sYruo48x/view?usp=sharing)
 ​
 ## 開発環境
 - OS：Linux(CentOS)
