@@ -14,15 +14,16 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+
   def update
-    #byebug
     @user = User.find(params[:id])
+
     if @user.update(user_params)
       flash[:notice] = "ユーザの登録情報を変更しました。"
-    redirect_to admin_user_path(@user)
+      redirect_to admin_user_path(@user)
     else
-    flash.now[:alert] = "変更に失敗しました。"
-    render :edit
+      flash.now[:alert] = "変更に失敗しました。"
+      render :edit
     end
   end
 

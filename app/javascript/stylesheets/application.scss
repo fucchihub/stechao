@@ -1,10 +1,22 @@
 $info: #2a83a2; //はなあさぎ（青系）
-$success: #54917f;// アンティークグリーン
-$warning: #d9a62e;// はじぞめ（黄系）
+$success: #54917f; // アンティークグリーン
+$warning: #d9a62e; // はじぞめ（黄系）
 $danger: #942343; //ガーネット（赤系）
-$dark: #4e454a;//チャコールグレイ
+$dark: #4e454a; //チャコールグレイ
 
 @import '~bootstrap/scss/bootstrap';
+
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
 html {
   height: 100%;
@@ -16,7 +28,142 @@ body {
   padding: 0;
   color: #4e454a; //チャコールグレイ
   font-family: 'Zen Kaku Gothic New', sans-serif;
+  -webkit-text-size-adjust: 100%;
 }
+
+// ----------------------------------
+// サイドバー用
+#sidebar {
+  display: none;
+  font-size: 16px;
+  padding-top: 50px;
+  width: 260px;
+  height: 100%;
+  position: fixed;
+  background: #fff;
+  text-align: center;
+}
+
+#global-nav ul {
+  list-style: none;
+  margin-left: 0;
+}
+#global-nav > ul > li {
+  position: relative;
+}
+
+#global-nav a {
+  display: block;
+  padding: 15px 0;
+  -moz-transition: background-color .3s linear;
+  -webkit-transition: background-color .3s linear;
+  transition: background-color .3s linear;
+}
+
+#nav-toggle {
+  display: block;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  height: 32px;
+}
+#nav-toggle > div {
+  position: relative;
+  width: 32px;
+}
+#nav-toggle span {
+  width: 100%;
+  height: 2px;
+  left: 0;
+  display: block;
+  background: #033560;
+  position: absolute;
+  -webkit-transition: .35s ease-in-out;
+  -moz-transition: .35s ease-in-out;
+  transition: .35s ease-in-out;
+}
+
+#nav-toggle span:nth-child(1) {
+  top: 0;
+}
+#nav-toggle span:nth-child(2) {
+  top: 11px;
+}
+#nav-toggle span:nth-child(3) {
+  top: 22px;
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  background: rgba(248,249,250,0.6);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#sidebar {
+  display: block;
+  position: fixed;
+  left: -300px;
+  top: 0;
+  height: 100%;
+  width: 300px;
+  background: #fff;
+  -webkit-transition: .35s ease-in-out;
+  transition: .35s ease-in-out;
+}
+
+#nav-toggle {
+  display: block;
+}
+
+/* nav open */
+.open {
+  overflow: hidden;
+}
+.open #overlay {
+  display: block;
+}
+.open #sidebar  {
+  -webkit-transform: translate3d(300px,0,0);
+  transform: translate3d(300px,0,0);
+}
+
+/* #nav-toggle close */
+.open #nav-toggle span:nth-child(1) {
+  top: 11px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.open #nav-toggle span:nth-child(2) {
+  width: 0;
+  left: 50%;
+}
+.open #nav-toggle span:nth-child(3) {
+  top: 11px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+/* z-index */
+#overlay {
+  z-index: 200;
+}
+#sidebar {
+  z-index: 300;
+}
+#nav-toggle {
+  z-index: 400;
+}
+// ----------------------------------
+
+
 
 a {
   color: #2a83a2; //はなあさぎ（青系）
@@ -51,7 +198,7 @@ a:hover {
   min-height: 200px;
 }
 
-// 一覧画面用
+// テーブルのようにリスト表示している画面用
 .index-table-row {
   min-height: 150px;
 }
@@ -59,17 +206,17 @@ a:hover {
   background-color: #f8f9fa;
 }
 
-// 薄い線
+// 薄く下線を引く
 .pale-border-bottom {
   border-bottom: 2px solid #f8f9fa;
 }
+
 // 投稿詳細画面のアイコンボタン
 .fontawesome-button {
   font-size: 25px;
   margin: 0 5px;
 }
 
-// フッター
 footer {
   position: sticky;
   top: 100vh;
@@ -80,3 +227,17 @@ footer {
 .field_with_errors{
   width: 100%;
 }
+
+
+@media screen and (max-width: 400px) {
+  #sidebar {
+    left: -200px;
+    width: 200px;
+    padding-top: 40px;
+  }
+  .open #sidebar  {
+    -webkit-transform: translate3d(200px,0,0);
+    transform: translate3d(200px,0,0);
+  }
+}
+

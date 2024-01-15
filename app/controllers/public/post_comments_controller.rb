@@ -1,18 +1,18 @@
 class Public::PostCommentsController < ApplicationController
   before_action :authenticate_user!
 
-  # 非同期通信化
   def create
     @post = Post.find(params[:post_id])
     comment = current_user.post_comments.new(post_comment_params)
     comment.post_id = @post.id
     comment.save
+    # 非同期通信化
   end
 
-  # 非同期通信化
   def destroy
     @comment = PostComment.find(params[:id])
     @comment.destroy
+    # 非同期通信化
   end
 
   private
