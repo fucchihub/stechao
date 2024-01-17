@@ -28,7 +28,7 @@
 - [詳細設計書](https://docs.google.com/spreadsheets/d/1F5nxsjOL0xFtFz07FlhvU5RBDqE-rLUT4_wiHy15B-s/edit?usp=sharing)
 ​
 ## 開発環境
-- OS：Linux(CentOS)
+- OS：Linux(Amazon Linux2)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
