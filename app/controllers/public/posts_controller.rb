@@ -138,14 +138,14 @@ class Public::PostsController < ApplicationController
     # params[:search_type]が存在する場合はその値を使用し、存在しない場合はデフォルトで "created_at" を設定する
     @search_type = params[:search_type] || "created_at"
 
-    # params[:start_date(:end_date)]が存在してかつDate型になっていないならDate型にし、そうでないならそのままparamsのデータを使う
-    @start_date = params[:start_date].presence && !params[:start_date].is_a?(Date) ? params[:start_date].to_date : params[:start_date]
-    @end_date = params[:end_date].presence && !params[:end_date].is_a?(Date) ? params[:end_date].to_date : params[:end_date]
+    # params[:starting_date(:ending_date)]が存在してかつDate型になっていないならDate型にし、そうでないならそのままparamsのデータを使う
+    @starting_date = params[:starting_date].presence && !params[:starting_date].is_a?(Date) ? params[:starting_date].to_date : params[:starting_date]
+    @ending_date = params[:ending_date].presence && !params[:ending_date].is_a?(Date) ? params[:ending_date].to_date : params[:ending_date]
 
     @posts = if @search_type == "created_at"
-               @posts.where(created_at: @start_date.beginning_of_day..@end_date.end_of_day)
+               @posts.where(created_at: @starting_date.beginning_of_day..@ending_date.end_of_day)
              else
-               @posts.where(updated_at: @start_date.beginning_of_day..@end_date.end_of_day)
+               @posts.where(updated_at: @starting_date.beginning_of_day..@ending_date.end_of_day)
              end
 
     # 有効なユーザの投稿だけ表示
