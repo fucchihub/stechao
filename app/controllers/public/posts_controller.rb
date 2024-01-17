@@ -115,9 +115,8 @@ class Public::PostsController < ApplicationController
     split_keyword.each do |keyword|
       # キーワードが空白の場合は検索しないでスキップ(空白で検索すると全レコードを取得してしまう)
       next if keyword == ""
-      # キーワードが#で始まる場合は#を取り除く(文字列の2文字目から最後までを取り出す)
-      keyword = keyword.starts_with?('#') ? keyword[1..-1] : keyword
-      # 「nameとcaption両方からキーワードで部分一致検索」という条件で探したpostを@postsに結合
+
+      # 「nameとcaption両方からキーワードで部分一致検索」という条件で探したpostを@postsに結合していく
       @posts = @posts.or(Post.where('name LIKE :keyword OR caption LIKE :keyword', keyword: "%#{keyword}%"))
     end
 
