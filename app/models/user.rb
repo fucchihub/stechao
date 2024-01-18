@@ -16,7 +16,8 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
-  # プロフィール画像があればサイズ指定、なければノーイメージ画像を表示。
+
+  # プロフィール画像があればサイズ指定して表示、なければノーイメージ画像を表示する。
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/stechao-shade.jpg')
@@ -24,6 +25,7 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_fill: [width, height]).processed
   end
+
 
   # ゲストログイン機能。パスワードはランダムに作られる。
   def self.guest

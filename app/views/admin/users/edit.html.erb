@@ -4,7 +4,9 @@
     <div class="col-sm-10 col-md-6 col-lg-5 px-sm-0 mx-auto">
 
       <div class="rounded-lg border p-2 p-sm-3">
-        <h5 class="mb-4">ユーザー編集</h5>
+        <h5 class="text-center mx-auto mb-4">
+          ユーザー編集
+        </h5>
         <%= form_with model: @user, url: admin_user_path do |f| %>
           <%= render "admin/shared/error_messages", resource: @user %>
 
@@ -23,13 +25,12 @@
             <%= f.text_area :introduction, placeholder: "200字以内", class: 'form-control' %>
           </div>
 
-          <h5 class="my-4">登録メールアドレス</h5>
           <div class="form-group">
-            <%= f.label :email, "メールアドレス" %><br>
+            <%= f.label :email, "登録メールアドレス" %><br>
             <%= f.text_field :email, placeholder: "abc@stechao.com", class: 'form-control' %>
           </div>
 
-          <h5 class="my-4">ステータス</h5>
+          <span>ステータス</span>
           <div class="form-group">
             <%= f.radio_button :is_active, true %>
             <%= f.label :is_active_true, "有効", class: "mr-3" %>

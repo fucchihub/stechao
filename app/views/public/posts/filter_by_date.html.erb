@@ -9,9 +9,9 @@
       <!--投稿を日付指定で絞り込む検索フォーム-->
       <%= render "public/posts/filter_by_date_form" %>
 
-      <!--2099年12月24日(日)～2099年12月25日(月)のような形で日付表示-->
+      <!--2099/12/24(日)～2099/12/25(月)のような形で日付表示-->
       <h5 class="row justify-content-center align-items-center text-center">
-        <%= I18n.l(@start_date) %> ～ <%= I18n.l(@end_date) %>
+        <%= I18n.l(@starting_date) %> ～ <%= I18n.l(@ending_date) %>
       </h5>
 
       <!--日付期間内の投稿数と断捨離数を表示-->
@@ -32,9 +32,9 @@
 
       <!--投稿並び替えボタン-->
       <div class="text-center mx-auto py-4 mb-4">
-        <%= link_to '新しい順', filter_by_date_posts_path(search_type: params[:search_type], start_date: params[:start_date], end_date: params[:end_date], latest: "true") %>
-        | <%= link_to '古い順', filter_by_date_posts_path(search_type: params[:search_type], start_date: params[:start_date], end_date: params[:end_date], old: "true") %>
-        | <%= link_to filter_by_date_posts_path(search_type: params[:search_type], start_date: params[:start_date], end_date: params[:end_date], most_favorites: "true") do %>
+        <%= link_to '新しい順', filter_by_date_posts_path(search_type: params[:search_type], starting_date: params[:starting_date], ending_date: params[:ending_date], latest: "true") %>
+        | <%= link_to '古い順', filter_by_date_posts_path(search_type: params[:search_type], starting_date: params[:starting_date], ending_date: params[:ending_date], old: "true") %>
+        | <%= link_to filter_by_date_posts_path(search_type: params[:search_type], starting_date: params[:starting_date], ending_date: params[:ending_date], most_favorites: "true") do %>
             <i class="fas fa-heart"></i>が多い順
           <% end %>
       </div>
