@@ -22,13 +22,15 @@
 - 他の人がどんなものをなぜ断捨離したか知りたい時。
 ​
 ## 設計書
+- [AWS構成図](https://drive.google.com/file/d/1uGtoqTM-CZopWHK7gCjS7YZiOzQAKGcT/view?usp=sharing)
+- [AWSインフラ設計書](https://docs.google.com/spreadsheets/d/1Bmdm5uTy6G658Vp90e5RggNTSemvSl_o3m_x8ZgLQVs/edit?usp=sharing)
 - [テーブル定義書](https://docs.google.com/spreadsheets/d/1zqArP2UiEOINWpOsM9x2cFM6HADGKdJa/edit?usp=sharing&ouid=105848788524554887104&rtpof=true&sd=true)
 - [ER図](https://drive.google.com/file/d/18ImwtOei5uYCDuiLHEkTsPz1Ws5fC3jN/view?usp=sharing)
 - [画面遷移図](https://drive.google.com/file/d/183MdHpsRM8ukcu_4CIhgt0M3sYruo48x/view?usp=sharing)
 - [詳細設計書](https://docs.google.com/spreadsheets/d/1F5nxsjOL0xFtFz07FlhvU5RBDqE-rLUT4_wiHy15B-s/edit?usp=sharing)
 - [ワイヤーフレーム](https://drive.google.com/file/d/1PYzptPr5kHA87eod4ldnTQzIyP4NjAEu/view?usp=sharing)
 - [テスト仕様書](https://docs.google.com/spreadsheets/d/19rmEnl_S9ALNjK93Js-YzW5Mfg3CA6j7/edit?usp=sharing&ouid=105848788524554887104&rtpof=true&sd=true)
-​
+
 ## 開発環境
 - OS：Linux(Amazon Linux2)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
