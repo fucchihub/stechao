@@ -27,6 +27,12 @@ class User < ApplicationRecord
   end
 
 
+  # ユーザがゲストであるかを確認するメソッド。
+  def guest?
+    self.email == "guest@example.com"
+  end
+
+
   # ゲストログイン機能。パスワードはランダムに作られる。
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|

@@ -36,10 +36,15 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :users, only: [:index, :show, :edit, :update] do
+    resources :users, only: [:index, :show] do
+      collection do
+        get :edit_profile
+        put :update_profile
+      end
+
       member do
         get :favorites
-        put :withdraw
+        patch :withdraw
       end
     end
 

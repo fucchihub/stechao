@@ -211,6 +211,12 @@ a:hover {
   border-bottom: 2px solid #f8f9fa;
 }
 
+// クリックやタッチを無効化する
+.click-disabled-css {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 // 投稿詳細画面のアイコンボタン
 .fontawesome-button {
   font-size: 25px;
