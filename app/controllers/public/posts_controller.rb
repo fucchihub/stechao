@@ -64,7 +64,8 @@ class Public::PostsController < ApplicationController
 
   # postモデル内にbefore_updateコールバックあり(ハッシュタグを更新するため)
   def update
-    @post = Post.find(params[:id])
+    # 自身の投稿のみ取得（他のユーザの投稿は更新できない）
+    @post = current_user.posts.find(params[:id])
 
     if @post.update(post_params)
       flash[:success] = "投稿内容を変更しました。"
@@ -78,7 +79,9 @@ class Public::PostsController < ApplicationController
 
 
   def destroy
-    @post = Post.find(params[:id])
+    # 自身の投稿のみ取得（他のユーザの投稿は削除できない）
+    @post = current_user.posts.find(params[:id])
+
     @post.destroy
     flash[:notice] = "投稿を削除しました。"
     redirect_to user_path(current_user)

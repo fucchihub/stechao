@@ -42,7 +42,8 @@ class Public::UsersController < ApplicationController
 
 
   def update
-    @user = User.find(params[:id])
+    # 自身の情報のみ取得（他のユーザの情報は更新できない）
+    @user = current_user
 
     if @user.update(user_params)
       flash[:success] = "プロフィールを変更しました。"
