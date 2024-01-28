@@ -26,22 +26,13 @@ class Public::UsersController < ApplicationController
     end
   end
 
-
-  def edit
-    @user = User.find_by(id: params[:id])
-
-    if @user.nil?
-      flash[:error] = "ページが存在しません。"
-      redirect_to posts_path
-
-    elsif @user != current_user
-      flash[:error] = "禁止された操作です。"
-      redirect_to posts_path
-    end
+  # プロフィール情報編集画面
+  def edit_profile
+    @user = current_user
   end
 
-
-  def update
+  # プロフィール情報更新処理
+  def update_profile
     # 自身の情報のみ取得（他のユーザの情報は更新できない）
     @user = current_user
 
@@ -51,7 +42,7 @@ class Public::UsersController < ApplicationController
 
     else
       flash.now[:alert] = "変更に失敗しました。"
-      render :edit
+      render :edit_profile
     end
   end
 
